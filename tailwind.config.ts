@@ -8,6 +8,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      animation: {
+        slideUp: 'slideUp 0.7s ease-out forwards', // 애니메이션 이름과 속성
+      },
+      keyframes: {
+        slideUp: {
+          '0%': { transform: 'translateY(25px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
