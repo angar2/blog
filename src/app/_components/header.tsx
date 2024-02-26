@@ -25,7 +25,9 @@ const Header = () => {
             key={menu.path}
             href={`${menu.path}`}
             className={`${i > 0 ? `ml-4` : ``} ${
-              menu.path === pathname ? `text-gray-900` : `text-gray-400`
+              pathname === menu.path || pathname.startsWith(`${menu.path}/`)
+                ? `text-gray-900`
+                : `text-gray-400`
             } font-normal text-gray-400 transition-colors duration-300 hover:text-gray-900`}
           >
             {menu.name}
