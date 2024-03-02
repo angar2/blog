@@ -4,13 +4,19 @@ import { Intro } from '@/app/_components/intro';
 import { PostList } from '@/app/_components/post-list';
 import { getAllPosts } from '@/lib/api';
 import Header from '../_components/header';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Blog',
+  description: `Posting insights on web development.`,
+};
 
 export default function BlogMain() {
   const allPosts = getAllPosts();
 
-  const heroPost = allPosts[0];
+  // const heroPost = allPosts[0];
 
-  const morePosts = allPosts.slice(1);
+  // const morePosts = allPosts.slice(1);
 
   return (
     <main>

@@ -9,10 +9,10 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: {
-    default: `Web Developer MTSEO's Blog`,
-    template: `%s - MTSEO's Blog`,
+    default: `mtseo`,
+    template: `%s - mtseo`,
   },
-  description: `Posting insights on web development.`,
+  description: `Exploring Web Tech Frontiers.`,
   metadataBase: new URL(`https://mtseo.dev`),
   twitter: {
     card: 'summary_large_image',
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
   openGraph: {
     images: [HOME_OG_IMAGE_URL],
-    siteName: 'MTSEO DEV',
+    siteName: 'mtseo',
     authors: 'mtseo',
   },
 };
