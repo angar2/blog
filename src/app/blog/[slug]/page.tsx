@@ -6,6 +6,7 @@ import Container from '../../_components/container';
 import Header from '../../_components/header';
 import { PostBody } from '../../_components/post-body';
 import { PostHeader } from '../../_components/post-header';
+import { HOME_OG_IMAGE_URL } from '@/lib/constants';
 
 export default async function Post({ params }: Params) {
   const post = getPostBySlug(params.slug);
@@ -56,7 +57,7 @@ export function generateMetadata({ params }: Params): Metadata {
     openGraph: {
       title,
       description,
-      images: [post.ogImage?.url],
+      images: [post.ogImage?.url, HOME_OG_IMAGE_URL],
     },
   };
 }
