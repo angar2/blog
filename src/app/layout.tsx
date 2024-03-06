@@ -2,8 +2,16 @@ import Footer from '@/app/_components/footer';
 import { HOME_OG_IMAGE_URL } from '@/lib/constants';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-
+import { WebSite, WithContext } from 'schema-dts';
 import './globals.css';
+
+const jsonLd: WithContext<WebSite> = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'mtseo',
+  image: `${HOME_OG_IMAGE_URL}`,
+  description: `Exploring Web Tech Frontiers.`,
+};
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -64,6 +72,10 @@ export default function RootLayout({
         />
         <meta name="theme-color" content="#000" />
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className={inter.className}>
         <div className="min-h-screen">{children}</div>
