@@ -9,19 +9,19 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: {
-    default: `mtseo`,
-    template: `%s - mtseo`,
+    default: `angari`,
+    template: `%s - angari`,
   },
-  description: `Exploring Web Tech Frontiers.`,
-  metadataBase: new URL(`https://mtseo.dev`),
+  description: `Hi I'm Angari.`,
+  metadataBase: new URL(`https://angari.dev`),
   twitter: {
     card: 'summary_large_image',
   },
 
   openGraph: {
     images: [HOME_OG_IMAGE_URL],
-    siteName: 'mtseo',
-    authors: 'mtseo',
+    siteName: 'angari',
+    authors: 'angari',
   },
 };
 
@@ -31,42 +31,42 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <head>
         <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/favicon/apple-touch-icon.png"
+          rel='apple-touch-icon'
+          sizes='180x180'
+          href='/favicon/apple-touch-icon.png'
         />
         <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon/favicon-32x32.png"
+          rel='icon'
+          type='image/png'
+          sizes='32x32'
+          href='/favicon/favicon-32x32.png'
         />
         <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon/favicon-16x16.png"
+          rel='icon'
+          type='image/png'
+          sizes='16x16'
+          href='/favicon/favicon-16x16.png'
         />
-        <link rel="manifest" href="/favicon/site.webmanifest" />
+        <link rel='manifest' href='/favicon/site.webmanifest' />
         <link
-          rel="mask-icon"
-          href="/favicon/safari-pinned-tab.svg"
-          color="#000000"
+          rel='mask-icon'
+          href='/favicon/safari-pinned-tab.svg'
+          color='#000000'
         />
-        <link rel="shortcut icon" href="/favicon/favicon.ico" />
-        <meta name="msapplication-TileColor" content="#000000" />
+        <link rel='shortcut icon' href='/favicon/favicon.ico' />
+        <meta name='msapplication-TileColor' content='#000000' />
         <meta
-          name="msapplication-config"
-          content="/favicon/browserconfig.xml"
+          name='msapplication-config'
+          content='/favicon/browserconfig.xml'
         />
-        <meta name="theme-color" content="#000" />
-        <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+        <meta name='theme-color' content='#000' />
+        <link rel='alternate' type='application/rss+xml' href='/feed.xml' />
       </head>
       <body className={inter.className}>
-        <div className="min-h-screen">{children}</div>
+        <div className='min-h-screen'>{children}</div>
         {/* <Footer /> */}
       </body>
     </html>
