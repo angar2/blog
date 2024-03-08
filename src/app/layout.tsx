@@ -1,9 +1,18 @@
 import Footer from '@/app/_components/footer';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { HOME_OG_IMAGE_URL } from '@/lib/constants';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-
+import { WebSite, WithContext } from 'schema-dts';
 import './globals.css';
+
+const jsonLd: WithContext<WebSite> = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'angari',
+  image: `${HOME_OG_IMAGE_URL}`,
+  description: `Hi I'm Angari.`,
+};
 
 const inter = Inter({ subsets: ['latin'] });
 
