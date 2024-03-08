@@ -50,20 +50,20 @@ export default function RootLayout({
           sizes='16x16'
           href='/favicon/favicon-16x16.png'
         />
-        <link rel='manifest' href='/favicon/site.webmanifest' />
+        <link rel='manifest' href='/assets/favicon/site.webmanifest' />
         <link
           rel='mask-icon'
           href='/favicon/safari-pinned-tab.svg'
-          color='#000000'
+          color='#e01808'
         />
-        <link rel='shortcut icon' href='/favicon/favicon.ico' />
-        <meta name='msapplication-TileColor' content='#000000' />
+        <meta name='apple-mobile-web-app-title' content='Angari' />
+        <meta name='application-name' content='Angari' />
+        <meta name='msapplication-TileColor' content='#e01808' />
         <meta
-          name='msapplication-config'
-          content='/favicon/browserconfig.xml'
+          name='msapplication-TileImage'
+          content='/favicon/mstile-144x144.png'
         />
-        <meta name='theme-color' content='#000' />
-        <link rel='alternate' type='application/rss+xml' href='/feed.xml' />
+        <meta name='theme-color' content='#ffffff' />
       </head>
       <body className={inter.className}>
         <div className='min-h-screen'>{children}</div>
