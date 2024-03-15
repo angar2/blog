@@ -29,7 +29,7 @@ const Header = () => {
         href={path}
         className={`ml-4 first:ml-0 ${
           isActive ? 'text-gray-900' : 'text-gray-400'
-        } font-normal transition-colors duration-300 hover:text-gray-900`}
+        } font-semibold transition-colors duration-300 hover:text-gray-900`}
       >
         {name}
       </Link>
