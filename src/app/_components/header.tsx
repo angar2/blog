@@ -44,7 +44,7 @@ const Header = () => {
           src={LOGO_IMAGE_URL}
           width={192}
           height={192}
-          style={{ width: 'auto', height: 82 }}
+          style={{ width: '42%', height: 'auto' }}
         />
       </Link>
       <button className='md:hidden' onClick={() => setIsMenuOpen(!isMenuOpen)}>
