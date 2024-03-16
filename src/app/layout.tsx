@@ -75,7 +75,9 @@ export default function RootLayout({
         <meta name='theme-color' content='#ffffff' />
       </head>
       <body className={inter.className}>
-        <div className='min-h-screen'>{children}</div>
+        <div className="min-h-screen">{children}</div>
+        <div id="_portal"></div>
+        <GoogleAnalytics gaId="GTM-NJ8BQ9FM" />
         {/* <Footer /> */}
       </body>
     </html>

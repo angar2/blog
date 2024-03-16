@@ -21,7 +21,7 @@ const MobileNav = ({
 
   return (
     <nav
-      className={`md:hidden absolute transform ${
+      className={`md:hidden fixed transform ${
         isMenuOpen ? 'translate-x-0' : 'translate-x-full'
       } transition-transform duration-300 ease-in-out flex flex-col bg-white right-0 w-3/4 h-full top-0 pt-24 z-50 border-l border-gray-200 shadow-lg`}
     >
