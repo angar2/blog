@@ -38,30 +38,30 @@ const Header = () => {
   };
 
   return (
-    <header className='flex justify-between mt-8 mb-20 text-2xl font-bold leading-tight tracking-tight md:text-3xl md:tracking-tighter'>
-      <Link href='/'>
+    <header className="flex justify-between mt-8 mb-20 text-2xl font-bold leading-tight tracking-tight md:text-3xl md:tracking-tighter">
+      <Link href="/">
         <Image
-          alt='logo'
+          alt="logo"
           src={LOGO_IMAGE_URL}
           width={192}
           height={192}
-          style={{ width: '42%', height: 'auto' }}
+          style={{ width: 82, height: 'auto' }}
         />
       </Link>
-      <button className='md:hidden' onClick={() => setIsMenuOpen(!isMenuOpen)}>
+      <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         <svg
-          width='24'
-          height='18'
-          viewBox='0 0 40 30'
-          fill='none'
-          xmlns='http://www.w3.org/2000/svg'
+          width="24"
+          height="18"
+          viewBox="0 0 40 30"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <rect width='40' height='6' fill='#333' />
-          <rect y='12' width='40' height='6' fill='#333' />
-          <rect y='24' width='40' height='6' fill='#333' />
+          <rect width="40" height="6" fill="#333" />
+          <rect y="12" width="40" height="6" fill="#333" />
+          <rect y="24" width="40" height="6" fill="#333" />
         </svg>
       </button>
-      <nav className='hidden md:flex md:justify-start'>
+      <nav className="hidden md:flex md:justify-start">
         {headerMenu.map((menu) => (
           <NavLink key={menu.path} {...menu} />
         ))}
