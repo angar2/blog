@@ -2,6 +2,9 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
+import MobileNav from './mobile-nav';
+import Portal from './portal';
 
 interface HeaderMenuType {
   path: string;
@@ -15,6 +18,7 @@ const headerMenu: HeaderMenuType[] = [
 
 const Header = () => {
   const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const NavLink = ({ path, name }: HeaderMenuType) => {
     const isActive = pathname === path || pathname.startsWith(`${path}/`);
@@ -33,11 +37,37 @@ const Header = () => {
   return (
     <header className="flex justify-between mt-8 mb-20 text-2xl font-bold leading-tight tracking-tight md:text-3xl md:tracking-tighter">
       <Link href="/">mtseo</Link>
-      <nav className="flex justify-start">
+      <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <svg
+          width="24"
+          height="18"
+          viewBox="0 0 40 30"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="40" height="6" fill="#333" />
+          <rect y="12" width="40" height="6" fill="#333" />
+          <rect y="24" width="40" height="6" fill="#333" />
+        </svg>
+      </button>
+      <nav className="hidden md:flex md:justify-start">
         {headerMenu.map((menu) => (
           <NavLink key={menu.path} {...menu} />
         ))}
       </nav>
+      <Portal>
+        <MobileNav
+          headerMenu={headerMenu}
+          isMenuOpen={isMenuOpen}
+          setIsMenuOpen={setIsMenuOpen}
+        />
+        {isMenuOpen && (
+          <div
+            className="fixed inset-0 z-40 bg-black bg-opacity-25 backdrop-blur-sm"
+            onClick={() => setIsMenuOpen(false)}
+          ></div>
+        )}
+      </Portal>
     </header>
   );
 };
