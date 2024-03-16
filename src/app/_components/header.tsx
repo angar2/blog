@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import MobileNav from './mobile-nav';
+import Portal from './portal';
 
 interface HeaderMenuType {
   path: string;
@@ -54,17 +55,19 @@ const Header = () => {
           <NavLink key={menu.path} {...menu} />
         ))}
       </nav>
-      <MobileNav
-        headerMenu={headerMenu}
-        isMenuOpen={isMenuOpen}
-        setIsMenuOpen={setIsMenuOpen}
-      />
-      {isMenuOpen && (
-        <div
-          className="fixed inset-0 z-40 bg-black bg-opacity-25 backdrop-blur-sm"
-          onClick={() => setIsMenuOpen(false)}
-        ></div>
-      )}
+      <Portal>
+        <MobileNav
+          headerMenu={headerMenu}
+          isMenuOpen={isMenuOpen}
+          setIsMenuOpen={setIsMenuOpen}
+        />
+        {isMenuOpen && (
+          <div
+            className="fixed inset-0 z-40 bg-black bg-opacity-25 backdrop-blur-sm"
+            onClick={() => setIsMenuOpen(false)}
+          ></div>
+        )}
+      </Portal>
     </header>
   );
 };
