@@ -3,30 +3,60 @@ import ProjectIntro, { ProjectIntroProps } from './project-intro';
 
 const projects: ProjectIntroProps[] = [
   {
-    projectName: '프로젝트 이름1',
-    description: '프로젝트 설명1',
-    period: '2023.04 - 현재',
-    tasks: ['task1', '**강조하기**'], // 강조하고 싶은 부분에 **text** 처리하면 됨
-    techStack: 'tech1, tech2',
+    projectName: 'Fleet',
+    description: '선박 작업 관리 및 문서결재 플랫폼',
+    period: '2024.01. - 현재.',
+    tasks: [
+      '**전자문서 시스템**(결재 / 반려 / 재상신) 구현',
+      '**스케줄러** 일반 및 전자문서 연동 기능 구현',
+      '선박별 **데이터 통계** 구현',
+      '회원/관리자 타입별 **기능 권한** 설정',
+    ],
+    techStack: ['C#', '.NET', 'MySQL', 'AWS(EC2, RDS)'],
   },
   {
-    projectName: '프로젝트 이름2',
-    description: '프로젝트 설명2을 길게 써보려고 합니다. 그러면 어떻게 될까요?',
-    period: '2023.04 - 2023.05',
-    tasks: ['**강조**하기', 'task2'], // 강조하고 싶은 부분에 **text** 처리하면 됨
-    techStack: 'tech1, tech2',
+    projectName: '국가대표',
+    description: '한국도로공사 고속도로 사고제보 관리 시스템',
+    period: '2023.10. - 2023.12.',
+    tasks: [
+      '블랙박스 제보의 현위치/이미지 **데이터 통신 API** 구현',
+      '**제보 처리 시스템**(직원 배정 → 처리 → 완료 보고) 구현',
+      '완료 보고서 **문서화(엑셀)**',
+    ],
+    techStack: ['C#', '.NET', 'MySQL', 'AWS(EC2, RDS)'],
+  },
+  {
+    projectName: 'Tyche Trip',
+    description: '여행 정보 및 설계 중개 플랫폼',
+    period: '2023.07. - 2023.10.',
+    tasks: [
+      '외부 API를 활용한 **전자결제** 기능 구현',
+      '**여행 설계 매칭 시스템**(요청/설계 → 매칭/결제 → 후기/리워드) 구현',
+      '회원별 기능/플랫폼(**여행자-App / 설계자-Web**) 구분하여 구현',
+    ],
+    techStack: ['C#', '.NET', 'MySQL', 'AWS(EC2, RDS)'],
+  },
+  {
+    projectName: '아이컬러',
+    description: '퍼스널컬러 기반 뷰티 제품 정보 및 소통 플랫폼',
+    period: '2023.04. - 2023.07.',
+    tasks: ['관리자 **콘텐츠 관리**(회원, 제품 등 8개 콘텐츠) 기능 구현'],
+    techStack: ['Typescript', 'Node.js', 'MySQL', 'AWS(EC2, RDS)'],
   },
 ];
 
 export default function Experience() {
   return (
-    <section className="max-w-2xl mx-auto">
+    <section className="max-w-5xl mx-auto">
+      <div className="w-auto h-16 mb-14 flex items-center overflow-hidden rounded-md md:h-40 md:mb-28 md:rounded-xl">
+        <img src="/assets/images/experience/banner-image.jpeg" alt="banner" />
+      </div>
       <div className="flex-col md:flex md:flex-row md:justify-start">
         {/* 회사 */}
         <CompanyIntro
           companyName="주식회사 데브몬스터"
           position="소프트웨어 개발사 | Back-end Developer"
-          period="2023.04 - 현재"
+          period="2023.04. - 현재."
         />
         {/* 경험 내용 */}
         <div className="w-full md:w-2/4">
