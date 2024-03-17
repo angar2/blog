@@ -26,7 +26,7 @@ const MobileNav = ({
       } transition-transform duration-300 ease-in-out flex flex-col bg-white right-0 w-3/4 h-full top-0 pt-24 z-50 border-l border-gray-200 shadow-lg`}
     >
       <button
-        className='absolute top-0 right-0 mt-8 mr-8 text-2xl'
+        className="absolute top-0 right-0 mt-8 mr-8 text-2xl"
         onClick={() => setIsMenuOpen(false)}
       >
         &#x2715;
@@ -40,7 +40,7 @@ const MobileNav = ({
             href={menu.path}
             className={`ml-0 md:ml-4 first:ml-0 ${
               isActive ? 'text-gray-900' : 'text-gray-400'
-            } font-semibold transition-colors duration-300 hover:text-gray-900 p-4`}
+            } text-xl font-semibold transition-colors duration-300 hover:text-gray-900 p-4`}
             onClick={() => setIsMenuOpen(false)}
           >
             {menu.name}
