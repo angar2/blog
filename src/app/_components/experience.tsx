@@ -1,5 +1,15 @@
 import CompanyIntro from './company-intro';
+import ProjectCommon, { ProjectCommonProps } from './project-common';
 import ProjectIntro, { ProjectIntroProps } from './project-intro';
+
+const common: ProjectCommonProps = {
+  tasks: [
+    '**DB**: 데이터 모델링 및 스키마 설계',
+    '**Hosting**: AWS를 이용한 서비스 웹서버 호스팅',
+    '**Plan**: 서비스 기능 및 아키텍처 기획 부분 담당',
+    '**Develope**: 회원, 관리자 CRUD 등 주요 기능 API 구현',
+  ],
+};
 
 const projects: ProjectIntroProps[] = [
   {
@@ -60,6 +70,7 @@ export default function Experience() {
         />
         {/* 경험 내용 */}
         <div className="w-full md:w-2/4">
+          <ProjectCommon tasks={common.tasks} />
           {projects.map((project, index) => (
             <ProjectIntro
               projectName={project.projectName}
