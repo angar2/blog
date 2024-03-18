@@ -1,19 +1,34 @@
+import { Metadata } from 'next';
+import { createHash } from 'crypto';
 import Container from '@/app/_components/container';
 import Header from '../_components/header';
-import { Metadata } from 'next';
 import Experience from '../_components/experience';
+import ExperienceFobidden from '../_components/experience-fobidden';
+import { ACCESS_PASSWORD } from '@/lib/constants';
+
+interface ExperienceMainProps {
+  params: { slug: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
 
 export const metadata: Metadata = {
-  title: 'Projects',
-  description: `My Crafted Projects.`,
+  title: 'Experience',
+  description: `My Experience.`,
 };
 
-export default async function ExperienceMain() {
+function generateSHA256Hash(value: string): string {
+  return createHash('sha256').update(value).digest('hex');
+}
+
+export default function ExperienceMain({ searchParams }: ExperienceMainProps) {
+  const isAccessible =
+    searchParams?.accessKey === generateSHA256Hash(ACCESS_PASSWORD);
+
   return (
     <main>
       <Container>
         <Header />
-        <Experience />
+        {isAccessible ? <Experience /> : <ExperienceFobidden />}
       </Container>
     </main>
   );
