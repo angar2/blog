@@ -53,7 +53,7 @@ export default function Main() {
           <div className="w-1/2 gap-6 max-md:ml-0 max-md:w-full">
             <div className="flex flex-col max-md:mt-6 max-md:max-w-full">
               {/* Stack */}
-              <div className="flex max-md:max-w-full rounded-2xl border-[0.05rem] border-[#F4E9E9] shadow-lg hover:shadow-2xl">
+              <div className="flex max-md:max-w-full rounded-2xl border-[0.05rem] border-[#F4E9E9] shadow-lg hover:shadow-2xl max-md:w-[312px]">
                 <div className="flex">
                   <div className="flex justify-center items-center w-[119px] shrink-0 border-r-2 border-[#F4E9E9] max-md:w-[78px]">
                     <p className="rotate-[-90deg] text-4xl font-black max-md:text-2xl">
@@ -105,9 +105,9 @@ export default function Main() {
           <div className="w-1/2 gap-6 max-md:ml-0 max-md:w-full">
             <div className="flex flex-col max-md:mt-6 max-md:max-w-full">
               {/* Than */}
-              <div className="flex max-md:max-w-full rounded-2xl border-[0.05rem] border-[#F4E9E9] shadow-lg hover:shadow-2xl">
+              <div className="flex max-md:max-w-full rounded-2xl border-[0.05rem] border-[#F4E9E9] shadow-lg hover:shadow-2xl max-md:w-[312px]">
                 <div className="flex">
-                  <div className="flex justify-center items-center w-[119px] rounded-l-2xl bg-[#281713] max-md:ml-0 max-md:w-full shrink-0 border-r-2 border-[#F4E9E9] max-md:w-[78px]">
+                  <div className="flex justify-center items-center w-[119px] shrink-0 border-r-2 border-[#F4E9E9] rounded-l-2xl bg-[#281713] max-md:w-[78px]">
                     <p className="rotate-[-90deg] text-4xl font-black text-white max-md:text-2xl">
                       Than
                     </p>
