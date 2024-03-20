@@ -1,12 +1,13 @@
 import Container from '@/app/_components/container';
-
 import Header from './_components/header';
+import Main from './_components/main';
 
 export default function Index() {
   return (
     <main>
       <Container>
         <Header />
+        <Main />
       </Container>
     </main>
   );
