@@ -6,7 +6,6 @@ export default function Index() {
   return (
     <main>
       <Container>
-        <Header />
         <Main />
       </Container>
     </main>

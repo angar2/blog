@@ -27,7 +27,6 @@ export default function ExperienceMain({ searchParams }: ExperienceMainProps) {
   return (
     <main>
       <Container>
-        <Header />
         {isAccessible ? <Experience /> : <ExperienceFobidden />}
       </Container>
     </main>

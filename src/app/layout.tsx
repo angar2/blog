@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { WebSite, WithContext } from 'schema-dts';
 import './globals.css';
+import Header from './_components/header';
 
 const jsonLd: WithContext<WebSite> = {
   '@context': 'https://schema.org',
@@ -40,42 +41,45 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang="en">
       <head>
         <link
-          rel='apple-touch-icon'
-          sizes='180x180'
-          href='/favicon/apple-touch-icon.png'
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/favicon/apple-touch-icon.png"
         />
         <link
-          rel='icon'
-          type='image/png'
-          sizes='32x32'
-          href='/favicon/favicon-32x32.png'
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon/favicon-32x32.png"
         />
         <link
-          rel='icon'
-          type='image/png'
-          sizes='16x16'
-          href='/favicon/favicon-16x16.png'
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon/favicon-16x16.png"
         />
-        <link rel='manifest' href='/assets/favicon/site.webmanifest' />
+        <link rel="manifest" href="/assets/favicon/site.webmanifest" />
         <link
-          rel='mask-icon'
-          href='/favicon/safari-pinned-tab.svg'
-          color='#e01808'
+          rel="mask-icon"
+          href="/favicon/safari-pinned-tab.svg"
+          color="#e01808"
         />
-        <meta name='apple-mobile-web-app-title' content='Angari' />
-        <meta name='application-name' content='Angari' />
-        <meta name='msapplication-TileColor' content='#e01808' />
+        <meta name="apple-mobile-web-app-title" content="Angari" />
+        <meta name="application-name" content="Angari" />
+        <meta name="msapplication-TileColor" content="#e01808" />
         <meta
-          name='msapplication-TileImage'
-          content='/favicon/mstile-144x144.png'
+          name="msapplication-TileImage"
+          content="/favicon/mstile-144x144.png"
         />
-        <meta name='theme-color' content='#ffffff' />
+        <meta name="theme-color" content="#ffffff" />
       </head>
       <body className={inter.className}>
-        <div className="min-h-screen">{children}</div>
+        <div className="min-h-screen">
+          <Header />
+          {children}
+        </div>
         <div id="_portal"></div>
         <GoogleAnalytics gaId="GTM-NJ8BQ9FM" />
         {/* <Footer /> */}

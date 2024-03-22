@@ -15,7 +15,6 @@ export default function BlogMain() {
   return (
     <main>
       <Container>
-        <Header />
         {allPosts.length > 0 && <PostList posts={allPosts} />}
       </Container>
     </main>

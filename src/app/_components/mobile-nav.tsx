@@ -23,10 +23,10 @@ const MobileNav = ({
     <nav
       className={`md:hidden fixed transform ${
         isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-      } transition-transform duration-300 ease-in-out flex flex-col bg-white right-0 w-3/4 h-full top-0 pt-24 z-50 border-l border-gray-200 shadow-lg`}
+      } transition-transform duration-300 ease-in-out flex flex-col bg-white right-0 w-3/5 h-full top-0 pt-24 z-50 border-l border-gray-200 shadow-lg`}
     >
       <button
-        className="absolute top-0 right-0 mt-8 mr-8 text-2xl"
+        className="absolute top-0 right-0 mt-8 mr-8 text-2xl hover:font-black"
         onClick={() => setIsMenuOpen(false)}
       >
         &#x2715;
@@ -38,9 +38,9 @@ const MobileNav = ({
           <Link
             key={menu.path}
             href={menu.path}
-            className={`ml-0 md:ml-4 first:ml-0 ${
-              isActive ? 'text-gray-900' : 'text-gray-400'
-            } text-xl font-semibold transition-colors duration-300 hover:text-gray-900 p-4`}
+            className={`ml-4 md:ml-4 first:ml-0 ${
+              isActive ? 'text-gray-900' : 'text-[#2C2C2C]'
+            } text-xl font-medium transition-colors duration-300 hover:font-semibold hover:text-[#008B6B] p-4`}
             onClick={() => setIsMenuOpen(false)}
           >
             {menu.name}

@@ -10,9 +10,7 @@ export const metadata: Metadata = {
 export default function ProjectsMain() {
   return (
     <main>
-      <Container>
-        <Header />
-      </Container>
+      <Container></Container>
     </main>
   );
 }
