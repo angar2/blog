@@ -1,15 +1,15 @@
 export default function Main() {
   return (
-    <section className="max-w-5xl pt-2 mx-auto sm:pt-8">
+    <section className="max-w-6xl pt-2 mx-auto sm:pt-8 max-2xl:max-w-5xl">
       <div className="flex flex-col items-center mx-auto gap-1 lg:flex-row lg:m-0 lg:justify-between lg:items-start">
         {/* Left */}
-        <div className="flex flex-col min-w-[20rem] flex-shrink-0 mb-8 lg:mb-0 lg:w-1/3 ">
+        <div className="flex flex-col min-w-[20rem] flex-shrink-0 mb-8 lg:mb-0 lg:w-2/5 2xl:w-1/2">
           {/* Comment */}
           <p className="mb-0.5 tracking-tighter text-right font-semibold">
             매번 <span className="text-[#CE0004]">이유</span>를 찾는 개발자
           </p>
           {/* Image */}
-          <div className="flex justify-center items-center w-[20rem] max-w-[32rem] max-h-[14rem] overflow-hidden rounded-sm border-[0.15rem] border-black sm:w-full sm:max-h-[24rem] lg:max-h-full">
+          <div className="flex justify-center items-center w-[20rem] max-w-[32rem] max-h-[14rem] overflow-hidden rounded-sm border-[0.15rem] border-black sm:w-full sm:max-h-[24rem] lg:max-h-full 2xl:max-w-full">
             <img
               alt="main"
               src="assets/images/main/banner.png"
@@ -18,7 +18,7 @@ export default function Main() {
           </div>
         </div>
         {/* Right */}
-        <div className="flex flex-col w-[20rem] min-w-[20rem] gap-6 lg:w-2/3 sm:w-full sm:max-w-[32rem] max-w-[20rem] lg:pt-6 lg:gap-8">
+        <div className="flex flex-col w-[20rem] min-w-[20rem] gap-6 sm:w-full sm:max-w-[32rem] max-w-[20rem] lg:pt-6 2xl:w-full">
           {/* Stack */}
           <div className="flex rounded-sm border-[0.0625rem] border-black sm:w-full lg:min-h-[15rem]">
             <div className="flex justify-center items-center w-1/4 bg-[#2C2C2C]">
@@ -59,6 +59,12 @@ export default function Main() {
                   <p>AWS</p>
                 </div>
               </div>
+            </div>
+          </div>
+          {/* Label */}
+          <div className="w-full h-full py-2 px-4 rounded-sm bg-[#2C2C2C]">
+            <div className="text-end text-xs text-white sm:text-base">
+              <p>There must be a reason for everything</p>
             </div>
           </div>
           {/* Menu */}
