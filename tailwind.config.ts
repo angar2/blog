@@ -10,11 +10,16 @@ const config: Config = {
     extend: {
       animation: {
         slideUp: 'slideUp 0.7s ease-out forwards', // 애니메이션 이름과 속성
+        blink: 'blink 1s ease-in-out infinite', // 타이핑 커서 깜빡임
       },
       keyframes: {
         slideUp: {
           '0%': { transform: 'translateY(25px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        blink: {
+          '0%, 20%, 80%, 100%': { borderRight: '1px solid white' }, // 흰색
+          '40%, 60%': { borderRight: '1px solid transparent' }, // 투명
         },
       },
       backgroundImage: {

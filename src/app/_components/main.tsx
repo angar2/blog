@@ -1,4 +1,62 @@
+'use client';
+import React, { useState, useEffect } from 'react';
+
+const texts = [
+  '# Efficiency rather than emotion',
+  '# Accurately rather than quickly',
+  '# Planning before doing',
+  '# Finding reasons before just skipping',
+  '# Talking louder than being quiet',
+];
 export default function Main() {
+  const [textIndex, setTextIndex] = useState(0);
+  const [text, setText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentText = texts[textIndex];
+
+    const handleTyping = () => {
+      if (!isDeleting) {
+        // Typing
+        const newText = currentText.substring(0, currentIndex + 1);
+        setText(newText);
+
+        if (newText === currentText) {
+          // Start deleting after typing is complete
+          setTimeout(() => {
+            setIsDeleting(true);
+          }, 2000); // Wait for 2 seconds before starting to delete
+        }
+      } else {
+        // Deleting
+        const newText = currentText.substring(0, currentIndex);
+        setText(newText);
+
+        if (newText === '') {
+          // Reset index and stop deleting when text is completely deleted
+          setIsDeleting(false);
+          setCurrentIndex(0);
+
+          // Move to the next text
+          const nextIndex = (textIndex + 1) % texts.length;
+          setTextIndex(nextIndex);
+        }
+      }
+
+      // Update index for next iteration
+      setCurrentIndex((prevIndex) => prevIndex + (isDeleting ? -1 : 1));
+    };
+
+    const typingInterval = isDeleting ? 80 : 80; // Adjust the typing and deleting speed here
+
+    const typingTimer = setTimeout(() => {
+      handleTyping();
+    }, typingInterval);
+
+    return () => clearTimeout(typingTimer);
+  }, [textIndex, text, isDeleting, currentIndex]);
   return (
     <section className="max-w-6xl pt-2 mx-auto sm:pt-8 max-2xl:max-w-5xl">
       <div className="flex flex-col items-center mx-auto gap-1 lg:flex-row lg:m-0 lg:justify-between lg:items-start">
@@ -62,9 +120,9 @@ export default function Main() {
             </div>
           </div>
           {/* Label */}
-          <div className="w-full h-full py-2 px-4 rounded-sm bg-[#2C2C2C]">
+          <div className="w-full h-full py-2 px-6 rounded-sm bg-[#2C2C2C]">
             <div className="text-end text-xs text-white sm:text-base">
-              <p>There must be a reason for everything</p>
+              <p className="inline animate-blink">{text}</p>
             </div>
           </div>
           {/* Menu */}
