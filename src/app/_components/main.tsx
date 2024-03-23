@@ -58,7 +58,7 @@ export default function Main() {
     return () => clearTimeout(typingTimer);
   }, [textIndex, text, isDeleting, currentIndex]);
   return (
-    <section className="max-w-6xl mx-auto max-2xl:max-w-5xl">
+    <section className="max-w-6xl mx-auto max-2xl:max-w-5xl 2xl:pt-32">
       <div className="flex flex-col items-center mx-auto gap-1 lg:flex-row lg:m-0 lg:justify-between lg:items-start">
         {/* Left */}
         <div className="flex flex-col min-w-[20rem] flex-shrink-0 mb-8 lg:mb-0 lg:w-2/5 2xl:w-1/2">

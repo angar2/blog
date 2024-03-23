@@ -58,8 +58,8 @@ const projects: ProjectIntroProps[] = [
 export default function Experience() {
   return (
     <section className="max-w-5xl mx-auto">
-      <div className="w-auto h-16 mb-14 flex items-center overflow-hidden rounded-md md:h-40 md:mb-28 md:rounded-xl">
-        <img src="/assets/images/experience/banner-image.jpeg" alt="banner" />
+      <div className="w-auto h-20 mt-6 mb-12 flex items-start overflow-hidden rounded-sm border-[0.15rem] border-black md:h-48 md:mb-24 md:rounded-ls">
+        <img src="/assets/images/experience/banner-image.png" alt="banner" />
       </div>
       <div className="flex-col md:flex md:flex-row md:justify-start">
         {/* 회사 */}
