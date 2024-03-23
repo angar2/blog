@@ -8,7 +8,7 @@ export default function ExperienceFobidden() {
         />
       </div>
       <div className='flex flex-col items-center rounded-md p-2 md:rounded-2xl'>
-        <p className='mx-auto my-6 text-base font-semibold md:font-bold md:text-2xl md:font-bold'>
+        <p className='mx-auto my-6 text-base font-semibold md:text-2xl md:font-bold'>
           일반 접근이 허용되지 않은 페이지입니다.
         </p>
         <p className='mx-auto mb-2 text-sm font-semibold text-gray-500 md:text-xl md:font-semibold '>
