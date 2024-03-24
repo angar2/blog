@@ -58,28 +58,37 @@ const projects: ProjectIntroProps[] = [
 export default function Experience() {
   return (
     <section className="max-w-5xl mx-auto">
-      <div className="w-auto h-20 mt-6 mb-12 flex items-start overflow-hidden rounded-sm border-[0.15rem] border-black md:h-48 md:mb-24 md:rounded-ls">
+      <div className="w-auto min-w-[20rem] min-h-20 mt-6 mb-8 flex items-start overflow-hidden rounded-sm border-[0.15rem] border-black md:h-48 md:mb-12 md:rounded-ls">
         <img src="/assets/images/experience/banner-image.png" alt="banner" />
       </div>
-      <div className="flex-col md:flex md:flex-row md:justify-start">
+      <div className="w-full mb-8 py-2 px-1 border-b-2 md:mb-12 md:py-4 md:px-2">
+        <p className="text-xl font-medium md:text-2xl">
+          Work Experience{' '}
+          <span className="text-2xl text-[#008B6B] md:text-4xl">.</span>
+        </p>
+      </div>
+      <div className="flex-col lg:flex lg:flex-row lg:justify-start">
         {/* 회사 */}
         <CompanyIntro
           companyName="주식회사 데브몬스터"
-          position="소프트웨어 개발사 | Back-end Developer"
+          companyIntro="소프트웨어 개발사"
+          position="Back-end Developer"
           period="2023.04. - 현재."
         />
         {/* 경험 내용 */}
-        <div className="w-full md:w-2/4">
-          <ProjectCommon tasks={common.tasks} />
-          {projects.map((project, index) => (
-            <ProjectIntro
-              projectName={project.projectName}
-              description={project.description}
-              period={project.period}
-              tasks={project.tasks}
-              techStack={project.techStack}
-            />
-          ))}
+        <div className="w-full pl-16 sm:pl-24 lg:w-2/4 lg:pl-0 lg:border-0">
+          <div className="pl-2 border-l-4 border-gray-600 rounded-md sm:pl-12 lg:border-0 lg:pl-4">
+            <ProjectCommon tasks={common.tasks} />
+            {projects.map((project, index) => (
+              <ProjectIntro
+                projectName={project.projectName}
+                description={project.description}
+                period={project.period}
+                tasks={project.tasks}
+                techStack={project.techStack}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
