@@ -13,8 +13,8 @@ export default function ProjectCommon({ tasks }: ProjectCommonProps) {
 
   return (
     <div className="mb-16 px-4 md:px-0">
-      <div className="mb-2 bg-orange-50 md:bg-transparent">
-        <p className="mt-2 py-1 text-lg font-bold md:mb-2 text-center md:text-2xl md:text-left">
+      <div className="mb-2">
+        <p className="mt-2 py-1 text-2xl font-bold md:mb-2 md:text-3xl">
           공통 작업
         </p>
       </div>

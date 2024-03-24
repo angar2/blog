@@ -23,11 +23,11 @@ export default function ProjectIntro({
 
   return (
     <div className="mb-16 px-4 md:px-0">
-      <div className="mb-4 bg-gray-50 md:bg-transparent">
-        <p className="mt-2 py-1 text-2xl font-bold md:mb-2 text-center md:text-3xl md:text-left">
+      <div className="mb-4">
+        <p className="mt-2 py-1 text-2xl font-bold md:mb-2 md:text-3xl">
           {projectName}
         </p>
-        <div className="flex-col mb-4 pb-1 text-center md:justify-between md:flex-wrap md:flex md:flex-row md:text-left md:border-b-[1.5px]">
+        <div className="flex flex-col mb-4 pb-1 border-b-[0.1rem] md:justify-between md:flex-wrap md:flex-row">
           <p className="mb-1 text-sm font-semibold md:text-lg md:mb-0">
             {description}
           </p>
