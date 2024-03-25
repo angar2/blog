@@ -74,7 +74,7 @@ export default function ExperienceWork() {
         />
         {/* 경험 내용 */}
         <div className="w-full pl-4 sm:pl-24 lg:w-2/4 lg:pl-0 lg:border-0">
-          <div className="pl-4 border-l-4 border-gray-600 rounded-md sm:pl-12 lg:border-0 lg:pl-4">
+          <div className="pl-4 border-l-4 border-gray-400 rounded-md sm:pl-12 lg:border-0 lg:pl-4">
             <ProjectCommon tasks={common.tasks} />
             {projects.map((project, index) => (
               <ProjectIntro
