@@ -1,3 +1,4 @@
+import ExperienceStyle from './experience-style';
 import ExperienceWork from './experience-work';
 
 export default function Experience() {
@@ -7,6 +8,7 @@ export default function Experience() {
         <img src="/assets/images/experience/banner-image.png" alt="banner" />
       </div>
       <ExperienceWork />
+      <ExperienceStyle />
     </section>
   );
 }
