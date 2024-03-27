@@ -52,6 +52,9 @@ const config: Config = {
         md: '0 8px 30px rgba(0, 0, 0, 0.12)',
         d: '0 1px 2px 0 #00000080',
       },
+      screens: {
+        '3xl': '1792px',
+      },
     },
   },
   plugins: [],

@@ -43,7 +43,7 @@ const Header = () => {
   };
 
   return (
-    <header className="flex justify-between items-center pt-3 pb-4 px-4 text-xl font-bold leading-tight tracking-tight md:tracking-tighter">
+    <header className="flex justify-between items-center max-w-5xl mx-auto pt-3 pb-4 px-4 text-xl font-bold leading-tight tracking-tight md:tracking-tighter 3xl:max-w-6xl">
       <div>
         <Link
           href={`/experience?accessKey=${generateSHA256Hash(ACCESS_PASSWORD)}`}

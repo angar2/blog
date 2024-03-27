@@ -58,10 +58,10 @@ export default function Main() {
     return () => clearTimeout(typingTimer);
   }, [textIndex, text, isDeleting, currentIndex]);
   return (
-    <section className="max-w-6xl mx-auto max-2xl:max-w-5xl 2xl:pt-32">
-      <div className="flex flex-col items-center mx-auto gap-1 lg:flex-row lg:m-0 lg:justify-between lg:items-start">
+    <section className="max-w-5xl mx-auto pt-4 3xl:max-w-6xl sm:pt-16">
+      <div className="flex flex-col items-center mx-auto gap-1 sm:gap-[10%] lg:flex-row lg:m-0 lg:justify-between lg:items-start">
         {/* Left */}
-        <div className="flex flex-col min-w-[20rem] flex-shrink-0 mb-8 lg:mb-0 lg:w-2/5 2xl:w-1/2">
+        <div className="flex flex-col min-w-[20rem] flex-shrink-1 mb-8 lg:mb-0">
           {/* Comment */}
           <p className="mb-0.5 tracking-tighter text-right font-semibold">
             매번 <span className="text-[#CE0004]">이유</span>를 찾는 개발자
@@ -76,7 +76,7 @@ export default function Main() {
           </div>
         </div>
         {/* Right */}
-        <div className="flex flex-col w-[20rem] min-w-[20rem] gap-6 sm:w-full sm:max-w-[32rem] max-w-[20rem] lg:pt-6 2xl:w-full">
+        <div className="flex flex-col flex-shrink-0 w-[20rem] min-w-[20rem] gap-6 sm:w-full sm:max-w-[32rem] max-w-[20rem] lg:pt-6">
           {/* Stack */}
           <div className="flex rounded-sm border-[0.0625rem] border-black sm:w-full lg:min-h-[15rem]">
             <div className="flex justify-center items-center w-1/4 bg-[#2C2C2C]">
