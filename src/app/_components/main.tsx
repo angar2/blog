@@ -1,4 +1,5 @@
 'use client';
+import { MAIN_ARROW_IMAGE_URL, MAIN_BANNER_IMAGE_URL } from '@/lib/constants';
 import React, { useState, useEffect } from 'react';
 
 const texts = [
@@ -69,8 +70,8 @@ export default function Main() {
           {/* Image */}
           <div className="flex justify-center items-center w-[20rem] max-w-[32rem] max-h-[14rem] overflow-hidden rounded-sm border-[0.15rem] border-black sm:w-full sm:max-h-[24rem] lg:max-h-full 2xl:max-w-full">
             <img
-              alt="main"
-              src="assets/images/main/banner.png"
+              alt="banner"
+              src={MAIN_BANNER_IMAGE_URL}
               className="mb-8 lg:m-0 sm:mb-16 lg:mb-0"
             />
           </div>
@@ -128,7 +129,7 @@ export default function Main() {
           {/* Menu */}
           <div className="flex justify-end items-center gap-3 text-center text-xs font-normal sm:text-base">
             <div className="w-[3rem] mr-1 overflow-hidden sm:w-[5rem] sm:mr-6">
-              <img alt="arrow" src="assets/images/main/arrow.png" />
+              <img alt="arrow" src={MAIN_ARROW_IMAGE_URL} />
             </div>
             <a
               href="/blog"

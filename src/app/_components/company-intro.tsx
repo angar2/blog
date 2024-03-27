@@ -1,3 +1,4 @@
+import { EXPERIENCE_COMPANY_LOGO_IMAGE_URL } from '@/lib/constants';
 import Image from 'next/image';
 
 interface CompanyIntroProps {
@@ -25,7 +26,7 @@ export default function CompanyIntro({
         <div className="flex justify-center items-center max-w-16 w-12 p-2 aspect-square overflow-hidden shadow-d  border-black rounded-md md:w-full">
           <img
             alt="logo"
-            src="/assets/images/experience/logo-image-devmonster.png"
+            src={EXPERIENCE_COMPANY_LOGO_IMAGE_URL}
             className="w-auto"
           />
         </div>
