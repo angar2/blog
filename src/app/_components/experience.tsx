@@ -1,6 +1,7 @@
 import { EXPERIENCE_BANNER_IMAGE_URL } from '@/lib/constants';
 import ExperienceStyle from './experience-style';
 import ExperienceWork from './experience-work';
+import ExperienceProject from './experience-project';
 
 export default function Experience() {
   return (
@@ -9,6 +10,7 @@ export default function Experience() {
         <img src={EXPERIENCE_BANNER_IMAGE_URL} alt="banner" />
       </div>
       <ExperienceWork />
+      <ExperienceProject />
       <ExperienceStyle />
     </section>
   );
