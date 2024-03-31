@@ -1,4 +1,4 @@
-import { emphasizeText } from '@/lib/utils/textUtils';
+import { TextFormat } from '@/lib/utils/textUtils';
 
 interface BulletedListProps {
   list: string[];
@@ -8,7 +8,7 @@ export default function BulletedList({ list }: BulletedListProps) {
     <ul className="pl-2 sm:pl-4">
       {list.map((content, index) => (
         <li key={index} className="ml-4 mb-2 text-sm list-disc md:text-lg">
-          {emphasizeText(content)}
+          {TextFormat(content)}
         </li>
       ))}
     </ul>

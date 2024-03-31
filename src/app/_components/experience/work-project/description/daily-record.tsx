@@ -2,6 +2,7 @@ import BulletedList from '../../common/bulleted-list';
 import ChipTag from '../../common/chip-tag';
 import SectionHeader from '../../common/section-header';
 import CodeTag from '../../common/code-tag';
+import { PROJECT_FIGMA_URL } from '@/lib/constants';
 
 export default function DailyRecord() {
   return (
@@ -11,7 +12,7 @@ export default function DailyRecord() {
         <div>
           <div className="mb-6 md:mb-8">
             <p className="font-medium italic md:text-xl">
-              " 목표를 정하고 하루하루 채워나가는 성취 프로젝트형 플랫폼 "
+              " 목표를 정하고 하루하루 채워나가는 성취형 프로젝트 플랫폼 "
             </p>
           </div>
           <div className="flex flex-col mb-6 sm:mb-8">
@@ -51,7 +52,7 @@ export default function DailyRecord() {
             <ChipTag name={'Designing'} />
             <BulletedList
               list={[
-                '기능의 특성을 살릴 수 있는 심플한 **UI/UX 디자인** → Figma 제작',
+                `기능의 특성을 살릴 수 있는 심플한 **UI/UX 디자인** → @@Figma[${PROJECT_FIGMA_URL}]@@ 제작`,
                 '메인/서브 콘텐츠의 **기능 및 아키텍처 설계**',
               ]}
             />
@@ -60,10 +61,10 @@ export default function DailyRecord() {
             <ChipTag name={'Developing'} />
             <BulletedList
               list={[
-                '최대한 **Nest.js(TypeORM)**의 기본 기능과 **Restful API**에 충실하게 활용해 서버 안정성 높히려 노력',
-                '메인 콘텐츠 요소(Project-Task-Activity)의 **기능 간 관계를 디테일하게 연결**하여 버그를 최대한 줄임',
-                'Oauth, Email 등 **외부 라이브러리 및 API 활용**해 접근성과 확장성을 키움',
-                '**DB 테이블 관계**를 철저하게 설계해 무결성을 높힘',
+                '최대한 **Nest.js(TypeORM)**의 기본 기능과 **Restful API**에 충실하여 서버 안정성 높히려 노력',
+                '메인 콘텐츠 요소(Project-Task-Activity)의 **기능 간 관계를 디테일하게 연결**하여 버그를 최대한 줄이려 노력',
+                'Oauth, Email 등 **외부 라이브러리 및 API 활용**해 확장성을 키움',
+                '**DB 테이블 관계**를 철저하게 설계해 무결성을 높히려 노력',
               ]}
             />
           </div>
