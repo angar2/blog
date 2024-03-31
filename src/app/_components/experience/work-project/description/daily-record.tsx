@@ -1,4 +1,3 @@
-import { emphasizeText } from '@/lib/utils/textUtils';
 import BulletedList from '../../common/bulleted-list';
 import ChipTag from '../../common/chip-tag';
 import SectionHeader from '../../common/section-header';

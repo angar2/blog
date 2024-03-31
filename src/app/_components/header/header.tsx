@@ -1,6 +1,4 @@
 'use client';
-
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ACCESS_PASSWORD, LOGO_IMAGE_URL } from '@/lib/constants';

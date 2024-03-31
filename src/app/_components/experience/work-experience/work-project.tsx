@@ -1,4 +1,3 @@
-import { emphasizeText } from '@/lib/utils/textUtils';
 import BulletedList from '../common/bulleted-list';
 
 export interface ProjectProps {
