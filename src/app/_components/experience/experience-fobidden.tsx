@@ -1,11 +1,10 @@
 import { EXPERIENCE_BANNER_403_IMAGE_URL } from '@/lib/constants';
+import BannerImage from './common/banner-image';
 
 export default function ExperienceFobidden() {
   return (
     <section className="max-w-xl mx-auto">
-      <div className="w-auto h-24 mb-2 flex items-center overflow-hidden rounded-md md:h-40 md:mb-6 md:rounded-xl">
-        <img src={EXPERIENCE_BANNER_403_IMAGE_URL} alt="banner" />
-      </div>
+      <BannerImage imageUrl={EXPERIENCE_BANNER_403_IMAGE_URL} />
       <div className="flex flex-col items-center rounded-md p-2 md:rounded-2xl">
         <p className="mx-auto my-6 text-base font-semibold md:text-2xl md:font-bold">
           일반 접근이 허용되지 않은 페이지입니다.

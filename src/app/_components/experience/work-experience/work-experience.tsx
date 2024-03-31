@@ -1,6 +1,7 @@
 import WorkCompany from './work-company';
 import WorkCommon, { CommonProps } from './work-common';
 import WorkProject, { ProjectProps } from './work-project';
+import ExperienceTitle from '../common/title';
 
 const common: CommonProps = {
   tasks: [
@@ -58,12 +59,7 @@ const projects: ProjectProps[] = [
 export default function WorkExperience() {
   return (
     <div className="mt-12 sm:mt-16">
-      <div className="w-full mb-8 py-2 px-1 border-b-2 md:mb-12 md:py-4 md:px-2">
-        <p className="text-xl font-medium md:text-2xl">
-          Work Experience{' '}
-          <span className="text-2xl text-[#008B6B] md:text-4xl">.</span>
-        </p>
-      </div>
+      <ExperienceTitle title="Work Experience" />
       <div className="flex-col lg:flex lg:flex-row lg:justify-start">
         {/* 회사 */}
         <WorkCompany
@@ -77,13 +73,15 @@ export default function WorkExperience() {
           <div className="pl-4 border-l-4 border-gray-400 rounded-md sm:pl-12 lg:border-0 lg:pl-4">
             <WorkCommon tasks={common.tasks} />
             {projects.map((project, index) => (
-              <WorkProject
-                projectName={project.projectName}
-                description={project.description}
-                period={project.period}
-                tasks={project.tasks}
-                techStack={project.techStack}
-              />
+              <div key={index}>
+                <WorkProject
+                  projectName={project.projectName}
+                  description={project.description}
+                  period={project.period}
+                  tasks={project.tasks}
+                  techStack={project.techStack}
+                />
+              </div>
             ))}
           </div>
         </div>

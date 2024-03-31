@@ -1,3 +1,6 @@
+import { emphasizeText } from '@/lib/utils/textUtils';
+import BulletedList from '../common/bulleted-list';
+
 export interface ProjectProps {
   projectName: string;
   description: string;
@@ -13,14 +16,6 @@ export default function WorkProject({
   tasks,
   techStack,
 }: ProjectProps) {
-  // 강조 텍스트를 감싸는 함수
-  const emphasizeText = (text: string) => {
-    const parts = text.split('**');
-    return parts.map((part, index) => {
-      return index % 2 === 0 ? part : <strong key={index}>{part}</strong>;
-    });
-  };
-
   return (
     <div className="mb-16 px-4 md:px-0">
       <div className="mb-6">
@@ -39,16 +34,7 @@ export default function WorkProject({
           <p className="mb-3 ml-1 text-sm font-semibold text-gray-600 italic md:text-base">
             WHAT DID I DO .
           </p>
-          <ul>
-            {tasks.map((text, index) => (
-              <li
-                key={index}
-                className="ml-4 mb-2 text-sm list-disc md:text-lg"
-              >
-                {emphasizeText(text)}
-              </li>
-            ))}
-          </ul>
+          <BulletedList list={tasks} />
         </div>
         <div className="my-4">
           <div className="flex flex-wrap">
