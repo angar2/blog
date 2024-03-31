@@ -1,7 +1,7 @@
 import { EXPERIENCE_BANNER_IMAGE_URL } from '@/lib/constants';
-import ExperienceStyle from './experience-style';
-import ExperienceWork from './experience-work';
-import ExperienceProject from './experience-project';
+import WorkStyle from './work-style/work-style';
+import WorkExperience from './work-experience/work-experience';
+import WorkProject from './work-project/work-project';
 
 export default function Experience() {
   return (
@@ -9,9 +9,9 @@ export default function Experience() {
       <div className="w-auto min-w-[20rem] min-h-20 mt-6 mb-8 flex items-start overflow-hidden rounded-sm border-[0.15rem] border-black md:h-48 md:mb-12 md:rounded-ls">
         <img src={EXPERIENCE_BANNER_IMAGE_URL} alt="banner" />
       </div>
-      <ExperienceWork />
-      <ExperienceProject />
-      <ExperienceStyle />
+      <WorkExperience />
+      <WorkProject />
+      <WorkStyle />
     </section>
   );
 }

@@ -1,8 +1,8 @@
-import CompanyIntro from './company-intro';
-import ProjectCommon, { ProjectCommonProps } from './project-common';
-import ProjectIntro, { ProjectIntroProps } from './project-intro';
+import WorkCompany from './work-company';
+import WorkCommon, { CommonProps } from './work-common';
+import WorkProject, { ProjectProps } from './work-project';
 
-const common: ProjectCommonProps = {
+const common: CommonProps = {
   tasks: [
     '**DB**: 데이터 모델링 및 스키마 설계',
     '**Hosting**: AWS를 이용한 서비스 웹서버 호스팅',
@@ -11,7 +11,7 @@ const common: ProjectCommonProps = {
   ],
 };
 
-const projects: ProjectIntroProps[] = [
+const projects: ProjectProps[] = [
   {
     projectName: 'Fleet',
     description: '선박 작업 관리 및 문서결재 플랫폼',
@@ -55,7 +55,7 @@ const projects: ProjectIntroProps[] = [
   },
 ];
 
-export default function ExperienceWork() {
+export default function WorkExperience() {
   return (
     <div className="mt-12 sm:mt-16">
       <div className="w-full mb-8 py-2 px-1 border-b-2 md:mb-12 md:py-4 md:px-2">
@@ -66,7 +66,7 @@ export default function ExperienceWork() {
       </div>
       <div className="flex-col lg:flex lg:flex-row lg:justify-start">
         {/* 회사 */}
-        <CompanyIntro
+        <WorkCompany
           companyName="주식회사 데브몬스터"
           companyIntro="소프트웨어 개발사"
           position="Back-end Developer"
@@ -75,9 +75,9 @@ export default function ExperienceWork() {
         {/* 경험 내용 */}
         <div className="w-full pl-4 sm:pl-24 lg:w-2/4 lg:pl-0 lg:border-0">
           <div className="pl-4 border-l-4 border-gray-400 rounded-md sm:pl-12 lg:border-0 lg:pl-4">
-            <ProjectCommon tasks={common.tasks} />
+            <WorkCommon tasks={common.tasks} />
             {projects.map((project, index) => (
-              <ProjectIntro
+              <WorkProject
                 projectName={project.projectName}
                 description={project.description}
                 period={project.period}

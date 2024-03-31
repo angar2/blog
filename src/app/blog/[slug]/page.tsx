@@ -3,9 +3,9 @@ import { notFound } from 'next/navigation';
 import { getAllPosts, getPostBySlug } from '../../../lib/api';
 import markdownToHtml from '../../../lib/markdownToHtml';
 import Container from '../../_components/container';
-import Header from '../../_components/header';
-import { PostBody } from '../../_components/post-body';
-import { PostHeader } from '../../_components/post-header';
+import Header from '../../_components/header/header';
+import { PostBody } from '../../_components/post/post-body';
+import { PostHeader } from '../../_components/post/post-header';
 import { HOME_OG_IMAGE_URL } from '@/lib/constants';
 
 export default async function Post({ params }: Params) {

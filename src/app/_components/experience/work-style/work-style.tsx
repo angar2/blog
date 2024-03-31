@@ -1,7 +1,3 @@
-import CompanyIntro from './company-intro';
-import ProjectCommon, { ProjectCommonProps } from './project-common';
-import ProjectIntro, { ProjectIntroProps } from './project-intro';
-
 interface StyleProps {
   title: string;
   descriptions: string[];
@@ -34,7 +30,7 @@ const styles: StyleProps[] = [
   },
 ];
 
-export default function ExperienceStyle() {
+export default function WorkStyle() {
   return (
     <div className="mt-12 sm:mt-16">
       <div className="w-full mb-8 py-2 px-1 border-b-2 md:mb-8 md:py-4 md:px-2">

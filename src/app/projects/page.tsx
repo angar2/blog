@@ -1,5 +1,5 @@
 import Container from '@/app/_components/container';
-import Header from '../_components/header';
+import Header from '../_components/header/header';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

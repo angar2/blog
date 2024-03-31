@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
 import { createHash } from 'crypto';
 import Container from '@/app/_components/container';
-import Header from '../_components/header';
-import Experience from '../_components/experience';
-import ExperienceFobidden from '../_components/experience-fobidden';
+import Header from '../_components/header/header';
+import Experience from '../_components/experience/experience';
+import ExperienceFobidden from '../_components/experience/experience-fobidden';
 import { ACCESS_PASSWORD } from '@/lib/constants';
 
 interface ExperienceMainProps {

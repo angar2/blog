@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { WebSite, WithContext } from 'schema-dts';
 import './globals.css';
-import Header from './_components/header';
+import Header from './_components/header/header';
 
 const jsonLd: WithContext<WebSite> = {
   '@context': 'https://schema.org',

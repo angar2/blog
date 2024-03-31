@@ -1,8 +1,8 @@
-export interface ProjectCommonProps {
+export interface CommonProps {
   tasks: string[];
 }
 
-export default function ProjectCommon({ tasks }: ProjectCommonProps) {
+export default function WorkCommon({ tasks }: CommonProps) {
   // 강조 텍스트를 감싸는 함수
   const emphasizeText = (text: string) => {
     const parts = text.split('**');

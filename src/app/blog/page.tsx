@@ -1,7 +1,7 @@
 import Container from '@/app/_components/container';
-import { PostList } from '@/app/_components/post-list';
+import { PostList } from '@/app/_components/post/post-list';
 import { getAllPosts } from '@/lib/api';
-import Header from '../_components/header';
+import Header from '../_components/header/header';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

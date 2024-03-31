@@ -1,31 +1,31 @@
-import ProjectCommon, { ProjectCommonProps } from './project-common';
-import ProjectIntro, { ProjectIntroProps } from './project-intro';
+// import ProjectCommon, { ProjectCommonProps } from '../work/work-common';
+// import ProjectIntro, { ProjectIntroProps } from '../work/work-project';
 
-const common: ProjectCommonProps = {
-  tasks: [
-    '**DB**: 데이터 모델링 및 스키마 설계',
-    '**Hosting**: AWS를 이용한 서비스 웹서버 호스팅',
-    '**Plan**: 서비스 기능 및 아키텍처 기획 부분 담당',
-    '**Develope**: 회원, 관리자 CRUD 등 주요 기능 API 구현',
-  ],
-};
+// const common: ProjectCommonProps = {
+//   tasks: [
+//     '**DB**: 데이터 모델링 및 스키마 설계',
+//     '**Hosting**: AWS를 이용한 서비스 웹서버 호스팅',
+//     '**Plan**: 서비스 기능 및 아키텍처 기획 부분 담당',
+//     '**Develope**: 회원, 관리자 CRUD 등 주요 기능 API 구현',
+//   ],
+// };
 
-const projects: ProjectIntroProps[] = [
-  {
-    projectName: 'Fleet',
-    description: '선박 작업 관리 및 문서결재 플랫폼',
-    period: '2024.01. - 현재.',
-    tasks: [
-      '**전자문서 시스템**(결재 / 반려 / 재상신) 구현',
-      '**스케줄러** 일반 및 전자문서 연동 기능 구현',
-      '선박별 **데이터 통계** 구현',
-      '회원/관리자 타입별 **기능 권한** 설정',
-    ],
-    techStack: ['C#', '.NET', 'MySQL', 'AWS(EC2, RDS)'],
-  },
-];
+// const projects: ProjectIntroProps[] = [
+//   {
+//     projectName: 'Fleet',
+//     description: '선박 작업 관리 및 문서결재 플랫폼',
+//     period: '2024.01. - 현재.',
+//     tasks: [
+//       '**전자문서 시스템**(결재 / 반려 / 재상신) 구현',
+//       '**스케줄러** 일반 및 전자문서 연동 기능 구현',
+//       '선박별 **데이터 통계** 구현',
+//       '회원/관리자 타입별 **기능 권한** 설정',
+//     ],
+//     techStack: ['C#', '.NET', 'MySQL', 'AWS(EC2, RDS)'],
+//   },
+// ];
 
-export default function ExperienceProject() {
+export default function WorkProject() {
   // 강조 텍스트를 감싸는 함수
   const emphasizeText = (text: string) => {
     const parts = text.split('**');

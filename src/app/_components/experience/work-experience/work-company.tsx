@@ -1,7 +1,6 @@
 import { EXPERIENCE_COMPANY_LOGO_IMAGE_URL } from '@/lib/constants';
-import Image from 'next/image';
 
-interface CompanyIntroProps {
+interface CompanyProps {
   companyName: string;
   companyIntro: string;
   position: string;
@@ -9,13 +8,13 @@ interface CompanyIntroProps {
   stickerColor?: string;
 }
 
-export default function CompanyIntro({
+export default function WorkCompany({
   companyName,
   companyIntro,
   position,
   period,
   stickerColor,
-}: CompanyIntroProps) {
+}: CompanyProps) {
   return (
     <div className="w-full mb-4 lg:mb-0 pb-4 lg:w-2/4 sm:mb-8">
       <div

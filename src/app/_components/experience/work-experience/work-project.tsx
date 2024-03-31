@@ -1,4 +1,4 @@
-export interface ProjectIntroProps {
+export interface ProjectProps {
   projectName: string;
   description: string;
   period: string;
@@ -6,13 +6,13 @@ export interface ProjectIntroProps {
   techStack: string[];
 }
 
-export default function ProjectIntro({
+export default function WorkProject({
   projectName,
   description,
   period,
   tasks,
   techStack,
-}: ProjectIntroProps) {
+}: ProjectProps) {
   // 강조 텍스트를 감싸는 함수
   const emphasizeText = (text: string) => {
     const parts = text.split('**');
