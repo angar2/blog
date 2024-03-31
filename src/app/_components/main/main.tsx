@@ -1,6 +1,6 @@
-'use client';
 import { MAIN_ARROW_IMAGE_URL, MAIN_BANNER_IMAGE_URL } from '@/lib/constants';
-import React, { useState, useEffect } from 'react';
+import Typing from '../common/typing';
+import StackChipTag from './stack-chip-tag';
 
 const texts = [
   '# Efficiency rather than emotion',
@@ -10,54 +10,6 @@ const texts = [
   '# Talking louder than being quiet',
 ];
 export default function Main() {
-  const [textIndex, setTextIndex] = useState(0);
-  const [text, setText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const currentText = texts[textIndex];
-
-    const handleTyping = () => {
-      if (!isDeleting) {
-        // Typing
-        const newText = currentText.substring(0, currentIndex + 1);
-        setText(newText);
-
-        if (newText === currentText) {
-          // Start deleting after typing is complete
-          setTimeout(() => {
-            setIsDeleting(true);
-          }, 2000); // Wait for 2 seconds before starting to delete
-        }
-      } else {
-        // Deleting
-        const newText = currentText.substring(0, currentIndex);
-        setText(newText);
-
-        if (newText === '') {
-          // Reset index and stop deleting when text is completely deleted
-          setIsDeleting(false);
-          setCurrentIndex(0);
-
-          // Move to the next text
-          const nextIndex = (textIndex + 1) % texts.length;
-          setTextIndex(nextIndex);
-        }
-      }
-
-      // Update index for next iteration
-      setCurrentIndex((prevIndex) => prevIndex + (isDeleting ? -1 : 1));
-    };
-
-    const typingInterval = isDeleting ? 80 : 80; // Adjust the typing and deleting speed here
-
-    const typingTimer = setTimeout(() => {
-      handleTyping();
-    }, typingInterval);
-
-    return () => clearTimeout(typingTimer);
-  }, [textIndex, text, isDeleting, currentIndex]);
   return (
     <section className="max-w-5xl mx-auto pt-4 3xl:max-w-6xl sm:pt-16">
       <div className="flex flex-col items-center mx-auto gap-1 sm:gap-[10%] lg:flex-row lg:m-0 lg:justify-between lg:items-start">
@@ -87,43 +39,24 @@ export default function Main() {
             </div>
             <div className="flex flex-col items-end py-3 px-5 w-3/4 text-center text-xs font-medium text-[#FFF5EF] sm:py-5 sm:px-6 sm:text-base">
               <div className="flex gap-3 box-border sm:gap-6">
-                <div className="flex justify-center items-center w-[5.5rem] h-[1.75rem] p-2 bg-[#2C2C2C] rounded-lg sm:w-[8.25rem] sm:h-[2.25rem] max-lg:rounded-md">
-                  <p>Typescript</p>
-                </div>
-                <div className="flex justify-center items-center w-[5.5rem] h-[1.75rem] p-2 bg-[#2C2C2C] rounded-lg sm:w-[8.25rem] sm:h-[2.25rem] max-lg:rounded-md">
-                  <p>C#</p>
-                </div>
+                <StackChipTag stacks={['Typescript', 'C#']} />
               </div>
               <div className="flex justify-start gap-3 mt-2.5 sm:gap-6">
-                <div className="flex justify-center items-center w-[5.5rem] h-[1.75rem] p-2 bg-[#2C2C2C] rounded-lg sm:w-[8.25rem] sm:h-[2.25rem] max-lg:rounded-md">
-                  <p>Node.js</p>
-                </div>
-                <div className="flex justify-center items-center w-[5.5rem] h-[1.75rem] p-2 bg-[#2C2C2C] rounded-lg sm:w-[8.25rem] sm:h-[2.25rem] max-lg:rounded-md">
-                  <p>.NET</p>
-                </div>
+                <StackChipTag stacks={['Node.js', '.NET']} />
               </div>
               <div className="flex justify-start gap-3 mt-2.5 sm:gap-6">
-                <div className="flex justify-center items-center w-[5.5rem] h-[1.75rem] p-2 bg-[#2C2C2C] rounded-lg sm:w-[8.25rem] sm:h-[2.25rem] max-lg:rounded-md">
-                  <p>Nest.js</p>
-                </div>
-                <div className="flex justify-center items-center w-[5.5rem] h-[1.75rem] p-2 bg-white rounded-lg sm:w-[8.25rem] sm:h-[2.25rem] max-lg:rounded-md">
-                  <p></p>
-                </div>
+                <StackChipTag stacks={['Nest.js']} />
+                <div className="w-[5.5rem] h-[1.75rem] p-2 bg-transparent sm:w-[8.25rem] sm:h-[2.25rem]"></div>
               </div>
               <div className="flex justify-start gap-3 mt-5 sm:gap-6 sm:mt-8">
-                <div className="flex justify-center items-center w-[5.5rem] h-[1.75rem] p-2 bg-[#2C2C2C] rounded-lg sm:w-[8.25rem] sm:h-[2.25rem] max-lg:rounded-md">
-                  <p>MySQL</p>
-                </div>
-                <div className="flex justify-center items-center w-[5.5rem] h-[1.75rem] p-2 bg-[#2C2C2C] rounded-lg sm:w-[8.25rem] sm:h-[2.25rem] max-lg:rounded-md">
-                  <p>AWS</p>
-                </div>
+                <StackChipTag stacks={['MySQL', 'AWS']} />
               </div>
             </div>
           </div>
           {/* Label */}
           <div className="w-full h-full py-2 px-6 rounded-sm bg-[#2C2C2C]">
             <div className="text-end text-xs text-white sm:text-base">
-              <p className="inline animate-blink">{text}</p>
+              <Typing texts={texts} />
             </div>
           </div>
           {/* Menu */}

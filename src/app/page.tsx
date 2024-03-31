@@ -1,6 +1,6 @@
 import Container from '@/app/_components/container';
 import Header from './_components/header/header';
-import Main from './_components/main';
+import Main from './_components/main/main';
 
 export default function Index() {
   return (
