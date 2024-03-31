@@ -2,6 +2,8 @@ import ExperienceTitle from '../common/title';
 import ProjectName from './project-name';
 import ProjectIntro from './project-intro';
 import DailyRecord from './description/daily-record';
+import { EXPERIENCE_PROJECT_BLOG_LOGO_IMAGE_URL } from '@/lib/constants';
+import AngariDev from './description/angari-dev';
 
 const projects = [
   {
@@ -12,6 +14,15 @@ const projects = [
       image: '',
     },
     projectDescription: DailyRecord,
+  },
+  {
+    projectName: {
+      name: 'angari.dev',
+      description: '개발 블로그',
+      period: '2024.01 - 현재',
+      image: EXPERIENCE_PROJECT_BLOG_LOGO_IMAGE_URL,
+    },
+    projectDescription: AngariDev,
   },
 ];
 

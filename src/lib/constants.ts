@@ -8,6 +8,8 @@ export const EXPERIENCE_BANNER_IMAGE_URL =
   '/assets/images/experience/banner.png';
 export const EXPERIENCE_COMPANY_LOGO_IMAGE_URL =
   '/assets/images/experience/logo-devmonster.png';
+export const EXPERIENCE_PROJECT_BLOG_LOGO_IMAGE_URL =
+  '/assets/images/experience/logo-blog.png';
 export const EXPERIENCE_BANNER_403_IMAGE_URL =
   '/assets/images/experience/banner-403.jpg';
 export const ACCESS_PASSWORD = '관용짱';
