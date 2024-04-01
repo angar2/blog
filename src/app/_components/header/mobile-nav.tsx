@@ -66,7 +66,7 @@ const MobileNav = ({
           ></path>
         </svg>
       </Link> */}
-      <div className="fixed bottom-16 ml-4">
+      <div className="fixed bottom-8 ml-4">
         <Footer />
       </div>
     </nav>
