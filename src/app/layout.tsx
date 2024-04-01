@@ -75,7 +75,7 @@ export default function RootLayout({
         />
         <meta name="theme-color" content="#ffffff" />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} overflow-y-scroll`}>
         <div className="min-h-screen">
           <Header />
           {children}
