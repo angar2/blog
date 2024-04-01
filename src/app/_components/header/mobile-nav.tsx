@@ -53,7 +53,7 @@ const MobileNav = ({
           );
         })}
       </div>
-      <div className="fixed bottom-8 self-start ml-4">
+      <div className="fixed bottom-8 self-start ml-8">
         <div className="flex flex-col items-end">
           <div className="flex items-center">
             <Link
