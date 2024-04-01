@@ -16,3 +16,5 @@ export const ACCESS_PASSWORD = '관용짱';
 
 export const PROJECT_FIGMA_URL =
   'https://www.figma.com/file/h99IPKLTXuBsx9zkXLA8pX/Daily-Record?type=design&node-id=0-1&mode=design';
+export const GITHUB_PROFILE_URL =
+  'https://github.com/angar2';
