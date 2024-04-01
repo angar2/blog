@@ -76,13 +76,15 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
       </head>
       <body className={`${inter.className} overflow-y-scroll`}>
-        <div className="min-h-screen">
+        <div className="flex flex-col min-h-screen">
           <Header />
           {children}
+          <div className="hidden sm:block">
+            <Footer />
+          </div>
         </div>
         <div id="_portal"></div>
         <GoogleAnalytics gaId="GTM-NJ8BQ9FM" />
-        {/* <Footer /> */}
       </body>
     </html>
   );

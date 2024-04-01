@@ -1,6 +1,7 @@
 import { GITHUB_PROFILE_URL } from '@/lib/constants';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Footer from '../footer';
 
 interface HeaderMenuType {
   path: string;
@@ -48,7 +49,7 @@ const MobileNav = ({
           </Link>
         );
       })}
-      <Link
+      {/* <Link
         href={GITHUB_PROFILE_URL}
         className="ml-4 p-4 self-start"
         onClick={() => setIsMenuOpen(false)}
@@ -64,7 +65,10 @@ const MobileNav = ({
             className="fill-[#2C2C2C]"
           ></path>
         </svg>
-      </Link>
+      </Link> */}
+      <div className="fixed bottom-16 ml-4">
+        <Footer />
+      </div>
     </nav>
   );
 };

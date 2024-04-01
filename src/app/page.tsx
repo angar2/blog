@@ -4,7 +4,7 @@ import Main from './_components/main/main';
 
 export default function Index() {
   return (
-    <main>
+    <main className="flex-grow">
       <Container>
         <Main />
       </Container>
