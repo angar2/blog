@@ -52,7 +52,7 @@ const projects: ProjectProps[] = [
     description: '퍼스널컬러 기반 뷰티 제품 정보 및 소통 플랫폼',
     period: '2023.04. - 2023.07.',
     tasks: ['관리자 **콘텐츠 관리**(회원, 제품 등 8개 콘텐츠) 기능 구현'],
-    techStack: ['Typescript', 'Node.js', 'MySQL', 'AWS(EC2, RDS)'],
+    techStack: ['TypeScript', 'Node.js', 'MySQL', 'AWS(EC2, RDS)'],
   },
 ];
 
