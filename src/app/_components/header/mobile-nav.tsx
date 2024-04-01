@@ -53,7 +53,7 @@ const MobileNav = ({
           );
         })}
       </div>
-      <div className="fixed bottom-8 self-end mr-4">
+      <div className="fixed bottom-8 self-start ml-4">
         <div className="flex flex-col items-end">
           <div className="flex items-center">
             <Link
@@ -81,7 +81,7 @@ const MobileNav = ({
           </div>
           <div className="mt-3">
             <h3 className="text-xs tracking-tighter leading-tight text-end">
-              © {currentYear} angari, Hosted on Vercel.
+              © {currentYear} Angari, Hosted on Vercel.
             </h3>
           </div>
         </div>
