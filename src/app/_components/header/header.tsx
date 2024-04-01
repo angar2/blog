@@ -17,14 +17,14 @@ interface HeaderMenuType {
 }
 
 const headerMenu: HeaderMenuType[] = [
-  { path: '/experience', name: 'Experience' },
   { path: '/blog', name: 'Blog' },
-  { path: '/projects', name: 'Projects' },
+  { path: '/experience', name: 'Experience' },
+  // { path: '/projects', name: 'Projects' },
 ];
 
-function generateSHA256Hash(value: string): string {
-  return createHash('sha256').update(value).digest('hex');
-}
+// function generateSHA256Hash(value: string): string {
+//   return createHash('sha256').update(value).digest('hex');
+// }
 
 const Header = () => {
   const pathname = usePathname();
@@ -47,20 +47,13 @@ const Header = () => {
   return (
     <header className="flex justify-between items-center max-w-5xl mx-auto pt-3 pb-4 px-4 text-xl font-bold leading-tight tracking-tight md:tracking-tighter 3xl:max-w-6xl">
       <div>
-        <Link
+        {/* <Link
           href={`/experience?accessKey=${generateSHA256Hash(ACCESS_PASSWORD)}`}
         >
           <div className="absolute top-0 left-0 w-2 h-2"></div>
-        </Link>
+        </Link> */}
         <Link href="/">
           <img alt="logo" src={LOGO_IMAGE_URL} className="w-12 sm:w-20" />
-          {/* <Image
-            alt="logo"
-            src={LOGO_IMAGE_URL}
-            width={192}
-            height={192}
-            style={{ width: 48, height: 'auto' }}
-          /> */}
         </Link>
       </div>
       <button className="sm:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
