@@ -1,12 +1,11 @@
-import Container from '@/app/_components/container';
-import { EXAMPLE_PATH, GITHUB_PROFILE_URL } from '@/lib/constants';
+import { GITHUB_PROFILE_URL } from '@/lib/constants';
 import Link from 'next/link';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
   return (
     <footer className="mt-8 p-4 sm:p-8 3xl:p-16">
-      <div className="flex flex-col items-end sm:items-center">
+      <div className="flex flex-col items-center">
         <div className="flex items-center">
           <Link
             href="/experience"
@@ -31,7 +30,7 @@ export function Footer() {
           </Link>
         </div>
         <div className="mt-3 sm:mt-4">
-          <h3 className="text-xs sm:text-sm tracking-tighter leading-tight text-end sm:text-center">
+          <h3 className="text-xs sm:text-sm tracking-tighter leading-tight text-center">
             © {currentYear} angari, Hosted on Vercel.
           </h3>
         </div>

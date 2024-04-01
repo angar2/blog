@@ -95,7 +95,7 @@ const Header = () => {
         />
         {isMenuOpen && (
           <div
-            className="fixed inset-0 z-40 bg-black bg-opacity-25 backdrop-blur-sm"
+            className="fixed inset-0 z-40 bg-black bg-opacity-25 backdrop-blur-sm sm:hidden"
             onClick={() => setIsMenuOpen(false)}
           ></div>
         )}
