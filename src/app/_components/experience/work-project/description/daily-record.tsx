@@ -61,10 +61,10 @@ export default function DailyRecord() {
             <ChipTag name={'Developing'} />
             <BulletedList
               list={[
-                '최대한 **Nest.js(TypeORM)**의 기본 기능과 **Restful API**에 충실하여 서버 안정성 높히려 노력',
-                '메인 콘텐츠 요소(Project-Task-Activity)의 **기능 간 관계를 디테일하게 연결**하여 버그를 최대한 줄이려 노력',
-                'Oauth, Email 등 **외부 라이브러리 및 API 활용**해 확장성을 키움',
-                '**DB 테이블 관계**를 철저하게 설계해 무결성을 높히려 노력',
+                '최대한 **Nest.js(TypeORM)**의 기본 기능과 **Restful API**를 활용하여 서버의 안정성을 최대화하기 위해 노력',
+                '메인 콘텐츠 구조(Project-Task-Activity)의 **주요 기능 간 관계를 세밀하게 연결**하여 버그 최소화',
+                'OAuth, 이메일 등 외부 라이브러리 및 API를 활용해 시스템의 확장성 강화',
+                '**DB 테이블 관계**를 철저하게 설계하여 데이터 무결성 강화',
               ]}
             />
           </div>
@@ -72,9 +72,9 @@ export default function DailyRecord() {
             <ChipTag name={'Recording'} />
             <BulletedList
               list={[
-                '각 기능 개발에 적용한 논리 로직 기록',
-                'DB 및 API 명세서 작성 → 노션',
-                '프로젝트 일정/진행도, 팀 회의/기능요청 등 협업 내용 기록',
+                '개발된 각 기능에 적용된 논리 로직 기록',
+                '데이터베이스 및 API 명세서 작성 → 노션',
+                '프로젝트 일정, 진행 상황, 팀 회의 및 기능 요청과 같은 협업 내용 기록',
               ]}
             />
           </div>
