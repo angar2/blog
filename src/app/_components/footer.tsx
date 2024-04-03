@@ -31,7 +31,7 @@ export function Footer() {
         </div>
         <div className="mt-3 sm:mt-4">
           <h3 className="text-xs sm:text-sm tracking-tighter leading-tight text-center">
-            © {currentYear} angari, Hosted on Vercel.
+            © {currentYear} Angari, Hosted on Vercel.
           </h3>
         </div>
       </div>
