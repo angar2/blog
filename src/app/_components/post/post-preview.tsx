@@ -20,12 +20,12 @@ export function PostPreview({
   slug,
 }: Props) {
   return (
-    <div className="my-6 p-6 animate-slideUp rounded-lg hover:shadow-sm">
+    <div className="p-6 rounded-lg hover:shadow-sm">
       <Link as={`/blog/${slug}`} href="/blog/[slug]">
         {/* <div className="mb-5">
           <CoverImage slug={slug} title={title} src={coverImage} />
         </div> */}
-        <h3 className="mb-3 text-lg font-bold leading-snug md:text-2xl">
+        <h3 className="mb-3 text-lg font-bold leading-snug md:text-xl">
           {title}
         </h3>
         <p className="mb-3 text-sm leading-relaxed md:text-base line-clamp-3">

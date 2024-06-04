@@ -1,9 +1,8 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getAllPosts, getPostBySlug } from '../../../lib/api';
+import { getPosts, getPostBySlug } from '../../../lib/api';
 import markdownToHtml from '../../../lib/markdownToHtml';
 import Container from '../../_components/container';
-import Header from '../../_components/header/header';
 import { PostBody } from '../../_components/post/post-body';
 import { PostHeader } from '../../_components/post/post-header';
 import { HOME_OG_IMAGE_URL } from '@/lib/constants';
@@ -62,7 +61,7 @@ export function generateMetadata({ params }: Params): Metadata {
 }
 
 export async function generateStaticParams() {
-  const posts = getAllPosts();
+  const posts = getPosts();
 
   return posts.map((post) => ({
     slug: post.slug,

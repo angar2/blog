@@ -1,7 +1,6 @@
 import Container from '@/app/_components/container';
 import { PostList } from '@/app/_components/post/post-list';
-import { getAllPosts } from '@/lib/api';
-import Header from '../_components/header/header';
+import { getPosts } from '@/lib/api';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -10,12 +9,12 @@ export const metadata: Metadata = {
 };
 
 export default function BlogMain() {
-  const allPosts = getAllPosts();
+  const allPosts = getPosts();
 
   return (
     <main>
       <Container>
-        {allPosts.length > 0 && <PostList posts={allPosts} />}
+        {allPosts.length > 0 && <PostList allPosts={allPosts} />}
       </Container>
     </main>
   );

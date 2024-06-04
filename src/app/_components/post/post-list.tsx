@@ -1,16 +1,37 @@
+'use client';
 import { Post } from '@/interfaces/post';
 import { PostPreview } from './post-preview';
+import { useSearchParams } from 'next/navigation';
+import Pagination from '../experience/common/pagination';
 
 type Props = {
-  posts: Post[];
+  allPosts: Post[];
 };
 
-export function PostList({ posts }: Props) {
+export function PostList({ allPosts }: Props) {
+  const searchParams = useSearchParams();
+  const param = searchParams.get('page');
+  const currentPage = Number(param ?? 1);
+
+  const take = 10;
+  const startIndex = (currentPage - 1) * take;
+  const endIndex = startIndex + take;
+
+  const totalPages = Math.ceil(allPosts.length / take);
+
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      const newSearchParams = new URLSearchParams(searchParams.toString());
+      newSearchParams.set('page', page.toString());
+      window.history.replaceState(null, '', `?${newSearchParams.toString()}`);
+      window.scrollTo(0, 0);
+    }
+  };
+
   return (
-    <section className="max-w-2xl mx-auto">
-      {/* <div className="grid grid-cols-1 mb-32 md:grid-cols-2 md:gap-x-16 lg:gap-x-32 gap-y-20 md:gap-y-32"> */}
-      <div className="flex-col my-6">
-        {posts.map((post) => (
+    <section className="max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-8">
+        {allPosts.slice(startIndex, endIndex).map((post) => (
           <PostPreview
             key={post.slug}
             title={post.title}
@@ -22,6 +43,13 @@ export function PostList({ posts }: Props) {
           />
         ))}
       </div>
+
+      {/* Pagination */}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </section>
   );
 }
