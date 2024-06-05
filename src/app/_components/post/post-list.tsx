@@ -33,7 +33,7 @@ export function PostList({ allPosts }: Props) {
 
   const limitedPosts = filteredPosts.slice(startIndex, endIndex);
 
-  const totalPages = Math.ceil(allPosts.length / take);
+  const totalPages = Math.ceil(limitedPosts.length / take);
 
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= totalPages) {
