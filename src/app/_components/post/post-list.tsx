@@ -11,12 +11,13 @@ type Props = {
 export function PostList({ allPosts }: Props) {
   const searchParams = useSearchParams();
   const TagParams = searchParams.getAll('tag');
+  const uniqueTags = Array.from(new Set(TagParams));
   const pageParam = searchParams.get('page');
 
   const filteredPosts =
-    TagParams.length > 0
+    uniqueTags.length > 0
       ? allPosts.filter((post) =>
-          post.tags?.some((tag) => TagParams.includes(tag))
+          post.tags?.some((tag) => uniqueTags.includes(tag))
         )
       : allPosts;
 
@@ -46,6 +47,17 @@ export function PostList({ allPosts }: Props) {
 
   return (
     <section className="max-w-4xl mx-auto">
+      {/* Tag Names */}
+      <div className="flex mb-6 md:mb-8">
+        <h1 className="mr-2 text-2xl font-bold tracking-tight md:text-3xl">
+          {uniqueTags.join(' / ')}
+        </h1>
+        <h2 className="text-sm tracking-tight md:text-base">
+          {filteredPosts.length} posts
+        </h2>
+      </div>
+
+      {/* Post */}
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-8">
         {limitedPosts.map((post) => (
           <PostPreview
