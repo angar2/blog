@@ -10,12 +10,28 @@ type Props = {
 
 export function PostList({ allPosts }: Props) {
   const searchParams = useSearchParams();
-  const param = searchParams.get('page');
-  const currentPage = Number(param ?? 1);
+  const TagParams = searchParams.getAll('tag');
+  const pageParam = searchParams.get('page');
+
+  const filteredPosts =
+    TagParams.length > 0
+      ? allPosts.filter((post) =>
+          post.tags?.some((tag) => TagParams.includes(tag))
+        )
+      : allPosts;
+
+  const currentPage = Math.max(
+    1,
+    Number.isInteger(Number(pageParam)) && Number(pageParam) >= 1
+      ? Number(pageParam)
+      : 1
+  );
 
   const take = 10;
   const startIndex = (currentPage - 1) * take;
   const endIndex = startIndex + take;
+
+  const limitedPosts = filteredPosts.slice(startIndex, endIndex);
 
   const totalPages = Math.ceil(allPosts.length / take);
 
@@ -31,7 +47,7 @@ export function PostList({ allPosts }: Props) {
   return (
     <section className="max-w-4xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-8">
-        {allPosts.slice(startIndex, endIndex).map((post) => (
+        {limitedPosts.map((post) => (
           <PostPreview
             key={post.slug}
             title={post.title}

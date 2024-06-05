@@ -13,4 +13,5 @@ export type Post = {
   };
   content: string;
   preview?: boolean;
+  tags: string[];
 };
