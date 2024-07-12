@@ -21,6 +21,7 @@ export default async function Post({ params }: Params) {
       <Container>
         <article className="mb-32">
           <PostHeader
+            category={post.category}
             title={post.title}
             coverImage={post.coverImage}
             date={post.date}

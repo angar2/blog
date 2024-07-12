@@ -62,6 +62,7 @@ export function PostList({ allPosts }: Props) {
         {limitedPosts.map((post) => (
           <PostPreview
             key={post.slug}
+            category={post.category}
             title={post.title}
             coverImage={post.coverImage}
             date={post.date}

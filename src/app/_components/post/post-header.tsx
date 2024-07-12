@@ -1,12 +1,9 @@
-import Avatar from '../common/avatar';
-import CoverImage from '../common/cover-image';
 import DateFormatter from '../common/date-formatter';
-import { PostTitle } from '@/app/_components/post/post-title';
 import { type Author } from '@/interfaces/author';
-import CodeTag from '../experience/common/code-tag';
 import Link from 'next/link';
 
 type Props = {
+  category: string;
   title: string;
   coverImage: string;
   date: string;
@@ -14,23 +11,28 @@ type Props = {
   tags: string[];
 };
 
-export function PostHeader({ title, coverImage, date, author, tags }: Props) {
+export function PostHeader({
+  category,
+  title,
+  coverImage,
+  date,
+  author,
+  tags,
+}: Props) {
   return (
-    <>
-      <PostTitle>{title}</PostTitle>
-      {/* <div className=" mb-8 md:mb-16 sm:mx-0">
-        <CoverImage title={title} src={coverImage} />
-      </div> */}
-      <div className="max-w-2xl mx-auto my-2 md:my-4">
-        {/* <div className="block md:hidden mb-6">
-          <Avatar name={author.name} picture={author.picture} />
-        </div> */}
+    <div className="max-w-2xl mx-auto">
+      <div className="w-fit h-fit mb-2 px-1.5 rounded-sm bg-[#2C2C2C] md:mb-4">
+        <p className="text-sm text-[#FFF5EF] md:text-base">{category}</p>
+      </div>
+      <h1 className="text-2xl font-bold tracking-tighter md:text-4xl">
+        {title}
+      </h1>
+      <div className="my-2 md:my-4">
         <div className="mb-4 text-sm md:mb-6 text-gray-500 md:text-lg">
           <DateFormatter dateString={date} />
         </div>
 
         <div className="flex flex-wrap mb-6 md:mb-8">
-          {/* <CodeTag codes={tagsWithHash} /> */}
           {tags.map((tag, index) => (
             <pre
               key={index}
@@ -45,6 +47,6 @@ export function PostHeader({ title, coverImage, date, author, tags }: Props) {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
