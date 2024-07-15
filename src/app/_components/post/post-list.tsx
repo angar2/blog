@@ -2,7 +2,7 @@
 import { Post } from '@/interfaces/post';
 import { PostPreview } from './post-preview';
 import { useSearchParams } from 'next/navigation';
-import Pagination from '../experience/common/pagination';
+import Pagination from '../common/pagination';
 
 type Props = {
   allPosts: Post[];

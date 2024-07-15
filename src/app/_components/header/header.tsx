@@ -18,8 +18,8 @@ interface HeaderMenuType {
 
 const headerMenu: HeaderMenuType[] = [
   { path: '/blog', name: 'Blog' },
+  { path: '/project', name: 'Projects' },
   // { path: '/experience', name: 'Experience' },
-  // { path: '/projects', name: 'Projects' },
 ];
 
 // function generateSHA256Hash(value: string): string {
