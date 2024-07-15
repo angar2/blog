@@ -1,6 +1,7 @@
 import Container from '@/app/_components/container';
-import Header from '../_components/header/header';
 import { Metadata } from 'next';
+import { ProjectList } from '../_components/project/project-list';
+import { getProjects } from '@/lib/api';
 
 export const metadata: Metadata = {
   title: 'Projects',
@@ -8,9 +9,13 @@ export const metadata: Metadata = {
 };
 
 export default function ProjectsMain() {
+  const allProjects = getProjects();
+  
   return (
     <main>
-      <Container></Container>
+      <Container>
+        <ProjectList allProjects={allProjects} />
+      </Container>
     </main>
   );
 }

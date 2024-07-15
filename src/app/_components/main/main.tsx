@@ -71,7 +71,7 @@ export default function Main() {
               <p>Blog</p>
             </a>
             <a
-              href="/projects"
+              href="/project"
               className="flex justify-center items-center w-[6.75rem] h-[2rem] bg-white border-[0.0625rem] border-black  text-black rounded-sm transition-colors duration-300 hover:bg-[#2C2C2C] hover:border-0 hover:text-[#FFF5EF] sm:w-[10.75rem] sm:h-[3.5rem]"
             >
               <p>Projects</p>

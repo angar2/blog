@@ -35,7 +35,7 @@ const MobileNav = ({
       >
         &#x2715;
       </button>
-      <div className="ml-4 first:ml-0">
+      <div className="flex flex-col ml-4 first:ml-0">
         {headerMenu.map((menu) => {
           const isActive =
             pathname === menu.path || pathname.startsWith(`${menu.path}/`);
