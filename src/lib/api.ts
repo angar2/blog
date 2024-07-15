@@ -2,6 +2,7 @@ import { Post } from '@/interfaces/post';
 import { Project } from '@/interfaces/project';
 import fs from 'fs';
 import matter from 'gray-matter';
+import { notFound } from 'next/navigation';
 import { join } from 'path';
 
 const postsDirectory = join(process.cwd(), '_posts');
@@ -13,10 +14,13 @@ export function getPostSlugs() {
 export function getPostBySlug(slug: string) {
   const realSlug = slug.replace(/\.md$/, '');
   const fullPath = join(postsDirectory, `${realSlug}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const { data, content } = matter(fileContents);
-
-  return { ...data, slug: realSlug, content } as Post;
+  try {
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const { data, content } = matter(fileContents);
+    return { ...data, slug: realSlug, content } as Post;
+  } catch (err) {
+    return notFound();
+  }
 }
 
 export function getPosts(): Post[] {
@@ -37,10 +41,13 @@ export function getProjectSlugs() {
 export function getProjectBySlug(slug: string) {
   const realSlug = slug.replace(/\.md$/, '');
   const fullPath = join(projectsDirectory, `${realSlug}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const { data, content } = matter(fileContents);
-
-  return { ...data, slug: realSlug, content } as Project;
+  try {
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const { data, content } = matter(fileContents);
+    return { ...data, slug: realSlug, content } as Project;
+  } catch (err) {
+    return notFound();
+  }
 }
 
 export function getProjects(): Project[] {
