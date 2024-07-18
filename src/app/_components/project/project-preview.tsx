@@ -23,18 +23,18 @@ export function ProjectPreview({
   return (
     <Link as={`/project/${slug}`} href="/project/[slug]">
       <div className="flex flex-col p-4 mb-4 rounded-lg hover:shadow-sm md:flex-row md:p-6 md:mb-6">
-        <div className="mb-4 md:mb-0 md:w-2/5">
-          <div className="flex items-center justify-center aspect-w-3 aspect-h-1 md:aspect-w-1 md:aspect-h-1 rounded-lg overflow-hidden border">
+        <div className="mb-4 md:mb-0 md:w-1/2">
+          <div className="flex items-center justify-center rounded-lg overflow-hidden ">
             <Image
               src={coverImage}
               alt={`Cover Image for ${title}`}
-              className={'w-full h-full object-cover'}
+              className={'object-cover'}
               width={1300}
               height={630}
             />
           </div>
         </div>
-        <div className="md:w-3/5">
+        <div className="md:w-1/2">
           <div className="md:ml-8">
             <h3 className="mb-3 text-lg font-bold leading-snug md:text-xl">
               {title}

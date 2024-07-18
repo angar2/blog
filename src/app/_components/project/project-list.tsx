@@ -37,7 +37,7 @@ export function ProjectList({ allProjects }: Props) {
   };
 
   return (
-    <section className="max-w-3xl mx-auto">
+    <section className="max-w-4xl mx-auto">
       {/* Project */}
       <div className="grid grid-cols-1">
         {limitedProjects.map((project) => (
