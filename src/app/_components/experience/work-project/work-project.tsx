@@ -31,7 +31,7 @@ const projects = [
 
 export default function WorkProject() {
   return (
-    <div className="mt-12 sm:mt-16">
+    <div className="">
       <ExperienceTitle title="Projects" />
       <div className="flex flex-col gap-8 md:gap-12">
         {projects.map((project, index) => (

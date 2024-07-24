@@ -58,7 +58,7 @@ const projects: ProjectProps[] = [
 
 export default function WorkExperience() {
   return (
-    <div className="mt-12 sm:mt-16">
+    <div className="mt-4">
       <ExperienceTitle title="Work Experience" />
       <div className="flex-col lg:flex lg:flex-row lg:justify-start">
         {/* 회사 */}

@@ -7,7 +7,7 @@ import { EXPERIENCE_BANNER_IMAGE_URL } from '@/lib/constants';
 export default function Experience() {
   return (
     <section className="max-w-5xl mx-auto 3xl:max-w-6xl">
-      <BannerImage imageUrl={EXPERIENCE_BANNER_IMAGE_URL} />
+      {/* <BannerImage imageUrl={EXPERIENCE_BANNER_IMAGE_URL} /> */}
       <WorkExperience />
       <WorkProject />
       <WorkStyle />

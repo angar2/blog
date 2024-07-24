@@ -35,7 +35,7 @@ const styles: StyleProps[] = [
 
 export default function WorkStyle() {
   return (
-    <div className="mt-12 sm:mt-16">
+    <div className="">
       <ExperienceTitle title="Work Style" />
       <div className="flex flex-col w-full mx-auto overflow-hidden rounded-md border-[0.0125rem] border-[#2C2C2C] sm:w-11/12">
         <div className="flex gap-2 w-full py-1.5 pr-20 pl-2.5 border-b-[0.0125rem] border-[#2C2C2C] border-opacity-60 sm:2 sm:pl-3">
