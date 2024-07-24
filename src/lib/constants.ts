@@ -8,6 +8,8 @@ export const EXPERIENCE_BANNER_IMAGE_URL =
   '/assets/images/experience/banner.png';
 export const EXPERIENCE_COMPANY_LOGO_IMAGE_URL =
   '/assets/images/experience/logo-devmonster.png';
+export const EXPERIENCE_PROJECT_DAILYRECORD_LOGO_IMAGE_URL =
+  '/assets/images/experience/logo-dailyrecord.png';
 export const EXPERIENCE_PROJECT_BLOG_LOGO_IMAGE_URL =
   '/assets/images/experience/logo-blog.png';
 export const EXPERIENCE_BANNER_403_IMAGE_URL =
@@ -16,5 +18,4 @@ export const ACCESS_PASSWORD = '관용짱';
 
 export const PROJECT_FIGMA_URL =
   'https://www.figma.com/file/h99IPKLTXuBsx9zkXLA8pX/Daily-Record?type=design&node-id=0-1&mode=design';
-export const GITHUB_PROFILE_URL =
-  'https://github.com/angar2';
+export const GITHUB_PROFILE_URL = 'https://github.com/angar2';

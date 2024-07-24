@@ -18,7 +18,7 @@ export default function WorkProject({
   return (
     <div className="mb-16 px-4 md:px-0">
       <div className="mb-6">
-        <p className="mt-2 py-1 text-2xl font-bold md:mb-2 md:text-3xl">
+        <p className="mt-2 py-1 text-xl font-bold md:mb-2 md:text-2xl">
           {projectName}
         </p>
         <div className="flex flex-col mb-4 pb-1 border-b-[0.1rem] md:justify-between md:flex-wrap md:flex-row">
@@ -30,7 +30,7 @@ export default function WorkProject({
       </div>
       <div>
         <div className="mb-6">
-          <p className="mb-3 ml-1 text-sm font-semibold text-gray-600 italic md:text-base">
+          <p className="mb-3 ml-1 text-xs font-semibold text-gray-600 italic md:text-sm">
             WHAT DID I DO .
           </p>
           <BulletedList list={tasks} />

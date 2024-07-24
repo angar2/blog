@@ -1,11 +1,11 @@
 import { EXPERIENCE_COMPANY_LOGO_IMAGE_URL } from '@/lib/constants';
+import Image from 'next/image';
 
 interface CompanyProps {
   companyName: string;
   companyIntro: string;
   position: string;
   period: string;
-  stickerColor?: string;
 }
 
 export default function WorkCompany({
@@ -13,24 +13,22 @@ export default function WorkCompany({
   companyIntro,
   position,
   period,
-  stickerColor,
 }: CompanyProps) {
   return (
     <div className="w-full mb-4 lg:mb-0 pb-4 lg:w-2/4 sm:mb-8">
-      <div
-        className={`flex items-start pl-2 md:mb-2 ${
-          stickerColor ? `border-[${stickerColor}]` : `border-[#b2b2b2]`
-        } `}
-      >
-        <div className="flex justify-center items-center max-w-16 w-12 p-2 aspect-square overflow-hidden shadow-d  border-black rounded-md md:w-full">
-          <img
-            alt="logo"
+      <div className="flex items-start pl-2 md:mb-2">
+        {/* 이미지 */}
+        <div className="flex justify-center items-center w-12 h-12 md:w-16 md:h-16 p-2 overflow-hidden shadow-d border-black rounded-md">
+          <Image
             src={EXPERIENCE_COMPANY_LOGO_IMAGE_URL}
-            className="w-auto"
+            alt="Company Logo"
+            className="object-cover"
+            width={48}
+            height={48}
           />
         </div>
         <div className="ml-2 md:ml-4">
-          <h3 className="ml-1 text-2xl font-bold md:text-4xl md:mb-0">
+          <h3 className="ml-1 text-xl font-bold md:text-3xl md:mb-0">
             {companyName}
           </h3>
           <h5 className="ml-1 text-sm font-medium md:text-base">

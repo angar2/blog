@@ -16,14 +16,14 @@ const projects: ProjectProps[] = [
   {
     projectName: 'Fleet',
     description: '선박 작업 관리 및 문서결재 종합 플랫폼',
-    period: '2024.01. - 현재.',
+    period: '2024.01. - 2024.04.',
     tasks: [
       '**전자문서 시스템** 개발 (결재 / 반려 / 재상신 기능 포함)',
       '**스케줄러** 개발, 일반 및 전자문서와 연동',
       '선박별 **데이터 통계** 기능 구현',
       '회원/관리자별 **권한 설정** 기능 구현',
     ],
-    techStack: ['C#', '.NET', 'MySQL', 'AWS(EC2, RDS)'],
+    techStack: ['TypeScript', 'Node.js', 'MySQL', 'AWS(EC2, RDS)'],
   },
   {
     projectName: '국가대표',
@@ -34,7 +34,7 @@ const projects: ProjectProps[] = [
       '**제보 처리 시스템** 개발 (직원 배정 → 처리 → 완료 보고)',
       '완료 보고서 **문서화(엑셀 포맷)**',
     ],
-    techStack: ['C#', '.NET', 'MySQL', 'AWS(EC2, RDS)'],
+    techStack: ['TypeScript', 'Node.js', 'MySQL', 'AWS(EC2, RDS)'],
   },
   {
     projectName: 'Tyche Trip',
@@ -45,15 +45,13 @@ const projects: ProjectProps[] = [
       '**여행 설계 매칭 시스템** 개발(요청/설계 → 매칭/결제 → 후기/리워드)',
       '**여행자-App / 설계자-Web** 플랫폼 별 기능 구현',
     ],
-    techStack: ['C#', '.NET', 'MySQL', 'AWS(EC2, RDS)'],
+    techStack: ['TypeScript', 'Node.js', 'MySQL', 'AWS(EC2, RDS)'],
   },
   {
     projectName: '아이컬러',
     description: '퍼스널컬러 기반 뷰티 제품 정보 및 소통 플랫폼',
     period: '2023.04. - 2023.07.',
-    tasks: [
-      '관리자 **콘텐츠 관리** 기능 구현(회원, 제품 등 8개 콘텐츠)',
-    ],
+    tasks: ['관리자 **콘텐츠 관리** 기능 구현(회원, 제품 등 8개 콘텐츠)'],
     techStack: ['TypeScript', 'Node.js', 'MySQL', 'AWS(EC2, RDS)'],
   },
 ];
@@ -68,7 +66,7 @@ export default function WorkExperience() {
           companyName="주식회사 데브몬스터"
           companyIntro="소프트웨어 개발사"
           position="Back-end Developer"
-          period="2023.04. - 현재."
+          period="2023.04. - 2024.04."
         />
         {/* 경험 내용 */}
         <div className="w-full pl-4 sm:pl-24 lg:w-2/4 lg:pl-0 lg:border-0">

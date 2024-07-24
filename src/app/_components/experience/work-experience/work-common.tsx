@@ -8,7 +8,7 @@ export default function WorkCommon({ tasks }: CommonProps) {
   return (
     <div className="mb-16 px-4 md:px-0">
       <div className="mb-2">
-        <p className="mt-2 py-1 text-2xl font-bold md:mb-2 md:text-3xl">
+        <p className="mt-2 py-1 text-xl font-bold md:mb-2 md:text-2xl">
           공통 작업
         </p>
       </div>
