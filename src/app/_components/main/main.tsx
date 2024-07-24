@@ -39,16 +39,15 @@ export default function Main() {
             </div>
             <div className="flex flex-col items-end py-3 px-5 w-3/4 text-center text-xs font-medium text-[#FFF5EF] sm:py-5 sm:px-6 sm:text-base">
               <div className="flex gap-3 box-border sm:gap-6">
-                <StackChipTag stacks={['TypeScript', 'C#']} />
+                <StackChipTag stacks={['Back-end', 'Web-server']} />
+              </div>
+              <div className="flex justify-start gap-3 mt-2.5 sm:gap-6 sm:mt-8">
+                <StackChipTag stacks={['TypeScript', 'Node.js']} />
               </div>
               <div className="flex justify-start gap-3 mt-2.5 sm:gap-6">
-                <StackChipTag stacks={['Node.js', '.NET']} />
+                <StackChipTag stacks={['Nest.js', 'TypeORM']} />
               </div>
               <div className="flex justify-start gap-3 mt-2.5 sm:gap-6">
-                <StackChipTag stacks={['Nest.js']} />
-                <div className="w-[5.5rem] h-[1.75rem] p-2 bg-transparent sm:w-[8.25rem] sm:h-[2.25rem]"></div>
-              </div>
-              <div className="flex justify-start gap-3 mt-5 sm:gap-6 sm:mt-8">
                 <StackChipTag stacks={['MySQL', 'AWS']} />
               </div>
             </div>
