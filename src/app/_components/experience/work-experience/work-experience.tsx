@@ -2,6 +2,7 @@ import WorkCompany from './work-company';
 import WorkCommon, { CommonProps } from './work-common';
 import WorkProject, { ProjectProps } from './work-project';
 import ExperienceTitle from '../common/title';
+import { WorkPortfolio } from './work-portfolio';
 
 const common: CommonProps = {
   tasks: [
@@ -72,6 +73,9 @@ export default function WorkExperience() {
         <div className="w-full pl-4 sm:pl-24 lg:w-2/4 lg:pl-0 lg:border-0">
           <div className="pl-4 border-l-4 border-gray-400 rounded-md sm:pl-12 lg:border-0 lg:pl-4">
             <WorkCommon tasks={common.tasks} />
+
+            <WorkPortfolio />
+
             {projects.map((project, index) => (
               <div key={index}>
                 <WorkProject
