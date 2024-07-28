@@ -16,7 +16,7 @@ export function WorkPortfolioDetail() {
         <Image
           src="/assets/images/experience/portfolio_cover.png"
           alt="Portfolio"
-          className="object-cover w-full"
+          className="object-cover w-full transition-transform duration-300 ease-in-out transform hover:scale-105"
           width={160}
           height={90}
         />
