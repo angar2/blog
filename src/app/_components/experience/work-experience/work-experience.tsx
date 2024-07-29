@@ -8,9 +8,19 @@ import { WorkPortfolioDetail } from './work-portfolio-detail';
 const common: CommonProps = {
   tasks: [
     '**DB**: 데이터 모델링 및 스키마 설계',
-    '**Hosting**: AWS를 이용한 서비스 웹서버 호스팅',
-    '**Planning**: 서비스 기능 및 아키텍처 기획 부분 담당',
-    '**Develop**: 회원, 관리자 CRUD 등 주요 기능 API 구현',
+    '**Hosting**: AWS를 이용한 웹서버 호스팅 및 배포',
+    '**Develop**: 서버 애플리케이션의 주요 기능 API 구현',
+    '**Planning**: 애플리케이션 기능 및 아키텍처 기획 부분 담당',
+  ],
+  techStacks: [
+    'TypeScript',
+    'Node.js',
+    'Nest.js',
+    'Next.js',
+    'MySQL',
+    'AWS(EC2, RDS)',
+    'Linux Ubuntu',
+    'Nginx',
   ],
 };
 
@@ -89,7 +99,7 @@ export default function WorkExperience() {
         {/* 경험 내용 */}
         <div className="w-full pl-4 sm:pl-24 lg:w-2/4 lg:pl-0 lg:border-0">
           <div className="pl-4 border-l-4 border-gray-400 rounded-md sm:pl-12 lg:border-0 lg:pl-4">
-            <WorkCommon tasks={common.tasks} />
+            <WorkCommon tasks={common.tasks} techStacks={common.techStacks} />
             <WorkPortfolio projects={portfolio.projects} />
             <WorkPortfolioDetail />
 
