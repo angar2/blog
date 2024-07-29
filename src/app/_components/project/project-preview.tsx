@@ -24,7 +24,7 @@ export function ProjectPreview({
     <Link as={`/project/${slug}`} href="/project/[slug]">
       <div className="flex flex-col p-4 mb-4 rounded-lg hover:shadow-sm md:flex-row md:p-6 md:mb-6">
         <div className="mb-4 md:mb-0 md:w-1/2">
-          <div className="flex items-center justify-center rounded-lg overflow-hidden ">
+          <div className="flex items-center justify-center rounded-lg overflow-hidden shadow-sm">
             <Image
               src={coverImage}
               alt={`Cover Image for ${title}`}
@@ -60,3 +60,34 @@ export function ProjectPreview({
     </Link>
   );
 }
+// const slides = document.querySelectorAll('.slides > div');
+// const slideWidth = 100 / slides.length;
+// let currentTransform =
+//   parseFloat(
+//     document
+//       .querySelector('.slides')
+//       .style.transform.replace('translateX(', '')
+//       .replace('%', '')
+//   ) || 0;
+// currentTransform += slideWidth;
+// if (currentTransform > 0) currentTransform = -(slides.length - 1) * slideWidth;
+// document.querySelector(
+//   '.slides'
+// ).style.transform = `translateX(${currentTransform}%)`;
+
+
+
+// const slides = document.querySelectorAll('.slides > div');
+// const slideWidth = 100 / slides.length;
+// let currentTransform =
+//   parseFloat(
+//     document
+//       .querySelector('.slides')
+//       .style.transform.replace('translateX(', '')
+//       .replace('%', '')
+//   ) || 0;
+// currentTransform -= slideWidth;
+// if (currentTransform < -(slides.length - 1) * slideWidth) currentTransform = 0;
+// document.querySelector(
+//   '.slides'
+// ).style.transform = `translateX(${currentTransform}%)`;
