@@ -3,7 +3,7 @@ title: 'angari.dev'
 excerpt: '" 내가 하나하나 만들어 나가는 개발 공간 "
 개발 블로그입니다.'
 date: '2024-01-01T00:00:00.0000Z'
-coverImage: '/assets/images/project/2/1.png'
+coverImage: '/assets/images/project/angari-dev/1.png'
 author:
   name: Angari
   picture: '/assets/images/authors/angari.png'
@@ -26,7 +26,7 @@ stacks: ['TypeScript', 'Next.js', 'Vercel', 'TailwindCSS']
 
 - ##### **로고**
   <figure style="width: 20%;">
-    <img src="/assets/images/project/2/logo.png" alt="angari.dev logo" style="width: 100%; height: auto;">
+    <img src="/assets/images/project/angari-dev/logo.png" alt="angari.dev logo" style="width: 100%; height: auto;">
     <figcaption style="font-size: 12px; text-align: center;">Angari</figcaption>
   </figure>
 
@@ -52,7 +52,7 @@ stacks: ['TypeScript', 'Next.js', 'Vercel', 'TailwindCSS']
     <div style="display: flex; flex-direction: column; padding: 10px 28px;">
       <h5><strong>1. 메인 페이지</strong></h5><br/>
       <figure style="width: 100%;">
-        <img src="/assets/images/project/2/1.png" alt="Daily Record" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
+        <img src="/assets/images/project/angari-dev/1.png" alt="Daily Record" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
         <figcaption style="font-size: 12px; text-align: center;">메인 화면</figcaption>
       </figure>
       <ul>
@@ -64,7 +64,7 @@ stacks: ['TypeScript', 'Next.js', 'Vercel', 'TailwindCSS']
     <div style="display: flex; flex-direction: column; padding: 10px 28px;">
       <h5><strong>2. 개발 기록 페이지</strong></h5><br/>
       <figure style="width: 100%;">
-        <img src="/assets/images/project/2/2.png" alt="angari.dev" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
+        <img src="/assets/images/project/angari-dev/2.png" alt="angari.dev" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
         <figcaption style="font-size: 12px; text-align: center;">개발 기록 목록 화면</figcaption>
       </figure>
       <ul>
@@ -76,7 +76,7 @@ stacks: ['TypeScript', 'Next.js', 'Vercel', 'TailwindCSS']
     <div style="display: flex; flex-direction: column; padding: 10px 28px;">
       <h5><strong>3. 개발 기록 상세 페이지</strong></h5><br/>
       <figure style="width: 100%;">
-        <img src="/assets/images/project/2/3.png" alt="angari.dev" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
+        <img src="/assets/images/project/angari-dev/3.png" alt="angari.dev" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
         <figcaption style="font-size: 12px; text-align: center;">개발 기록 상세 화면</figcaption>
       </figure>
       <ul>
@@ -87,7 +87,7 @@ stacks: ['TypeScript', 'Next.js', 'Vercel', 'TailwindCSS']
     <div style="display: flex; flex-direction: column; padding: 10px 28px;">
       <h5><strong>4. 개인 프로젝트 페이지</strong></h5><br/>
       <figure style="width: 100%;">
-        <img src="/assets/images/project/2/4.png" alt="angari.dev" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
+        <img src="/assets/images/project/angari-dev/4.png" alt="angari.dev" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
         <figcaption style="font-size: 12px; text-align: center;">개인 프로젝트 목록 화면</figcaption>
       </figure>
       <ul>
@@ -98,7 +98,7 @@ stacks: ['TypeScript', 'Next.js', 'Vercel', 'TailwindCSS']
     <div style="display: flex; flex-direction: column; padding: 10px 28px;">
       <h5><strong>5. 개인 프로젝트 상세 페이지</strong></h5><br/>
       <figure style="width: 100%;">
-        <img src="/assets/images/project/2/5.png" alt="angari.dev" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
+        <img src="/assets/images/project/angari-dev/5.png" alt="angari.dev" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
         <figcaption style="font-size: 12px; text-align: center;">개인 프로젝트 상세 화면</figcaption>
       </figure>
       <ul>
@@ -109,7 +109,7 @@ stacks: ['TypeScript', 'Next.js', 'Vercel', 'TailwindCSS']
     <div style="display: flex; flex-direction: column; padding: 10px 28px;">
       <h5><strong>6. 포트폴리오 페이지</strong></h5><br/>
       <figure style="width: 100%;">
-        <img src="/assets/images/project/2/6.png" alt="angari.dev" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
+        <img src="/assets/images/project/angari-dev/6.png" alt="angari.dev" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
         <figcaption style="font-size: 12px; text-align: center;">포트폴리오 화면</figcaption>
       </figure>
       <ul>
@@ -172,6 +172,6 @@ stacks: ['TypeScript', 'Next.js', 'Vercel', 'TailwindCSS']
 <br/>
 
 <figure style="width: 100%;">
-  <img src="/assets/images/project/2/7.png" alt="Vercel Deployment" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
+  <img src="/assets/images/project/angari-dev/7.png" alt="Vercel Deployment" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
   <figcaption style="font-size: 12px; text-align: center;">Vercel 배포 상태</figcaption>
 </figure>

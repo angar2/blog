@@ -4,7 +4,7 @@ excerpt: '" 목표 설정과 성취를 위한 프로젝트 플랫폼 "
 일상의 작은 행동부터 인생의 큰 목표까지, 꾸준히 기록하고 관리합니다.
 달성률을 통해 현재 상태를 되돌아보며 성취를 체감할 수 있습니다.'
 date: '2024-04-01T00:00:00.0000Z'
-coverImage: '/assets/images/project/1/1.png'
+coverImage: '/assets/images/project/daily-record/1.png'
 author:
   name: Angari
   picture: '/assets/images/authors/angari.png'
@@ -27,7 +27,7 @@ stacks: ['TypeScript', 'Nest.js', 'MySQL', 'AWS', 'Linux Ubuntu', 'Nginx']
 
 - ##### **로고**
   <figure style="width: 20%;">
-    <img src="/assets/images/project/1/logo.png" alt="angari.dev logo" style="width: 100%; height: auto;">
+    <img src="/assets/images/project/daily-record/logo.png" alt="angari.dev logo" style="width: 100%; height: auto;">
     <figcaption style="font-size: 12px; text-align: center;">Daily Record</figcaption>
   </figure>
 
@@ -53,7 +53,7 @@ stacks: ['TypeScript', 'Nest.js', 'MySQL', 'AWS', 'Linux Ubuntu', 'Nginx']
     <div style="display: flex; flex-direction: column; padding: 10px 28px;">
       <h5><strong>1. 활동 기록 캘린더</strong></h5><br/>
       <figure style="width: 100%;">
-        <img src="/assets/images/project/1/1.png" alt="Daily Record" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
+        <img src="/assets/images/project/daily-record/1.png" alt="Daily Record" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
         <figcaption style="font-size: 12px; text-align: center;">메인 화면</figcaption>
       </figure>
       <ul>
@@ -65,7 +65,7 @@ stacks: ['TypeScript', 'Nest.js', 'MySQL', 'AWS', 'Linux Ubuntu', 'Nginx']
     <div style="display: flex; flex-direction: column; padding: 10px 28px;">
       <h5><strong>2. 프로젝트 관리</strong></h5><br/>
       <figure style="width: 100%;">
-        <img src="/assets/images/project/1/2.png" alt="Daily Record" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
+        <img src="/assets/images/project/daily-record/2.png" alt="Daily Record" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
         <figcaption style="font-size: 12px; text-align: center;">프로젝트 관리 화면</figcaption>
       </figure>
       <ul>
@@ -77,7 +77,7 @@ stacks: ['TypeScript', 'Nest.js', 'MySQL', 'AWS', 'Linux Ubuntu', 'Nginx']
     <div style="display: flex; flex-direction: column; padding: 10px 28px;">
       <h5><strong>3. 프로젝트 생성</strong></h5><br/>
       <figure style="width: 100%;">
-        <img src="/assets/images/project/1/3.png" alt="Daily Record" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
+        <img src="/assets/images/project/daily-record/3.png" alt="Daily Record" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
         <figcaption style="font-size: 12px; text-align: center;">프로젝트 생성 화면</figcaption>
       </figure>
       <ul>
@@ -88,7 +88,7 @@ stacks: ['TypeScript', 'Nest.js', 'MySQL', 'AWS', 'Linux Ubuntu', 'Nginx']
     <div style="display: flex; flex-direction: column; padding: 10px 28px;">
       <h5><strong>4. 과제 생성</strong></h5><br/>
       <figure style="width: 100%;">
-        <img src="/assets/images/project/1/4.png" alt="Daily Record" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
+        <img src="/assets/images/project/daily-record/4.png" alt="Daily Record" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
         <figcaption style="font-size: 12px; text-align: center;">과제 생성 화면</figcaption>
       </figure>
       <ul>
@@ -101,7 +101,7 @@ stacks: ['TypeScript', 'Nest.js', 'MySQL', 'AWS', 'Linux Ubuntu', 'Nginx']
     <div style="display: flex; flex-direction: column; padding: 10px 28px;">
       <h5><strong>5. 계정 관리</strong></h5><br/>
       <figure style="width: 100%;">
-        <img src="/assets/images/project/1/5.png" alt="Daily Record" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
+        <img src="/assets/images/project/daily-record/5.png" alt="Daily Record" style="width: 100%; height: auto; border: 0.1px solid lightgray; border-radius: 6px;">
         <figcaption style="font-size: 12px; text-align: center;">계정 관리 화면</figcaption>
       </figure>
       <ul>
@@ -149,7 +149,7 @@ stacks: ['TypeScript', 'Nest.js', 'MySQL', 'AWS', 'Linux Ubuntu', 'Nginx']
     <a href="https://www.figma.com/file/h99IPKLTXuBsx9zkXLA8pX/Daily-Record?type=design&node-id=0-1&mode=design" target="_blank" style="color: #A259FF; font-style: italic; text-decoration: none; cursor: pointer; font-weight: normal;" onmouseover="this.style.fontWeight='bold';" onmouseout="this.style.fontWeight='normal';">
       <figure style="width: 100%;">
       <div style="border: 0.5px solid lightgray; border-radius: 6px; overflow: hidden;" onmouseover="this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.4)';" onmouseout="this.style.boxShadow='none';">
-      <img src="/assets/images/project/1/6.png" alt="Daily Record" style="width: 100%; height: auto; transition: transform 0.1s ease;" onmouseover="this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)';">
+      <img src="/assets/images/project/daily-record/6.png" alt="Daily Record" style="width: 100%; height: auto; transition: transform 0.1s ease;" onmouseover="this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)';">
       </div>
       <figcaption style="font-size: 16px; text-align: center;">Figma | <span style="color: #000000;">Daily Record</span>
       </figcaption>
