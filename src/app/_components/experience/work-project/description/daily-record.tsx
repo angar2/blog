@@ -1,25 +1,22 @@
 import BulletedList from '../../common/bulleted-list';
-import ChipTag from '../../common/chip-tag';
 import SectionHeader from '../../common/section-header';
 import CodeTag from '../../common/code-tag';
-import { PROJECT_FIGMA_URL } from '@/lib/constants';
-import Hyperlink from '../../common/hyperlink';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function DailyRecord() {
   return (
     <div className="pl-4 border-l-4 border-gray-400 rounded-md sm:pl-12 lg:border-0 lg:pl-4">
-      <SectionHeader name={'INFORMATION'} />
-      <div className="mb-8 px-4 md:px-0 md:mb-12">
+      <SectionHeader name={'Overview'} />
+      <div className="mb-4 px-4 md:px-0 md:mb-8">
         <div className="mb-6 md:mb-8">
-          <p className="mb-4 text-sm font-medium italic md:text-lg">
+          <p className="text-sm font-medium italic md:text-lg">
             " 목표를 정하고 하루하루 채워나가는 성취형 프로젝트 플랫폼 "
           </p>
-          <Hyperlink size={18} text="프로젝트 살펴보기" url="/project/1" />
         </div>
       </div>
       <div className="mb-6 px-4 md:px-0 md:mb-8">
         <div className="flex flex-col mb-6 sm:mb-8">
-          <ChipTag name={'Developing'} />
           <BulletedList
             list={[
               '최대한 **Nest.js(TypeORM)**의 기본 기능과 **Restful API**를 활용하여 서버의 안정성을 최대화하기 위해 노력',
@@ -29,37 +26,49 @@ export default function DailyRecord() {
             ]}
           />
         </div>
-        <div className="flex flex-col mb-6 sm:mb-8">
-          <ChipTag name={'Designing'} />
-          <BulletedList
-            list={[
-              `기능의 특성을 살릴 수 있는 심플한 **UI/UX 디자인** → @@Figma[${PROJECT_FIGMA_URL}]@@ 제작`,
-              '메인/서브 콘텐츠의 **기능 및 아키텍처 설계**',
+        <div className="w-fit px-4 md:px-0 mb-6 sm:mb-8">
+          <Link className="cursor-pointer hover:underline" href="/project/1">
+            <div className="w-32 md:w-40 overflow-hidden rounded-md border hover:shadow-d">
+              <Image
+                src="/assets/images/project/1/1.png"
+                alt="Portfolio"
+                className="object-cover w-full transition-transform duration-300 ease-in-out transform hover:scale-105"
+                width={160}
+                height={90}
+              />
+            </div>
+            <div className="flex items-center justify-center">
+              <span className="mr-0.5 text-xs md:text-base cursor-pointer">
+                프로젝트 정보 살펴보기
+              </span>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9 12H18.8L16.3 9.5L17.7 8.1L22.6 13L17.7 17.9L16.3 16.5L18.8 14H9V12ZM21 17.4V20H3V6H21V8.6L23 10.6V4C23 2.9 22.1 2 21 2H3C1.9 2 1 2.9 1 4V20C1 21.1 1.9 22 3 22H21C22.1 22 23 21.1 23 20V15.4L21 17.4Z"
+                  fill="black"
+                />
+              </svg>
+            </div>
+          </Link>
+        </div>
+        <div className="flex flex-wrap mb-6 md:mb-8">
+          <CodeTag
+            codes={[
+              'TypeScript',
+              'Nest.js',
+              'TypeORM',
+              'MySQL',
+              'AWS(EC2, RDS)',
+              'Linux Ubuntu',
+              'Nginx',
             ]}
           />
         </div>
-        <div className="flex flex-col mb-6 sm:mb-8">
-          <ChipTag name={'Recording'} />
-          <BulletedList
-            list={[
-              '개발된 각 기능에 적용된 논리 로직 기록',
-              '데이터베이스 및 API 명세서 작성 → **Notion**',
-              '프로젝트 일정, 진행 상황, 팀 회의 및 기능 요청과 같은 협업 내용 기록',
-            ]}
-          />
-        </div>
-      </div>
-      <div className="flex flex-wrap mb-6 md:mb-8">
-        <CodeTag
-          codes={[
-            'TypeScript',
-            'Nest.js',
-            'TypeORM',
-            'MySQL',
-            'AWS(EC2, RDS)',
-            'Nginx',
-          ]}
-        />
       </div>
     </div>
   );

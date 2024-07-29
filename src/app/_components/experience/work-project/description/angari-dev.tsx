@@ -4,9 +4,16 @@ import CodeTag from '../../common/code-tag';
 
 export default function AngariDev() {
   return (
-    <div className="pl-4 border-l-4 border-gray-400 rounded-md sm:pl-12 lg:border-0 lg:pl-4">
-      <SectionHeader name={'INFORMATION'} />
-      <div className="mb-12 px-4 md:px-0 md:mb-16">
+    <div className="mb-12 lg:mb-16 pl-4 sm:pl-12 lg:pl-4 border-l-4 lg:border-0 border-gray-400 rounded-md">
+      <SectionHeader name={'Overview'} />
+      <div className="mb-4 px-4 md:px-0 md:mb-8">
+        <div className="mb-6 md:mb-8">
+          <p className="text-sm font-medium italic md:text-lg">
+            " 내가 하나하나 만들어 나가는 개발 공간 "
+          </p>
+        </div>
+      </div>
+      <div className="mb-6 px-4 md:px-0 md:mb-8">
         <div className="flex flex-col mb-6 sm:mb-8">
           <BulletedList
             list={[

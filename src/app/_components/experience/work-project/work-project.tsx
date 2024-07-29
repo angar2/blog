@@ -13,7 +13,7 @@ const projects = [
     projectName: {
       name: 'Daily Record',
       description: '팀 프로젝트',
-      period: '2023.12. - 04.',
+      period: '2023.12. - 2024.04.',
       image: EXPERIENCE_PROJECT_DAILYRECORD_LOGO_IMAGE_URL,
     },
     projectDescription: DailyRecord,
@@ -32,7 +32,7 @@ const projects = [
 export default function WorkProject() {
   return (
     <div className="">
-      <ExperienceTitle title="Projects" />
+      <ExperienceTitle title="Personal Projects" />
       <div className="flex flex-col gap-8 md:gap-12">
         {projects.map((project, index) => (
           <div
