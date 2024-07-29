@@ -27,10 +27,13 @@ export default function DailyRecord() {
           />
         </div>
         <div className="w-fit px-4 md:px-0 mb-6 sm:mb-8">
-          <Link className="cursor-pointer hover:underline" href="/project/1">
+          <Link
+            className="cursor-pointer hover:underline"
+            href="/project/daily-record"
+          >
             <div className="w-32 md:w-40 overflow-hidden rounded-md border hover:shadow-d">
               <Image
-                src="/assets/images/project/1/1.png"
+                src="/assets/images/experience/preview-dailyrecord.png"
                 alt="Portfolio"
                 className="object-cover w-full transition-transform duration-300 ease-in-out transform hover:scale-105"
                 width={160}
