@@ -8,9 +8,9 @@ import { WorkPortfolioDetail } from './work-portfolio-detail';
 const common: CommonProps = {
   tasks: [
     '**DB**: 데이터 모델링 및 스키마 설계',
-    '**Hosting**: AWS를 이용한 웹서버 호스팅 및 배포',
-    '**Develop**: 서버 애플리케이션의 주요 기능 API 구현',
-    '**Planning**: 애플리케이션 기능 및 아키텍처 기획 부분 담당',
+    '**Deploying**: AWS를 이용한 웹서버 배포',
+    '**Developing**: 서버 애플리케이션의 주요 기능 API 구현',
+    '**Planning**: 애플리케이션 기능 및 아키텍처 기획 부분적 참여',
   ],
   techStacks: [
     'TypeScript',
