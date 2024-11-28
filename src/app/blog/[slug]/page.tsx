@@ -41,31 +41,31 @@ type Params = {
   };
 };
 
-export function generateMetadata({ params }: Params): Metadata {
-  const post = getPostBySlug(params.slug);
+// export function generateMetadata({ params }: Params): Metadata {
+//   const post = getPostBySlug(params.slug);
 
-  if (!post) {
-    return notFound();
-  }
+//   if (!post) {
+//     return notFound();
+//   }
 
-  const title = `${post.title}`;
-  const description = `${post.description}`;
+//   const title = `${post.title}`;
+//   const description = `${post.description}`;
 
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      images: [post.ogImage?.url, HOME_OG_IMAGE_URL],
-    },
-  };
-}
+//   return {
+//     title,
+//     description,
+//     openGraph: {
+//       title,
+//       description,
+//       images: [post.ogImage?.url, HOME_OG_IMAGE_URL],
+//     },
+//   };
+// }
 
-export async function generateStaticParams() {
-  const posts = getPosts();
+// export async function generateStaticParams() {
+//   const posts = getPosts();
 
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
+//   return posts.map((post) => ({
+//     slug: post.slug,
+//   }));
+// }
