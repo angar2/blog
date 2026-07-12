@@ -2,22 +2,12 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
-import { getAllPosts, resolveSeriesPosts } from '../lib/content';
+import { getAllPosts, getSeriesOverview } from '../lib/content';
 
 const latest = (await getAllPosts()).slice(0, 6);
 
-// 진행 중 시리즈 1~2: 최근 글이 속한 시리즈 우선
-const allSeries = await getCollection('series');
-const seriesWithLatest = await Promise.all(
-  allSeries.map(async (s) => {
-    const posts = await resolveSeriesPosts(s);
-    const latestCreated = posts.reduce((max, p) => (p.data.created > max ? p.data.created : max), '');
-    return { series: s, count: posts.length, latestCreated };
-  }),
-);
-const activeSeries = seriesWithLatest
-  .sort((a, b) => b.latestCreated.localeCompare(a.latestCreated))
-  .slice(0, 2);
+// 진행 중 시리즈 1~2: 최신 갱신순 (/series 목록과 동일 규칙)
+const activeSeries = (await getSeriesOverview()).slice(0, 2);
 
 // 대표 프로젝트 1~2: 최신순
 const projects = (await getCollection('projects'))

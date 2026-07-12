@@ -67,6 +67,33 @@ export async function resolveSeriesPosts(s: Series): Promise<Post[]> {
   );
 }
 
+export interface SeriesOverview {
+  series: Series;
+  /** 수록 글 수 */
+  count: number;
+  /** 수록 글 중 최신 created — /series 목록의 "최신 갱신일"이자 정렬 키 */
+  latestCreated: string;
+}
+
+/** /series 목록·홈 시리즈 코너: 최신 갱신순 (수록 글 중 최신 created 역순, 동률 시 slug 오름차순) */
+export async function getSeriesOverview(): Promise<SeriesOverview[]> {
+  const allSeries = await getCollection('series');
+  const overviews = await Promise.all(
+    allSeries.map(async (s) => {
+      const posts = await resolveSeriesPosts(s);
+      const latestCreated = posts.reduce(
+        (max, p) => (p.data.created > max ? p.data.created : max),
+        '',
+      );
+      return { series: s, count: posts.length, latestCreated };
+    }),
+  );
+  return overviews.sort(
+    (a, b) =>
+      b.latestCreated.localeCompare(a.latestCreated) || a.series.id.localeCompare(b.series.id),
+  );
+}
+
 /** 태그 → 글 수 집계 (글 수 많은 순) */
 export async function getTagCounts(posts?: Post[]): Promise<Array<{ tag: string; count: number }>> {
   const source = posts ?? (await getAllPosts());
