@@ -5,7 +5,7 @@ export async function GET(context) {
   const posts = await getAllPosts();
   return rss({
     title: 'angari.dev',
-    description: '백엔드 개발자 지크의 개인 사이트 — 글은 AI가 쓰고 지크가 검수해 발행한다.',
+    description: 'AI로 만들어 나가는 개발자 지크의 기록 블로그.',
     site: context.site,
     items: posts.map((post) => ({
       title: post.data.title,
