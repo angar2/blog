@@ -20,7 +20,8 @@ const KEBAB_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const source = z
   .object({
     title: z.string().min(1),
-    url: z.url(),
+    // url은 optional — 책 등 온라인 링크 없는 출처도 title만으로 등재 가능
+    url: z.url().optional(),
   })
   .strict();
 
@@ -34,17 +35,10 @@ const posts = defineCollection({
       created: datetime,
       updated: datetime.optional(),
       tags: z.array(z.string().regex(KEBAB_RE, '태그는 소문자 kebab-case')),
+      // sources는 track 무관 optional — 출처 없이 습득한 지식도 notes로 발행 가능
       sources: z.array(source).optional(),
     })
-    .strict()
-    .superRefine((data, ctx) => {
-      if (data.track === 'notes' && (!data.sources || data.sources.length === 0)) {
-        ctx.addIssue({
-          code: 'custom',
-          message: 'notes 트랙은 sources(1차 출처)가 필수다 — 없으면 발행 불가.',
-        });
-      }
-    }),
+    .strict(),
 });
 
 const series = defineCollection({
