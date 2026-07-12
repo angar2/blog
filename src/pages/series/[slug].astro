@@ -20,7 +20,7 @@ const posts = await resolveSeriesPosts(series);
 const projects = await getCollection('projects', (p) => p.data.series === series.id);
 ---
 
-<Base title={`${series.data.title} · angari.dev`} description={series.data.description}>
+<Base title={`${series.data.title} · angari.dev`} description={series.data.description} current="series">
   <article>
     <header>
       <h1>{series.data.title}</h1>
