@@ -1,0 +1,54 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import type { Project } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+
+const series = project.data.series ? await getEntry('series', project.data.series) : null;
+if (project.data.series && !series) {
+  throw new Error(
+    `프로젝트 "${project.id}"가 존재하지 않는 시리즈 "${project.data.series}"를 참조한다 — 빌드 중단.`,
+  );
+}
+---
+
+<Base title={`${project.data.title} · angari.dev`} description={project.data.tagline} current="projects">
+  <article>
+    <header>
+      <h1>{project.data.title}</h1>
+      <p class="tagline">{project.data.tagline}</p>
+      <Image src={project.data.cover} alt={`${project.data.title} 스크린샷`} />
+      <ul class="stack-chips" aria-label="기술 스택">
+        {project.data.stacks.map((stack) => <li>{stack}</li>)}
+      </ul>
+      <nav class="project-links" aria-label="프로젝트 링크">
+        {project.data.links?.demo && <a href={project.data.links.demo} rel="external noopener">데모</a>}
+        {project.data.links?.github && <a href={project.data.links.github} rel="external noopener">GitHub</a>}
+      </nav>
+    </header>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {
+      series && (
+        <nav aria-label="제작기">
+          <a href={`/series/${series.id}`}>제작기 읽기 → {series.data.title}</a>
+        </nav>
+      )
+    }
+  </article>
+</Base>

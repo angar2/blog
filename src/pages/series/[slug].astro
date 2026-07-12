@@ -1,0 +1,54 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { displayDate, resolveSeriesPosts, type Series } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const series = await getCollection('series');
+  return series.map((s) => ({ params: { slug: s.id }, props: { series: s } }));
+}
+
+interface Props {
+  series: Series;
+}
+
+const { series } = Astro.props;
+const { Content } = await render(series);
+const posts = await resolveSeriesPosts(series);
+
+// 완성품 보기 → 프로젝트 (역방향: 이 시리즈를 가리키는 프로젝트)
+const projects = await getCollection('projects', (p) => p.data.series === series.id);
+---
+
+<Base title={`${series.data.title} · angari.dev`} description={series.data.description}>
+  <article>
+    <header>
+      <h1>{series.data.title}</h1>
+      <p>{series.data.description}</p>
+    </header>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    <ol class="series-posts" aria-label={`수록 글 ${posts.length}편`}>
+      {
+        posts.map((p) => (
+          <li>
+            <a href={`/posts/${p.id}`}>{p.data.title}</a>
+            <time datetime={p.data.created}>{displayDate(p.data.created)}</time>
+          </li>
+        ))
+      }
+    </ol>
+    <p>{posts.length}편</p>
+
+    {
+      projects.map((p) => (
+        <nav aria-label="완성품">
+          <a href={`/projects/${p.id}`}>완성품 보기 → {p.data.title}</a>
+        </nav>
+      ))
+    }
+  </article>
+</Base>

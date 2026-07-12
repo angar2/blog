@@ -1,0 +1,63 @@
+---
+import '../styles/base.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** 헤더 메뉴 현재 페이지 표시용 */
+  current?: 'log' | 'notes' | 'projects' | 'about' | 'home';
+}
+
+const { title, description, current } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const menu = [
+  { key: 'log', label: 'Log', href: '/log' },
+  { key: 'notes', label: 'Notes', href: '/notes' },
+  { key: 'projects', label: 'Projects', href: '/projects' },
+  { key: 'about', label: 'About', href: '/about' },
+] as const;
+---
+
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title="angari.dev" href="/rss.xml" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <slot name="head" />
+  </head>
+  <body>
+    <header>
+      <nav aria-label="주 메뉴">
+        <a href="/" aria-label="홈" aria-current={current === 'home' ? 'page' : undefined}>
+          <!-- 아바타 로고 자리 — 디자인 납품 시 교체 -->
+          <span class="logo">angari</span>
+        </a>
+        <ul>
+          {
+            menu.map((m) => (
+              <li>
+                <a href={m.href} aria-current={current === m.key ? 'page' : undefined}>
+                  {m.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <p>© {new Date().getFullYear()} angari · <a href="https://github.com/angar2">GitHub</a></p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { getAllPosts, resolveSeriesPosts } from '../lib/content';
+
+const latest = (await getAllPosts()).slice(0, 6);
+
+// 진행 중 시리즈 1~2: 최근 글이 속한 시리즈 우선
+const allSeries = await getCollection('series');
+const seriesWithLatest = await Promise.all(
+  allSeries.map(async (s) => {
+    const posts = await resolveSeriesPosts(s);
+    const latestCreated = posts.reduce((max, p) => (p.data.created > max ? p.data.created : max), '');
+    return { series: s, count: posts.length, latestCreated };
+  }),
+);
+const activeSeries = seriesWithLatest
+  .sort((a, b) => b.latestCreated.localeCompare(a.latestCreated))
+  .slice(0, 2);
+
+// 대표 프로젝트 1~2: 최신순
+const projects = (await getCollection('projects'))
+  .sort((a, b) => b.data.created.localeCompare(a.data.created))
+  .slice(0, 2);
+---
+
+<Base
+  title="angari.dev"
+  description="백엔드 개발자 지크의 개인 사이트 — 글은 AI가 쓰고 지크가 검수해 발행한다."
+  current="home"
+>
+  <section class="hero">
+    <!-- 아바타 로고 + 한 줄 정체성 문구 (문안은 B4에서 지크 확정 — 타이핑 애니메이션은 디자인 납품 포함 시) -->
+    <p class="identity">백엔드 개발자 지크의 기록</p>
+  </section>
+
+  <section aria-label="최신 글">
+    <h2>최신 글</h2>
+    <PostList posts={latest} showTrackBadge={true} />
+  </section>
+
+  {
+    activeSeries.length > 0 && (
+      <section aria-label="진행 중 시리즈">
+        <h2>시리즈</h2>
+        <ul>
+          {activeSeries.map(({ series, count }) => (
+            <li>
+              <a href={`/series/${series.id}`}>{series.data.title}</a>
+              <span>{count}편</span>
+              <p>{series.data.description}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    projects.length > 0 && (
+      <section aria-label="대표 프로젝트">
+        <h2>프로젝트</h2>
+        <ul class="project-cards">
+          {projects.map((p) => (
+            <li>
+              <a href={`/projects/${p.id}`}>{p.data.title}</a>
+              <p>{p.data.tagline}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</Base>

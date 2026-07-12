@@ -1,0 +1,9 @@
+---
+interface Props {
+  track: 'log' | 'notes';
+}
+const { track } = Astro.props;
+const label = track === 'log' ? 'Log' : 'Notes';
+---
+
+<span class={`track-badge track-badge-${track}`}>{label}</span>
