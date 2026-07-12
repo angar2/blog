@@ -1,23 +1,19 @@
 ---
-// 홈 — 아바타·정체성 문구(타이핑)·소개 → 최신 글 4 → 2열(연재 중 시리즈·대표 프로젝트)
-import { getCollection } from 'astro:content';
+// 홈 — 아바타·정체성 문구(타이핑)·소개 → 최신 글 4 → 최신 시리즈
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
 import { getAllPosts, getSeriesOverview } from '../lib/content';
 
 const latest = (await getAllPosts()).slice(0, 4);
-const activeSeries = (await getSeriesOverview()).slice(0, 1);
-const projects = (await getCollection('projects'))
-  .sort((a, b) => b.data.created.localeCompare(a.data.created))
-  .slice(0, 1);
+const latestSeries = (await getSeriesOverview()).slice(0, 2);
 
 // 임시 문안 — 한 줄 정체성 문구는 B4에서 지크 확정 (build-prd §10)
-const identity = '# Efficiency over emotion';
+const identity = '# always doing something';
 ---
 
 <Base
   title="angari.dev"
-  description="백엔드 개발자 지크의 개인 사이트 — 글은 AI가 쓰고 지크가 검수해 발행한다."
+  description="AI로 만들어 나가는 개발자 지크의 기록 블로그."
   current="home"
 >
   <section class="hero">
@@ -26,8 +22,7 @@ const identity = '# Efficiency over emotion';
       <span class="typed">{identity}</span><span class="caret" aria-hidden="true"></span>
     </p>
     <p class="intro">
-      백엔드 개발자 지크의 기록. 글은 <b>AI가 쓰고 지크가 검수</b>합니다 — 이 사이트 자체가 그
-      실물 증거입니다.
+      개발자 지크의 활동 기록. 만든 것과 그 과정에서 배운 것을 정리해 남깁니다.
     </p>
   </section>
 
@@ -40,23 +35,15 @@ const identity = '# Efficiency over emotion';
   </section>
 
   {
-    (activeSeries.length > 0 || projects.length > 0) && (
-      <section class="feature-grid" aria-label="진행 중 · 대표작">
-        <h2 class="section-label span-all">진행 중 · 대표작</h2>
-        {activeSeries.map(({ series, count }) => (
+    latestSeries.length > 0 && (
+      <section class="feature-grid" aria-label="최신 시리즈">
+        <h2 class="section-label span-all">최신 시리즈</h2>
+        {latestSeries.map(({ series, count }) => (
           <a class="feature-card" href={`/series/${series.id}`}>
-            <span class="card-label accent">◈ 연재 중</span>
             <span class="card-title">{series.data.title}</span>
             <span class="card-desc">
               {series.data.description} · {count}편
             </span>
-          </a>
-        ))}
-        {projects.map((p) => (
-          <a class="feature-card" href={`/projects/${p.id}`}>
-            <span class="card-label">▤ 프로젝트</span>
-            <span class="card-title">{p.data.title}</span>
-            <span class="card-desc">{p.data.tagline}</span>
           </a>
         ))}
       </section>
