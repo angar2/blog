@@ -1,0 +1,200 @@
+---
+// 노션식 우측 목차 레일 — 평시 레벨별 대시(h2 26·h3 16·h4 10px), 호버 시 텍스트 패널, 스크롤 하이라이트(accent)
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const headings = Astro.props.headings.filter((h) => h.depth >= 2 && h.depth <= 4);
+---
+
+{
+  headings.length > 0 && (
+    <>
+      <nav class="toc-rail" aria-label="목차">
+        <ul>
+          {headings.map((h) => (
+            <li data-depth={h.depth}>
+              <a href={`#${h.slug}`}>
+                <span class="toc-dash" aria-hidden="true" />
+                <span class="toc-label">{h.text}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      {/* 모바일 대체 UI — 호버 부재, 상단 접이식 목차 */}
+      <details class="toc-mobile">
+        <summary>목차</summary>
+        <ul>
+          {headings.map((h) => (
+            <li data-depth={h.depth}>
+              <a href={`#${h.slug}`}>{h.text}</a>
+            </li>
+          ))}
+        </ul>
+      </details>
+    </>
+  )
+}
+
+<style>
+  /* ── 데스크톱 레일 ── */
+  .toc-rail {
+    position: sticky;
+    top: 70px;
+    align-self: start;
+    height: max-content;
+    justify-self: end;
+  }
+  .toc-rail ul {
+    list-style: none;
+    margin: 0;
+    padding: 8px 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    align-items: flex-end;
+  }
+  .toc-rail a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-direction: row-reverse;
+  }
+  .toc-dash {
+    display: block;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--c-tx3);
+    opacity: 0.5;
+    transition: all 0.18s ease;
+  }
+  li[data-depth='2'] .toc-dash {
+    width: 26px;
+  }
+  li[data-depth='3'] .toc-dash {
+    width: 16px;
+  }
+  li[data-depth='4'] .toc-dash {
+    width: 10px;
+  }
+  .toc-rail a[aria-current='true'] .toc-dash {
+    width: 40px;
+    background: var(--c-ac);
+    opacity: 1;
+  }
+
+  /* 라벨: 평시 숨김 → 레일 호버 시 텍스트 패널로 펼침 */
+  .toc-label {
+    display: none;
+    font: 500 12px/1.4 var(--font-sans);
+    color: var(--c-tx3);
+    white-space: nowrap;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .toc-rail:hover {
+    background: var(--c-bg2);
+    border: 1px solid var(--c-bd);
+    border-radius: 10px;
+    padding: 6px 4px;
+  }
+  .toc-rail:hover ul {
+    align-items: stretch;
+  }
+  .toc-rail:hover a {
+    padding: 2px 10px;
+  }
+  .toc-rail:hover .toc-label {
+    display: block;
+  }
+  li[data-depth='3'] .toc-label {
+    padding-left: 10px;
+  }
+  li[data-depth='4'] .toc-label {
+    padding-left: 20px;
+  }
+  .toc-rail:hover a[aria-current='true'] .toc-label {
+    color: var(--c-ac);
+    font-weight: 700;
+  }
+
+  /* ── 모바일 접이식 목차 ── */
+  .toc-mobile {
+    display: none;
+    margin: 14px 0;
+    border: 1px solid var(--c-bd);
+    border-radius: 10px;
+    background: var(--c-bg2);
+    padding: 10px 13px;
+  }
+  .toc-mobile summary {
+    cursor: pointer;
+    font: 700 12px/1 var(--font-sans);
+    color: var(--c-tx2);
+  }
+  .toc-mobile ul {
+    list-style: none;
+    margin: 8px 0 0;
+    padding: 0;
+  }
+  .toc-mobile li {
+    padding: 3px 0;
+  }
+  .toc-mobile li[data-depth='3'] {
+    padding-left: 12px;
+  }
+  .toc-mobile li[data-depth='4'] {
+    padding-left: 24px;
+  }
+  .toc-mobile a {
+    font: 500 12px/1.5 var(--font-sans);
+    color: var(--c-tx3);
+  }
+
+  @media (max-width: 700px) {
+    .toc-rail {
+      display: none;
+    }
+    .toc-mobile {
+      display: block;
+      order: -1; /* 단일 컬럼 그리드에서 본문 위로 */
+    }
+  }
+</style>
+
+<script>
+  // 스크롤 연동 하이라이트 — 유일한 스크롤 연동 JS (허용 인터랙션 #1)
+  const rail = document.querySelector('.toc-rail');
+  if (rail) {
+    const links = new Map<string, HTMLAnchorElement>();
+    rail.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((a) => {
+      links.set(decodeURIComponent(a.hash.slice(1)), a);
+    });
+    const headingEls = [...links.keys()]
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    let currentId: string | null = null;
+    const setCurrent = (id: string) => {
+      if (id === currentId) return;
+      if (currentId) links.get(currentId)?.removeAttribute('aria-current');
+      links.get(id)?.setAttribute('aria-current', 'true');
+      currentId = id;
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setCurrent(entry.target.id);
+        }
+      },
+      { rootMargin: '0px 0px -70% 0px' },
+    );
+    headingEls.forEach((el) => observer.observe(el));
+    if (headingEls[0]) setCurrent(headingEls[0].id);
+  }
+</script>

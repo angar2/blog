@@ -1,0 +1,117 @@
+---
+// 공통 글 리스트 항목 — 날짜(mono)·트랙 배지·◈시리즈·제목·요약. variant: column(목록 페이지)/home(홈)
+import TrackBadge from './TrackBadge.astro';
+import { displayDate, type Post } from '../lib/content';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  posts: Post[];
+  /** 트랙 목록 페이지처럼 트랙이 자명하면 배지 생략 */
+  showTrackBadge?: boolean;
+  /** column: 날짜 74px 좌측 열(목록 페이지) / home: 날짜 우측(홈) */
+  variant?: 'column' | 'home';
+}
+
+const { posts, showTrackBadge = false, variant = 'column' } = Astro.props;
+
+// 시리즈 배지: 역참조 — 시리즈 파일의 posts 배열에서 소속 시리즈를 찾는다
+const allSeries = await getCollection('series');
+function seriesOf(postId: string) {
+  return allSeries.filter((s) => s.data.posts.includes(postId));
+}
+---
+
+<ul class:list={['post-list', variant]}>
+  {
+    posts.map((post) => (
+      <li class="post-item" data-tags={post.data.tags.join(' ')}>
+        <a href={`/posts/${post.id}`}>
+          {variant === 'column' && (
+            <time datetime={post.data.created}>{displayDate(post.data.created)}</time>
+          )}
+          <span class="post-item-main">
+            <span class="post-item-meta">
+              {showTrackBadge && <TrackBadge track={post.data.track} />}
+              {seriesOf(post.id).map((s) => (
+                <span class="series-label">◈ {s.data.title}</span>
+              ))}
+              {variant === 'home' && (
+                <time datetime={post.data.created}>{displayDate(post.data.created)}</time>
+              )}
+            </span>
+            <span class="post-item-title">{post.data.title}</span>
+            <span class="post-item-desc">{post.data.description}</span>
+          </span>
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .post-list {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 0;
+  }
+  .post-item {
+    border-top: 1px solid var(--c-bd);
+  }
+  .post-item a {
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+    padding: 14px 0;
+  }
+  .home .post-item a {
+    display: block;
+    padding: 13px 0;
+  }
+  .post-item > a > time {
+    flex: 0 0 auto;
+    font: 500 11px/1.6 var(--font-mono);
+    color: var(--c-tx3);
+    width: 74px;
+  }
+  .post-item-main {
+    min-width: 0;
+    display: block;
+  }
+  .post-item-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .post-item-meta time {
+    margin-left: auto;
+    font: 500 11px/1 var(--font-mono);
+    color: var(--c-tx3);
+  }
+  .series-label {
+    font: 600 10px/1 var(--font-sans);
+    color: var(--c-tx3);
+  }
+  .post-item-title {
+    display: block;
+    font: 700 15px/1.4 var(--font-sans);
+    color: var(--c-tx);
+    letter-spacing: -0.01em;
+    margin-bottom: 2px;
+  }
+  .post-item-desc {
+    display: block;
+    font: 500 13px/1.5 var(--font-sans);
+    color: var(--c-tx2);
+  }
+
+  @media (max-width: 480px) {
+    .post-item > a {
+      flex-direction: column;
+      gap: 4px;
+    }
+    .post-item > a > time {
+      width: auto;
+    }
+  }
+</style>

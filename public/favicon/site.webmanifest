@@ -1,0 +1,14 @@
+{
+    "name": "angari.dev",
+    "short_name": "Angari",
+    "icons": [
+        {
+            "src": "/favicon/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#17100E",
+    "background_color": "#17100E",
+    "display": "standalone"
+}

@@ -1,0 +1,185 @@
+---
+// 홈 — 아바타·정체성 문구(타이핑)·소개 → 최신 글 4 → 2열(연재 중 시리즈·대표 프로젝트)
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { getAllPosts, getSeriesOverview } from '../lib/content';
+
+const latest = (await getAllPosts()).slice(0, 4);
+const activeSeries = (await getSeriesOverview()).slice(0, 1);
+const projects = (await getCollection('projects'))
+  .sort((a, b) => b.data.created.localeCompare(a.data.created))
+  .slice(0, 1);
+
+// 임시 문안 — 한 줄 정체성 문구는 B4에서 지크 확정 (build-prd §10)
+const identity = '# Efficiency over emotion';
+---
+
+<Base
+  title="angari.dev"
+  description="백엔드 개발자 지크의 개인 사이트 — 글은 AI가 쓰고 지크가 검수해 발행한다."
+  current="home"
+>
+  <section class="hero">
+    <img src="/avatar.png" alt="지크 아바타" width="56" height="56" />
+    <p class="identity" data-text={identity}>
+      <span class="typed">{identity}</span><span class="caret" aria-hidden="true"></span>
+    </p>
+    <p class="intro">
+      백엔드 개발자 지크의 기록. 글은 <b>AI가 쓰고 지크가 검수</b>합니다 — 이 사이트 자체가 그
+      실물 증거입니다.
+    </p>
+  </section>
+
+  <section aria-label="최신 글">
+    <div class="section-head">
+      <h2 class="section-label">최신 글</h2>
+      <a class="more" href="/log">전체 보기 →</a>
+    </div>
+    <PostList posts={latest} showTrackBadge={true} variant="home" />
+  </section>
+
+  {
+    (activeSeries.length > 0 || projects.length > 0) && (
+      <section class="feature-grid" aria-label="진행 중 · 대표작">
+        <h2 class="section-label span-all">진행 중 · 대표작</h2>
+        {activeSeries.map(({ series, count }) => (
+          <a class="feature-card" href={`/series/${series.id}`}>
+            <span class="card-label accent">◈ 연재 중</span>
+            <span class="card-title">{series.data.title}</span>
+            <span class="card-desc">
+              {series.data.description} · {count}편
+            </span>
+          </a>
+        ))}
+        {projects.map((p) => (
+          <a class="feature-card" href={`/projects/${p.id}`}>
+            <span class="card-label">▤ 프로젝트</span>
+            <span class="card-title">{p.data.title}</span>
+            <span class="card-desc">{p.data.tagline}</span>
+          </a>
+        ))}
+      </section>
+    )
+  }
+</Base>
+
+<style>
+  .hero {
+    padding: 14px 0 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .hero img {
+    border-radius: 50%;
+  }
+  .identity {
+    font: 700 clamp(22px, 4.4vw, 30px) / 1.25 var(--font-sans);
+    letter-spacing: -0.02em;
+    color: var(--c-tx);
+    min-height: 1.25em;
+    margin: 0;
+  }
+  .caret {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    margin-left: 2px;
+    background: var(--c-ac);
+    vertical-align: -2px;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink {
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+  .intro {
+    color: var(--c-tx2);
+    font: 500 14px/1.7 var(--font-sans);
+    max-width: 52ch;
+    margin: 0;
+  }
+  .intro b {
+    color: var(--c-tx);
+    font-weight: 700;
+  }
+
+  section[aria-label='최신 글'] {
+    margin-top: 14px;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .more {
+    color: var(--c-lk);
+    font: 600 12px/1 var(--font-sans);
+  }
+
+  .feature-grid {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .span-all {
+    grid-column: 1 / -1;
+  }
+  .feature-card {
+    display: block;
+    border: 1px solid var(--c-bd);
+    border-radius: 12px;
+    padding: 14px;
+    background: var(--c-bg2);
+  }
+  .card-label {
+    display: block;
+    font: 600 11px/1 var(--font-sans);
+    color: var(--c-tx3);
+    margin-bottom: 8px;
+  }
+  .card-label.accent {
+    color: var(--c-ac);
+  }
+  .card-title {
+    display: block;
+    font: 700 15px/1.3 var(--font-sans);
+    color: var(--c-tx);
+    margin-bottom: 4px;
+  }
+  .card-desc {
+    display: block;
+    font: 500 12px/1.5 var(--font-sans);
+    color: var(--c-tx2);
+  }
+
+  @media (max-width: 480px) {
+    .feature-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  // 홈 타이핑 애니메이션 (허용 인터랙션 #5 — 디자인 납품 포함분). JS 없으면 문구가 그대로 보인다.
+  const el = document.querySelector<HTMLElement>('.identity .typed');
+  const full = document.querySelector<HTMLElement>('.identity')?.dataset.text ?? '';
+  if (el && full) {
+    el.textContent = '';
+    let i = 0;
+    const timer = setInterval(() => {
+      i += 1;
+      el.textContent = full.slice(0, i);
+      if (i >= full.length) clearInterval(timer);
+    }, 65);
+  }
+</script>

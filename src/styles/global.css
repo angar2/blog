@@ -1,0 +1,341 @@
+/*
+ * 글로벌 스타일 — 핸드오프 hifi 스펙 재현 (타이포 스케일·본문 장치)
+ * 페이지 고유 레이아웃은 각 .astro 컴포넌트의 scoped style이 담당한다.
+ */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--c-bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--c-bg);
+  color: var(--c-tx);
+  font: 500 15px/1.85 var(--font-sans);
+  letter-spacing: -0.003em;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--c-lk);
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--c-acS);
+}
+
+/* ── 스크롤바 (핸드오프 계승) ── */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--c-bd2);
+  border-radius: 9px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ═══════════ 본문(prose) 장치 — design-prd §8 ═══════════ */
+
+.prose {
+  counter-reset: h2;
+  font: 500 15px/1.85 var(--font-sans);
+  color: var(--c-tx);
+}
+
+.prose > :first-child {
+  margin-top: 0;
+}
+
+.prose p {
+  margin: 0 0 15px;
+}
+
+/* ── 자동 채번: h2=`1.` h3=`1.1`, h4 번호 없음. 번호는 작은 mono·절제 ── */
+.prose h2 {
+  counter-reset: h3;
+  font: 700 19px/1.4 var(--font-sans);
+  color: var(--c-tx);
+  margin: 28px 0 14px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--c-bd2); /* h2 하단 가로 구분선 — 필수 계승 */
+  display: flex;
+  gap: 11px;
+  align-items: baseline;
+}
+.prose h2::before {
+  counter-increment: h2;
+  content: counter(h2);
+  font: 700 14px/1 var(--font-mono);
+  color: var(--c-ac);
+}
+.prose h3 {
+  font: 700 15px/1.4 var(--font-sans);
+  color: var(--c-tx);
+  margin: 20px 0 10px;
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+.prose h3::before {
+  counter-increment: h3;
+  content: counter(h2) '.' counter(h3);
+  font: 600 12px/1 var(--font-mono);
+  color: var(--c-tx3);
+}
+.prose h4 {
+  font: 700 14px/1.4 var(--font-sans);
+  color: var(--c-tx);
+  margin: 18px 0 8px;
+}
+
+/* ── 강조 4계층 ── */
+.prose b,
+.prose strong {
+  font-weight: 700;
+  color: var(--c-tx);
+}
+.prose :not(pre) > code {
+  font: 600 13px/1 var(--font-mono);
+  color: var(--c-ac);
+  background: var(--c-acS);
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+.prose u {
+  text-decoration: none;
+  background: var(--c-acS);
+  padding: 0 3px;
+  border-radius: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.prose em,
+.prose i {
+  font-style: italic;
+  color: var(--c-tx2);
+}
+
+/* ── 인용 정의 박스 (콜아웃과 위계 구분 — 컬러/배경 없음) ── */
+.prose blockquote {
+  margin: 16px 0;
+  padding: 12px 16px;
+  border-left: 3px solid var(--c-bd2);
+  color: var(--c-tx2);
+  font: 500 14px/1.7 var(--font-sans);
+}
+.prose blockquote p {
+  margin: 0;
+}
+
+/* ── 콜아웃 3종: 좌측 3px 컬러 바 + 옅은 컬러 배경 + 라벨 ── */
+.callout {
+  margin: 16px 0;
+  padding: 12px 14px;
+  border-radius: 9px;
+}
+.callout::before {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: 700 12px/1 var(--font-sans);
+  margin-bottom: 6px;
+}
+.callout p {
+  margin: 0;
+  font: 500 13px/1.65 var(--font-sans);
+  color: var(--c-tx2);
+}
+.callout p + p {
+  margin-top: 8px;
+}
+.callout-note {
+  background: var(--c-noteB);
+  border-left: 3px solid var(--c-note);
+}
+.callout-note::before {
+  content: 'ⓘ NOTE';
+  color: var(--c-note);
+}
+.callout-warn {
+  background: var(--c-warnB);
+  border-left: 3px solid var(--c-warn);
+}
+.callout-warn::before {
+  content: '⚠ WARNING';
+  color: var(--c-warn);
+}
+.callout-tip {
+  background: var(--c-tipB);
+  border-left: 3px solid var(--c-tip);
+}
+.callout-tip::before {
+  content: '✔ TIP';
+  color: var(--c-tip);
+}
+
+/* ── 표 ── */
+.prose table {
+  border-collapse: collapse;
+  margin: 16px 0;
+  font: 500 13px/1.6 var(--font-sans);
+}
+.prose th {
+  font-weight: 700;
+  text-align: left;
+  border-bottom: 1px solid var(--c-bd2);
+  padding: 7px 14px 7px 0;
+}
+.prose td {
+  border-bottom: 1px solid var(--c-bd);
+  padding: 7px 14px 7px 0;
+  color: var(--c-tx2);
+}
+
+/* ── 링크·리스트·구분선 ── */
+.prose a {
+  color: var(--c-lk);
+}
+.prose ul,
+.prose ol {
+  margin: 0 0 15px;
+  padding-left: 22px;
+}
+.prose li {
+  margin: 4px 0;
+}
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--c-bd);
+  margin: 24px 0;
+}
+.prose img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+/* ═══════════ 코드 블록 — Shiki + 상단 바 ═══════════ */
+
+.code-block {
+  margin: 14px 0 16px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--c-bd);
+  background: var(--c-code);
+}
+.code-block-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--c-bd);
+  background: var(--c-bg2);
+}
+.code-block-title {
+  font: 600 11px/1 var(--font-mono);
+  color: var(--c-tx3);
+}
+.code-copy {
+  margin-left: auto;
+  font: 600 11px/1 var(--font-sans);
+  color: var(--c-tx2);
+  background: none;
+  border: 1px solid var(--c-bd);
+  border-radius: 5px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+.code-copy.copied {
+  color: var(--c-tip);
+}
+
+.code-block pre {
+  margin: 0;
+  padding: 13px 14px;
+  overflow-x: auto;
+  font: 500 12.5px/1.7 var(--font-mono);
+  background: var(--c-code) !important; /* Shiki 인라인 배경보다 토큰이 이긴다 */
+}
+.code-block code {
+  font-family: var(--font-mono);
+}
+
+/* Shiki 듀얼 테마: data-theme가 어느 변수를 쓸지 결정 (defaultColor: false) */
+.astro-code span {
+  color: var(--shiki-dark);
+}
+[data-theme='light'] .astro-code span {
+  color: var(--shiki-light);
+}
+
+/* 줄번호 — 긴 코드만 (```lang showLineNumbers) */
+pre[data-line-numbers] code {
+  counter-reset: line;
+}
+pre[data-line-numbers] .line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 2ch;
+  margin-right: 14px;
+  text-align: right;
+  color: var(--c-tx3);
+  opacity: 0.6;
+}
+
+/* ═══════════ 공용 소형 요소 ═══════════ */
+
+/* 트랙 배지: LOG=accent 채움 / NOTES=외곽선 */
+.track-badge {
+  display: inline-block;
+  font: 700 10px/1 var(--font-sans);
+  letter-spacing: 0.02em;
+  border-radius: 5px;
+  flex: 0 0 auto;
+}
+.track-badge-log {
+  color: var(--c-acT);
+  background: var(--c-ac);
+  padding: 3px 7px;
+}
+.track-badge-notes {
+  color: var(--c-tx2);
+  background: transparent;
+  border: 1px solid var(--c-bd2);
+  padding: 2px 6px;
+}
+
+/* 섹션 헤더(홈 등): uppercase tertiary */
+.section-label {
+  font: 700 13px/1 var(--font-sans);
+  color: var(--c-tx3);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* 페이지 h1 */
+.page-title {
+  font: 800 24px/1.1 var(--font-sans);
+  letter-spacing: -0.02em;
+  color: var(--c-tx);
+  margin: 0;
+}
+.page-desc {
+  margin-top: 8px;
+  color: var(--c-tx2);
+  font: 500 13px/1.6 var(--font-sans);
+  max-width: 56ch;
+}

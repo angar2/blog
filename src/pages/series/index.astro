@@ -1,0 +1,100 @@
+---
+// /series 시리즈 목록 — 겹친 페이지 그림자 카드 + accent 세로바, 최신 갱신순
+import Base from '../../layouts/Base.astro';
+import { displayDate, getSeriesOverview } from '../../lib/content';
+
+const overviews = await getSeriesOverview();
+---
+
+<Base title="Series · angari.dev" description="시리즈 목록 — 순서대로 읽는 글 묶음" current="series">
+  <div class="list-head">
+    <h1 class="page-title">Series</h1>
+    <p class="page-desc">사후 결성된 연재 묶음. 살아있는 연재가 위로 옵니다.</p>
+  </div>
+  <div class="series-cards">
+    {
+      overviews.map(({ series, count, latestCreated }) => (
+        <a class="series-card" href={`/series/${series.id}`}>
+          <span class="accent-bar" aria-hidden="true" />
+          <span class="card-meta">
+            <span class="card-kind">◈ 시리즈</span>
+            <span class="card-stats">
+              {count}편 · <time datetime={latestCreated}>{displayDate(latestCreated)}</time>
+            </span>
+          </span>
+          <span class="card-title">{series.data.title}</span>
+          <span class="card-desc">{series.data.description}</span>
+        </a>
+      ))
+    }
+  </div>
+  {overviews.length === 0 && <p class="page-desc">등록된 시리즈가 아직 없다.</p>}
+</Base>
+
+<style>
+  .list-head {
+    padding: 16px 0 10px;
+  }
+  .series-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /* 겹친 페이지 그림자가 오른쪽·아래로 삐져나올 공간 */
+    padding: 0 14px 14px 0;
+  }
+  .series-card {
+    position: relative;
+    display: block;
+    border: 1px solid var(--c-bd);
+    border-radius: 14px;
+    background: var(--c-bg2);
+    padding: 16px 18px 16px 22px;
+    /* 겹친 페이지(묶음) 모티프 */
+    box-shadow:
+      6px 6px 0 -1px var(--c-bg2),
+      6px 6px 0 0 var(--c-bd),
+      12px 12px 0 -1px var(--c-bg),
+      12px 12px 0 0 var(--c-bd);
+  }
+  .accent-bar {
+    position: absolute;
+    left: 0;
+    top: 14px;
+    bottom: 14px;
+    width: 3px;
+    border-radius: 3px;
+    background: var(--c-ac);
+  }
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 8px;
+  }
+  .card-kind {
+    font: 700 10px/1 var(--font-sans);
+    color: var(--c-ac);
+    letter-spacing: 0.04em;
+  }
+  .card-stats {
+    margin-left: auto;
+    font: 600 11px/1 var(--font-mono);
+    color: var(--c-tx3);
+  }
+  .card-stats time {
+    font: inherit;
+    color: inherit;
+  }
+  .card-title {
+    display: block;
+    font: 800 17px/1.3 var(--font-sans);
+    color: var(--c-tx);
+    letter-spacing: -0.015em;
+    margin-bottom: 5px;
+  }
+  .card-desc {
+    display: block;
+    font: 500 13px/1.55 var(--font-sans);
+    color: var(--c-tx2);
+  }
+</style>

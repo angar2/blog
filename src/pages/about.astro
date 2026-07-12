@@ -1,0 +1,89 @@
+---
+// About — 2블록: [누구인가] + [AI 저작 선언 표면 카드]. 문안은 B4에서 지크 확정 (현재 초안)
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="About · angari.dev" description="지크 소개와 AI 저작 선언" current="about">
+  <article>
+    <div class="head">
+      <h1 class="page-title">About</h1>
+    </div>
+
+    <section class="who" aria-label="누구인가">
+      <img src="/avatar.png" alt="지크 아바타" width="52" height="52" />
+      <div>
+        <h2>지크 · 백엔드 개발자</h2>
+        <p>
+          서버와 데이터를 다룹니다. 배운 것을 정돈해 남기는 걸 좋아합니다.
+          <a href="https://github.com/angar2" rel="external noopener">GitHub ↗</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="decl" aria-label="AI 저작 선언">
+      <div class="decl-label">AI 저작 선언</div>
+      <p class="decl-main">
+        이 사이트의 글은 <span class="accent">AI가 초안을 쓰고, 지크가 검수해</span> 발행합니다.
+      </p>
+      <p class="decl-body">
+        숨기지 않습니다. 사실 검증·구조 정리·표현 다듬기를 사람이 책임지고, AI는 초안 속도를
+        담당합니다. 운영 방식 자체가 AI 활용 실력의 증거입니다.
+      </p>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .head {
+    padding: 16px 0 12px;
+  }
+  .who {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 6px 0 18px;
+    border-bottom: 1px solid var(--c-bd);
+  }
+  .who img {
+    border-radius: 50%;
+    flex: 0 0 auto;
+  }
+  .who h2 {
+    font: 700 16px/1.3 var(--font-sans);
+    color: var(--c-tx);
+    margin: 0 0 6px;
+  }
+  .who p {
+    color: var(--c-tx2);
+    font: 500 13px/1.7 var(--font-sans);
+    margin: 0;
+  }
+
+  .decl {
+    margin-top: 18px;
+    padding: 16px 18px;
+    border-radius: 12px;
+    background: var(--c-bg2);
+    border: 1px solid var(--c-bd);
+  }
+  .decl-label {
+    font: 700 11px/1 var(--font-sans);
+    color: var(--c-ac);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .decl-main {
+    color: var(--c-tx);
+    font: 600 16px/1.6 var(--font-sans);
+    margin: 0 0 10px;
+  }
+  .decl-main .accent {
+    color: var(--c-ac);
+  }
+  .decl-body {
+    color: var(--c-tx2);
+    font: 500 13px/1.7 var(--font-sans);
+    margin: 0;
+  }
+</style>

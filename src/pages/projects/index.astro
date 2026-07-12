@@ -1,0 +1,94 @@
+---
+// Projects 목록 — 2열 카드 그리드 (커버·프로젝트명·태그라인·스택 칩)
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) =>
+  b.data.created.localeCompare(a.data.created),
+);
+---
+
+<Base title="Projects · angari.dev" description="프로젝트 쇼케이스" current="projects">
+  <div class="list-head">
+    <h1 class="page-title">Projects</h1>
+    <p class="page-desc">만든 것들. 제작기는 시리즈로 이어집니다.</p>
+  </div>
+  <div class="project-grid">
+    {
+      projects.map((p) => (
+        <a class="project-card" href={`/projects/${p.id}`}>
+          <Image class="cover" src={p.data.cover} alt={`${p.data.title} 스크린샷`} />
+          <span class="card-body">
+            <span class="card-title">{p.data.title}</span>
+            <span class="card-tagline">{p.data.tagline}</span>
+            <span class="stack-chips">
+              {p.data.stacks.map((stack) => (
+                <span class="chip">{stack}</span>
+              ))}
+            </span>
+          </span>
+        </a>
+      ))
+    }
+  </div>
+  {projects.length === 0 && <p class="page-desc">등록된 프로젝트가 아직 없다.</p>}
+</Base>
+
+<style>
+  .list-head {
+    padding: 16px 0 10px;
+  }
+  .project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 480px) {
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .project-card {
+    display: block;
+    border: 1px solid var(--c-bd);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--c-bg2);
+  }
+  .project-card :global(.cover) {
+    display: block;
+    width: 100%;
+    height: 88px;
+    object-fit: cover;
+  }
+  .card-body {
+    display: block;
+    padding: 13px 14px 15px;
+  }
+  .card-title {
+    display: block;
+    font: 700 15px/1.2 var(--font-sans);
+    color: var(--c-tx);
+    margin-bottom: 5px;
+  }
+  .card-tagline {
+    display: block;
+    font: 500 12px/1.5 var(--font-sans);
+    color: var(--c-tx2);
+    margin-bottom: 11px;
+    min-height: 2.4em;
+  }
+  .stack-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .chip {
+    font: 600 10px/1 var(--font-mono);
+    color: var(--c-tx3);
+    border: 1px solid var(--c-bd);
+    border-radius: 5px;
+    padding: 4px 7px;
+  }
+</style>

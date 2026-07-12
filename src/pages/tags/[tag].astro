@@ -1,0 +1,31 @@
+---
+// 태그별 글 목록 — 두 트랙 혼재, 트랙 배지로 구분
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import { getAllPosts, getTagCounts, sortPosts } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const tags = await getTagCounts();
+  return tags.map(({ tag }) => ({ params: { tag } }));
+}
+
+const { tag } = Astro.params;
+const posts = sortPosts((await getAllPosts()).filter((p) => p.data.tags.includes(tag)));
+---
+
+<Base title={`#${tag} · angari.dev`} description={`#${tag} 태그가 붙은 글 ${posts.length}편`}>
+  <div class="list-head">
+    <h1 class="page-title mono">#{tag}</h1>
+    <p class="page-desc">{posts.length}편</p>
+  </div>
+  <PostList posts={posts} showTrackBadge={true} />
+</Base>
+
+<style>
+  .list-head {
+    padding: 16px 0 6px;
+  }
+  .mono {
+    font-family: var(--font-mono);
+  }
+</style>
