@@ -1,0 +1,26 @@
+# angari.dev
+
+> 백엔드 개발자 지크(angari)의 개인 사이트. 글은 AI가 쓰고 지크가 검수해 발행한다 —
+> 이를 숨기지 않고 공개 선언하는 것이 사이트의 정체성이다.
+
+## 콘텐츠 구조
+
+- 글은 2트랙이다: Log(서사 — 데브로그·구축기·회고) / Notes(지식 — 개념 정리·삽질 해법)
+- Notes 트랙의 모든 글은 1차 출처(참고 자료)를 반드시 표기한다
+- 시리즈는 사후 큐레이션 묶음이며, 글 URL은 분류와 무관하게 불변이다
+
+## 주요 페이지
+
+- [홈](https://angari.dev/): 최신 글·진행 중 시리즈·대표 프로젝트
+- [Log](https://angari.dev/log): 서사 트랙 글 목록
+- [Notes](https://angari.dev/notes): 지식 트랙 글 목록 (태그 색인)
+- [Projects](https://angari.dev/projects): 프로젝트 쇼케이스
+- [About](https://angari.dev/about): 소개 + AI 저작 선언
+- 글 본문: https://angari.dev/posts/{slug}
+- [RSS](https://angari.dev/rss.xml)
+- [사이트맵](https://angari.dev/sitemap-index.xml)
+
+## 저작·인용
+
+- 각 글의 JSON-LD(BlogPosting)에 author=AI, editor=지크가 구조화되어 있다
+- 인용 시 출처 표기를 환영한다

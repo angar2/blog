@@ -1,0 +1,62 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+/**
+ * 노션식 우측 목차 레일 (design-prd §8)
+ * - 평시: 헤딩 레벨별 대시(h2 길게·h3 중간·h4 짧게) — 시각 처리는 디자인 토큰 납품 후
+ * - 호버: 텍스트 패널 펼침 (CSS hover — 디자인 단계에서 스타일)
+ * - 스크롤 연동 현재 섹션 하이라이트 (IntersectionObserver)
+ * h2~h4만 노출. 모바일 대체 UI는 디자인 납품 기준으로 추후 구현.
+ */
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const headings = Astro.props.headings.filter((h) => h.depth >= 2 && h.depth <= 4);
+---
+
+{
+  headings.length > 0 && (
+    <nav class="toc-rail" aria-label="목차">
+      <ul>
+        {headings.map((h) => (
+          <li data-depth={h.depth}>
+            <a href={`#${h.slug}`}>{h.text}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+<script>
+  // 스크롤 연동 하이라이트: 화면에 들어온 헤딩 기준으로 현재 섹션 표시
+  const rail = document.querySelector('.toc-rail');
+  if (rail) {
+    const links = new Map<string, HTMLAnchorElement>();
+    rail.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((a) => {
+      links.set(decodeURIComponent(a.hash.slice(1)), a);
+    });
+    const headingEls = [...links.keys()]
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    let currentId: string | null = null;
+    const setCurrent = (id: string) => {
+      if (id === currentId) return;
+      if (currentId) links.get(currentId)?.removeAttribute('aria-current');
+      links.get(id)?.setAttribute('aria-current', 'true');
+      currentId = id;
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setCurrent(entry.target.id);
+        }
+      },
+      { rootMargin: '0px 0px -70% 0px' },
+    );
+    headingEls.forEach((el) => observer.observe(el));
+  }
+</script>

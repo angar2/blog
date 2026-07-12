@@ -1,0 +1,32 @@
+---
+import type { SeriesMembership } from '../lib/content';
+
+/**
+ * 글 머리 시리즈 박스 (design-prd §6-6 ②)
+ * 접힌 한 줄 "시리즈명 3/5 ▸" → 펼치면 연재 목차. 다중 소속이면 복수 개 렌더링(부모가 반복).
+ * 접기/펼치기는 <details>로 — JS 없이 허용 인터랙션 충족.
+ */
+interface Props {
+  membership: SeriesMembership;
+  currentPostId: string;
+}
+
+const { membership, currentPostId } = Astro.props;
+const { series, index, posts } = membership;
+---
+
+<details class="series-box">
+  <summary>
+    <a href={`/series/${series.id}`}>{series.data.title}</a>
+    <span class="series-position">{index + 1}/{posts.length}</span>
+  </summary>
+  <ol>
+    {
+      posts.map((p) => (
+        <li aria-current={p.id === currentPostId ? 'true' : undefined}>
+          {p.id === currentPostId ? p.data.title : <a href={`/posts/${p.id}`}>{p.data.title}</a>}
+        </li>
+      ))
+    }
+  </ol>
+</details>

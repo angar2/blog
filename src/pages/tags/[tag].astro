@@ -1,0 +1,19 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import { getAllPosts, getTagCounts, sortPosts } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const tags = await getTagCounts();
+  return tags.map(({ tag }) => ({ params: { tag } }));
+}
+
+const { tag } = Astro.params;
+const posts = sortPosts((await getAllPosts()).filter((p) => p.data.tags.includes(tag)));
+---
+
+<Base title={`#${tag} · angari.dev`} description={`#${tag} 태그가 붙은 글 ${posts.length}편`}>
+  <h1>#{tag}</h1>
+  <!-- 두 트랙 혼재 — 트랙 배지로 구분 -->
+  <PostList posts={posts} showTrackBadge={true} />
+</Base>

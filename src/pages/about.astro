@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<!--
+  본문 문안은 B4에서 지크가 확정한다 (build-prd §7 B4).
+  아래는 확정 전 초안 — 구조(2블록)는 design-prd §6-5 확정 사양.
+-->
+<Base title="About · angari.dev" description="지크 소개와 AI 저작 선언" current="about">
+  <article>
+    <h1>About</h1>
+
+    <section aria-label="누구인가">
+      <h2>누구인가</h2>
+      <p>
+        백엔드 개발자 지크(angari)다. 서버를 만들고, 요즘은 AI 에이전트를 일 시키는 방법을
+        파고 있다. 이 사이트는 그 기록이다.
+      </p>
+      <p><a href="https://github.com/angar2" rel="external noopener">GitHub</a></p>
+    </section>
+
+    <section aria-label="AI 저작 선언">
+      <h2>AI 저작 선언</h2>
+      <p>
+        <strong>이 사이트의 글은 AI가 쓰고, 지크가 검수해 발행한다.</strong> 숨길 일이 아니라
+        정체성이다 — 사이트 운영 자체가 AI 활용 실력의 실물 증거다.
+      </p>
+      <p>
+        글감은 지크가 실제로 겪고 소화한 것에서만 나온다. 습득하지 않은 지식으로 글을 쓰지
+        않는다. 모든 글은 발행 전 지크가 실물로 확인하며, 지식 글(Notes)은 1차 출처 표기를
+        시스템이 강제한다.
+      </p>
+    </section>
+  </article>
+</Base>

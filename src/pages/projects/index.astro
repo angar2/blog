@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) =>
+  b.data.created.localeCompare(a.data.created),
+);
+---
+
+<Base title="Projects · angari.dev" description="프로젝트 쇼케이스" current="projects">
+  <h1>Projects</h1>
+  <ul class="project-grid">
+    {
+      projects.map((p) => (
+        <li class="project-card">
+          <a href={`/projects/${p.id}`}>
+            <Image src={p.data.cover} alt={`${p.data.title} 스크린샷`} />
+            <span class="project-title">{p.data.title}</span>
+          </a>
+          <p>{p.data.tagline}</p>
+          <ul class="stack-chips" aria-label="기술 스택">
+            {p.data.stacks.map((stack) => (
+              <li>{stack}</li>
+            ))}
+          </ul>
+        </li>
+      ))
+    }
+  </ul>
+  {projects.length === 0 && <p>등록된 프로젝트가 아직 없다.</p>}
+</Base>

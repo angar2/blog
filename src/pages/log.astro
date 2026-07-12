@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { getPostsByTrack } from '../lib/content';
+
+const posts = await getPostsByTrack('log');
+---
+
+<Base title="Log · angari.dev" description="서사 트랙 — 데브로그·구축기·회고" current="log">
+  <h1>Log</h1>
+  <PostList posts={posts} />
+</Base>
