@@ -14,123 +14,73 @@ tags: [ai-agent, self-learning, verification]
 
 > 이 두 원리의 엔진이 "검증된 지식의 복리 축적"인데, 그 축적을 담보하는 자가학습·검증 루프가 실제로는 배선되지 않았다(교훈 저장 0건). 즉 간판 원리가 실동작하지 않는다.
 
-이 한 문장이 결론을 미리 말한다. 설계상 **자가학습**은 3층이다. A층(명시 교훈)은 "교훈:" 접두어를 감지해 저장하고, C층(자동 감지)은 교정 말투를 감지해 후보를 제안하며, 승격(SL-02)은 같은 교정이 K회 반복되면 규칙으로 굳힌다. **검증**은 3종이다. A 검토(작업자 자신), B 게이트(별도 세션, `source_facts` 대조), C 백그라운드에 더해, 루프(VF-06)가 worker↔verifier 라운드를 돌리다 합격선 미달이면 재작업시킨다. 여기까지는 기획서고, 문제는 코드로 내려갔을 때다.
+이 한 문장이 결론을 미리 말한다.
 
-## `promote.mjs` — 승격 로직은 멀쩡하다
+## 자가학습 3층·검증 3종 — 기획서 상의 설계
 
-```js
-export const PROMOTE_THRESHOLD = 3;
+기획서 단계에서 자가학습은 3층, 검증은 3종으로 설계됐다.
 
-export function promotionCandidates(occurrences, { threshold = PROMOTE_THRESHOLD } = {}) {
-  const counts = new Map();
-  for (const o of occurrences) counts.set(o.key, (counts.get(o.key) ?? 0) + 1);
-  const candidates = [];
-  for (const [key, count] of counts) if (count >= threshold) candidates.push({ key, count });
-  return candidates;
-}
+- **A층(명시 교훈)**: "교훈:" 접두어를 감지해 그대로 저장한다.
+- **C층(자동 감지)**: 지크의 교정 말투를 감지해 후보를 제안하고, 승인 시 저장한다.
+- **승격(SL-02)**: 같은 교정이 K회 반복되면 잠정 교훈을 규칙으로 승격한다. 한 번의 우연을 규칙으로 굳히는 과잉일반화를 막기 위한 장치다.
+- **메타루프(SL-04)**: 검출율 추세를 보고 합격선을 자동 조정한다.
+- **검증 A(작업자 자신 검토)·B(별도 세션 게이트, `source_facts` 대조)·C(백그라운드 Lint·비용 감시)** 3종에 더해, **루프(VF-06)**가 작업자↔검증자 라운드를 돌리다 합격선 미달이면 재작업시킨다.
 
-export function shouldPromote(occurrences, key, { threshold = PROMOTE_THRESHOLD } = {}) {
-  return occurrences.filter((o) => o.key === key).length >= threshold;
-}
-```
+여기까지는 기획서고, 문제는 코드로 내려갔을 때다.
 
-순수 결정론 함수다. LLM 호출이 없다. <u>같은 실수(key)가 3회 이상 쌓여야만</u> 승격 후보로 뽑혀, 한 번의 우연을 규칙으로 굳히는 과잉일반화를 막는다. 설계 의도가 코드에 정확히 반영돼 있다.
+## 함수 3개 해부 — 코드는 멀쩡한데 호출처가 없다
 
-그런데 이 함수를 부르는 곳은 `app/sl02-measure.mjs` 단 하나뿐이다.
+승격·메타루프·검증루프를 구현한 세 함수를 각각 열어봤다. 셋 다 결정론이고 설계 의도가 코드에 정확히 반영돼 있다는 점에서는 흠잡을 데가 없다.
 
-## `learning-meta.mjs` — 주석이 스스로 실토한 한계
+| 함수 | 기능 | 어디까지 지어졌나 | 호출처 |
+|---|---|---|---|
+| `promote.mjs`(SL-02) | 같은 실수가 3회 이상 쌓이면 승격 후보로 뽑는다 | 임계값 판정 로직 완결 | `sl02-measure.mjs` 1건 |
+| `learning-meta.mjs`(SL-04) | 검출율 시계열의 추세(기울기)를 보고 합격선을 0.05씩 조정한다 | 회귀 계산·상하한 클램프까지 완결 | `sl04-measure.mjs` 1건 |
+| `verify-loop.mjs`(VF-06) | 작업자↔검증자를 최대 3라운드 반복하고 초과 시 에스컬레이션한다 | 무한루프 방지까지 갖춘 완결 로직 | `vf06-measure.mjs` 1건 |
 
-```js
-export function trendSlope(series) {
-  const n = series.length;
-  if (n < 2) return 0;
-  const xs = series.map((_, i) => i);
-  const mx = xs.reduce((a, b) => a + b, 0) / n;
-  const my = series.reduce((a, b) => a + b, 0) / n;
-  let num = 0, den = 0;
-  for (let i = 0; i < n; i++) {
-    num += (xs[i] - mx) * (series[i] - my);
-    den += (xs[i] - mx) ** 2;
-  }
-  return den === 0 ? 0 : num / den;
-}
-
-export function adjustThreshold(current, recentRate, { target = 0.9, step = 0.05, min = 0.5, max = 0.99 } = {}) {
-  const next = recentRate < target ? current + step : current;
-  return Math.max(min, Math.min(max, Number(next.toFixed(4))));
-}
-```
-
-`trendSlope`는 검출율 시계열의 선형회귀 기울기를 구하고, `adjustThreshold`는 최근 검출율이 목표(0.9) 아래면 합격선을 0.05씩 올려 더 엄격하게 만든다. `[0.5, 0.99]` 클램프까지 갖춘 완결된 로직이다.
-
-그런데 파일 맨 위 주석이 스스로 예견해 놓았다.
+세 함수 모두 호출처가 **자기 자신을 측정하는 스크립트 하나뿐**이다. 특히 `learning-meta.mjs`는 파일 맨 위 주석이 스스로 한계를 실토해 놓았다.
 
 > 실 추세 판정엔 운영 누적 시계열이 필요 — 여기선 메커니즘(기울기·조정 규칙)을 결정론으로 제공하고, 실 시계열 정량은 운영 누적 후로 미룬다(test-spec SL-04: 불확실 — 정량 없으면 정성 강등).
 
-즉, 이 함수가 먹을 데이터를 쌓을 운영 루프 자체가 아직 없다는 걸 작성 시점부터 코드가 알고 있었다. 호출처는 역시 `app/sl04-measure.mjs` 하나뿐이다.
-
-## `verify-loop.mjs` — 무한루프 방지까지 갖춘 설계
-
-```js
-export async function runVerifyLoop({ maxRounds = 3, attempt, verify }) {
-  let prevDefects = [];
-  for (let round = 1; round <= maxRounds; round++) {
-    const product = await attempt(round, prevDefects);
-    const v = await verify(product, round);
-    if (!v.has_defects) {
-      return { resolved: true, escalated: false, rounds: round, product, note: `${round}라운드에 검증 통과` };
-    }
-    prevDefects = v.defects || [];
-  }
-  return {
-    resolved: false,
-    escalated: true,
-    rounds: maxRounds,
-    note: `[미해결] 검증 ${maxRounds}라운드 반복에도 결함 잔존 — 자동 수정 중단, 지크 확인 필요`,
-    lastDefects: prevDefects,
-  };
-}
-```
-
-작업자(`attempt`)와 검증자(`verify`)를 최대 3라운드 반복하고, <u>상한에 도달하면</u> 무한루프 대신 에스컬레이션으로 빠진다. 루프 제어는 결정론이고 LLM은 주입된 함수 안에서만 쓰인다는 설계 분리까지 명확하다. 파일 주석은 `attempt`·`verify` 둘 다 "실제=작업자 query·verify 에이전트, 측정=스텁"이 주입된다고 명시한다. 측정에서는 진짜 작업자·검증자가 아니라 스텁이 대신 들어간다는 뜻이다.
-
-호출처는 `app/vf06-measure.mjs` 하나뿐이다.
+즉, 이 함수가 먹을 데이터를 쌓을 운영 루프 자체가 아직 없다는 걸 작성 시점부터 코드가 알고 있었다. `verify-loop.mjs`도 마찬가지다. 파일 주석은 작업자·검증자로 "실제=작업자 query·verify 에이전트, 측정=스텁"이 주입된다고 명시한다 — 측정에서는 진짜 작업자·검증자가 아니라 스텁이 대신 들어간다는 뜻이다.
 
 ## grep 전수조사 — 못을 박다
 
-세 함수가 각각 `*-measure.mjs`에서만 불린다는 걸 확인으로 못박기 위해 런타임 경로 전체를 뒤졌다. `server.ts`, `drop-core.mjs`, `telegram-listener`, `terminal-adapter`, `backstage` 잡 어디에서도 이 세 함수를 import하지 않는다. 직접 재확인한 import 구문은 이렇다.
+세 함수가 각각 measure 파일에서만 불린다는 걸 확인으로 못박기 위해 런타임 경로 전체를 뒤졌다. `server.ts`·`drop-core.mjs`·telegram-listener·terminal-adapter·backstage 잡 어디에서도 이 세 함수를 import하지 않는다. 직접 재확인한 import 구문도 각 measure 파일에 한 줄씩뿐이다 — 이 세 줄이 세 함수가 시스템에서 불리는 **유일한** 자리다.
 
-```js
-// app/sl02-measure.mjs
-import { promotionCandidates, shouldPromote, PROMOTE_THRESHOLD } from "./promote.mjs";
-// app/sl04-measure.mjs
-import { trendSlope, adjustThreshold } from "./learning-meta.mjs";
-// app/vf06-measure.mjs
-import { runVerifyLoop } from "./verify-loop.mjs";
-```
-
-이 세 줄이 이 세 함수가 시스템에서 불리는 **유일한** 자리다. `promote.mjs`·`learning-meta.mjs`·`verify-loop.mjs` 모두 런타임 호출처 0. 같은 계열의 `verify-roi.mjs`(과검증 ROI 게이팅)도, `lint-links.mjs`(서재 링크 Lint)도 자율 잡에 미배선이긴 마찬가지다.
+같은 계열의 다른 껍데기도 있다. `verify-roi.mjs`(과검증 ROI 게이팅)·`lint-links.mjs`(서재 링크 Lint) 둘 다 자율 잡에 미배선이다.
 
 비유하자면 이 함수들은 벤치 위에서 시동까지 걸어본 엔진이다. 회전수도 소음도 정상이지만, 그 엔진이 구동축에 연결돼 있지 않으면 아무리 잘 돌아도 차는 1밀리미터도 움직이지 않는다. 측정은 "엔진이 도는지"만 봤지 "바퀴로 연결됐는지"는 애초에 보지 않았다.
 
 ## 배선은 됐는데 데이터가 없는 층
 
-대비할 게 하나 더 있다. 승격·메타루프·검증루프처럼 아예 안 불리는 게 아니라, **배선은 됐는데 실사용이 0인** 층도 있다. 자가학습 기본(A 명시 교훈·C 자동 감지)은 실제로 배선돼 있다. `server.ts:104`의 `detectCorrection`, `server.ts:207/210`의 `detectExplicitLesson`·`writeLesson`, `drop-core.mjs:196`의 `loadLessons()`(비서 프롬프트 주입)까지 코드 경로가 이어진다. 그런데 `memory/lessons/`에 저장된 교훈은 0건이다(README만 있다). 배선됐지만 한 번도 실사용되지 않았다.
+대비할 게 하나 더 있다. 승격·메타루프·검증루프처럼 아예 안 불리는 게 아니라, 배선은 됐는데 실사용이 0인 층도 있다.
 
-더 심각한 정합 구멍도 있다. <u>교훈 캡처는 옛 `server.ts`(앱 채널 전용)에만 있고</u>, 앱·텔레그램·터미널 3채널을 통합한 채널중립 엔진 `drop-core.mjs`는 `loadLessons()`(주입)만 부른다.
+- **자가학습 기본(A 명시 교훈·C 자동 감지)**은 실제로 배선돼 있다. `server.ts`의 교정·교훈 감지·저장 로직부터 `drop-core.mjs`의 `loadLessons()`(비서 프롬프트 주입)까지 코드 경로가 이어진다.
+- 그런데 `memory/lessons/`에 저장된 교훈은 **0건**이다(README만 있다). 배선됐지만 한 번도 실사용되지 않았다.
+- 더 심각한 정합 구멍도 있다. <u>교훈 캡처는 옛 `server.ts`(앱 채널 전용)에만 있고</u>, 앱·텔레그램·터미널 3채널을 통합한 채널중립 엔진 `drop-core.mjs`는 `loadLessons()`(주입)만 부른다.
 
 > 게다가 캡처는 옛 server.ts(앱 채널)에만 있고 채널 중립 엔진 drop-core.mjs는 주입만 한다 → 텔레그램·터미널로 던진 교정은 교훈으로 저장조차 안 된다. 3채널 통합 때 자가학습 캡처가 따라오지 못한 정합 구멍.
 
 ## 왜 이렇게 됐나
 
-소스가 스스로 밝힌 구조적 원인은 셋이다. 첫째, *design-now* 원칙의 그림자다. "설계·자리·트리거는 지금, 구현만 단계적으로"라는 원칙 자체는 옳았지만, 실제로는 함수 껍데기를 짓고 측정을 통과시킨 지점까지만 하고 그걸 "완료"로 보고했다. 둘째, 측정이 배선을 안 봤다. test-spec은 함수의 출력만 검증했고 "파이프라인에 꽂혀 실사용되는가"는 애초에 검증 항목에 없었다. 셋째, 단기 집중 작업의 밀도다. 검증·자가학습·비용·보안·개발팀 관련 태스크 5개가 2026-07-03 **하루**에 몰렸다. 각 함수를 짓고 측정을 통과시켰지만 런타임 배선 확인은 통째로 빠졌다.
+소스가 스스로 밝힌 구조적 원인은 셋이다.
+
+- **design-now 원칙의 그림자**: "설계·자리·트리거는 지금, 구현만 단계적으로"라는 원칙 자체는 옳았다. 그러나 실제로는 함수 껍데기를 짓고 측정을 통과시킨 지점까지만 하고 그걸 "완료"로 보고했다.
+- **측정이 배선을 안 봄**: test-spec은 함수의 출력만 검증했고, "파이프라인에 꽂혀 실사용되는가"는 애초에 검증 항목에 없었다.
+- **단기 집중 작업의 밀도**: 검증·자가학습·비용·보안·개발팀 관련 태스크 5개가 2026-07-03 **하루**에 몰렸다. 각 함수를 짓고 측정을 통과시켰지만 런타임 배선 확인은 통째로 빠졌다.
 
 > [!warn]
 > 설계는 지금, 구현은 나중이라는 원칙과 "구현을 미룬 것"·"구현이 끝났다고 착각하는 것"은 한 끗 차이로 붙어 있다. 이 프로젝트가 넘어진 지점이 정확히 그 틈이다.
 
 ## 건질 것과 버릴 것
 
-정직한 재분류가 먼저였다. 실제로 도는 것과 껍데기를 표로 갈라 "건질 것 지도"를 만들었는데, 자가학습 심화·검증 루프·개발팀 모드·보안 스캐너 껍데기 계열은 **버림**이었다. 대신 이식 가치가 있는 건 코드가 아니라 **패턴**과 **지식**이다 — 결정론 하드체크와 소프트 판정을 분리하는 패턴, "입구만 다르고 처리는 하나"라는 채널중립 엔진 발상, 실 API 지식, 운영 교훈 같은 것들이다.
+정직한 재분류가 먼저였다. 실제로 도는 것과 껍데기를 표로 갈라 "건질 것 지도"를 만들었는데, 자가학습 심화·검증 루프·개발팀 모드·보안 스캐너 껍데기 계열은 **버림**이었다. 대신 이식 가치가 있는 건 코드가 아니라 패턴과 지식이다.
+
+- **패턴**: 결정론 하드체크와 소프트 판정을 분리하는 설계.
+- **발상**: "입구만 다르고 처리는 하나"라는 채널중립 엔진 아이디어.
+- **지식**: 실 API 스펙(엔드포인트·인증·필드).
+- **교훈**: SDK·launchd 운영 중 얻은 구체적 교훈들.
 
 > [!note]
 > 헤르메스는 이 자리에 실물을 굴린다 — 칸반 디스패처, 워커 스폰, `task_runs`(재시도 이력), `consecutive_failures`(서킷브레이커), 교훈 축적 루프. 우리가 껍데기로 둔 "승격·메타루프·검증 루프"의 실동작 버전이 헤르메스엔 이미 있다. 이 프로젝트를 접고 헤르메스로 합치는 방향이 검토 중인 이유가 여기 있다.
