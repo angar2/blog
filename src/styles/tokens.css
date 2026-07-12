@@ -1,0 +1,63 @@
+/*
+ * 디자인 토큰 — 클로드디자인 확정 팔레트 A(레드), hifi 확정값
+ * 원천: .project/planning/design/design_handoff/README.md · angari.dev.dc.html PALETTES().red
+ * 네이밍은 핸드오프 프로토타입의 --c-* 를 그대로 계승한다.
+ */
+
+:root {
+  /* ── Dark (기본 · 1급) ── */
+  --c-bg: #17100e;            /* 배경 base */
+  --c-bg2: #1e1613;           /* 표면(surface) */
+  --c-bg3: #291d19;           /* 표면 raised */
+  --c-bd: rgba(255, 255, 255, 0.08);   /* 보더 hairline */
+  --c-bd2: rgba(255, 255, 255, 0.15);  /* 보더 strong */
+  --c-tx: #f3eae6;            /* 텍스트 primary */
+  --c-tx2: #b6a59f;           /* 텍스트 secondary */
+  --c-tx3: #7a6c67;           /* 텍스트 tertiary */
+  --c-ac: #ff5247;            /* 포인트(accent) */
+  --c-acT: #2a0e0b;           /* accent 위 글자 */
+  --c-acS: rgba(255, 82, 71, 0.16);    /* accent soft(배경 틴트) */
+  --c-lk: #ff7a70;            /* 링크 */
+  --c-note: #7fb3ff;
+  --c-noteB: rgba(127, 179, 255, 0.12);
+  --c-warn: #ffb84d;
+  --c-warnB: rgba(255, 184, 77, 0.13);
+  --c-tip: #5bd98a;
+  --c-tipB: rgba(91, 217, 138, 0.12);
+  --c-code: #140c0a;          /* 코드 배경 */
+
+  /* ── 타이포 ── */
+  --font-sans: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+
+  /* ── 레이아웃 ── */
+  --w-content: 720px;         /* 일반 페이지 컬럼 폭 */
+  --w-post: 860px;            /* 본문 페이지 폭 (목차 레일 포함) */
+
+  color-scheme: dark;
+}
+
+[data-theme='light'] {
+  /* ── Light (선택 토글 — 완결 팔레트) ── */
+  --c-bg: #fbf6f4;
+  --c-bg2: #ffffff;
+  --c-bg3: #f4ebe8;
+  --c-bd: rgba(0, 0, 0, 0.09);
+  --c-bd2: rgba(0, 0, 0, 0.15);
+  --c-tx: #2a211e;
+  --c-tx2: #6b5b56;
+  --c-tx3: #9c8c87;
+  --c-ac: #d9382e;
+  --c-acT: #ffffff;
+  --c-acS: rgba(217, 56, 46, 0.1);
+  --c-lk: #c0322a;
+  --c-note: #2f6fd6;
+  --c-noteB: rgba(47, 111, 214, 0.08);
+  --c-warn: #b5730a;
+  --c-warnB: rgba(181, 115, 10, 0.1);
+  --c-tip: #1f9d57;
+  --c-tipB: rgba(31, 157, 87, 0.1);
+  --c-code: #fbf3f0;
+
+  color-scheme: light;
+}

@@ -1,4 +1,5 @@
 ---
+// 글 본문 페이지 — 최우선 지면. ①머리 ②시리즈 박스 ③본문+목차 레일 ④참고 자료 ⑤이전/다음 ⑥바이라인
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import TrackBadge from '../../components/TrackBadge.astro';
@@ -25,6 +26,8 @@ const { post } = Astro.props;
 const { Content, headings } = await render(post);
 const memberships = await getSeriesMemberships(post.id);
 const relatedProjects = await getRelatedProjects(memberships.map((m) => m.series.id));
+const backHref = post.data.track === 'notes' ? '/notes' : '/log';
+const backLabel = post.data.track === 'notes' ? 'Notes' : 'Log';
 
 // JSON-LD: author=AI, 검수=지크를 정직하게 명시 — 정체성의 구조화 데이터 버전 (build-prd §4-2)
 const jsonLd = {
@@ -42,112 +45,295 @@ const jsonLd = {
 };
 ---
 
-<Base title={`${post.data.title} · angari.dev`} description={post.data.description}>
+<Base title={`${post.data.title} · angari.dev`} description={post.data.description} wide>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
-  <article>
-    <!-- ① 머리 -->
-    <header class="post-header">
-      <TrackBadge track={post.data.track} />
-      <h1>{post.data.title}</h1>
-      <time datetime={post.data.created}>{displayDate(post.data.created)}</time>
+  <div class="post-wrap">
+    <article>
+      <!-- ① 머리 -->
+      <header class="post-header">
+        <a class="back-link" href={backHref}>← {backLabel}</a>
+        <div class="post-meta">
+          <TrackBadge track={post.data.track} />
+          <time datetime={post.data.created}>{displayDate(post.data.created)}</time>
+          {
+            post.data.updated && (
+              <time class="updated" datetime={post.data.updated}>
+                개정 {displayDate(post.data.updated)}
+              </time>
+            )
+          }
+        </div>
+        <h1>{post.data.title}</h1>
+        <ul class="tag-list">
+          {
+            post.data.tags.map((tag) => (
+              <li>
+                <a href={`/tags/${tag}`}>#{tag}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </header>
+
+      <!-- ② 시리즈 박스 (다중 소속이면 복수) -->
+      {memberships.map((m) => <SeriesBox membership={m} currentPostId={post.id} />)}
+
+      <!-- ③ 본문 (우측 목차 레일은 post-wrap 그리드의 두 번째 열) -->
+      <div class="prose">
+        <Content />
+      </div>
+
+      <!-- ④ 참고 자료 (notes 트랙은 항상 존재) -->
       {
-        post.data.updated && (
-          <time class="updated" datetime={post.data.updated}>
-            (개정 {displayDate(post.data.updated)})
-          </time>
+        post.data.sources && post.data.sources.length > 0 && (
+          <section class="sources">
+            <h2>참고 자료</h2>
+            <ul>
+              {post.data.sources.map((s, i) => (
+                <li>
+                  <span class="source-num">[{i + 1}]</span> {s.title}
+                  <a href={s.url} rel="external noopener" aria-label={`${s.title} 원문 열기`}>
+                    ↗
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
         )
       }
-      <ul class="tag-list">
-        {
-          post.data.tags.map((tag) => (
-            <li>
-              <a href={`/tags/${tag}`}>#{tag}</a>
-            </li>
-          ))
-        }
-      </ul>
-    </header>
 
-    <!-- ② 시리즈 박스 (다중 소속이면 복수) -->
-    {memberships.map((m) => <SeriesBox membership={m} currentPostId={post.id} />)}
-
-    <!-- ③ 본문 + 우측 목차 레일 -->
-    <TocRail headings={headings} />
-    <div class="prose">
-      <Content />
-    </div>
-
-    <!-- ④ 참고 자료 (notes 트랙은 항상 존재) -->
-    {
-      post.data.sources && post.data.sources.length > 0 && (
-        <section class="sources">
-          <h2>참고 자료</h2>
-          <ul>
-            {post.data.sources.map((s) => (
-              <li>
-                <a href={s.url} rel="external noopener">
-                  {s.title}
+      <!-- ⑤ 꼬리: 시리즈 내 이전/다음 · 관련 프로젝트 -->
+      {
+        memberships.map((m) => {
+          const prev = m.index > 0 ? m.posts[m.index - 1] : null;
+          const next = m.index < m.posts.length - 1 ? m.posts[m.index + 1] : null;
+          if (!prev && !next) return null;
+          return (
+            <nav class="series-nav" aria-label={`${m.series.data.title} 연재 내비게이션`}>
+              {prev ? (
+                <a rel="prev" href={`/posts/${prev.id}`}>
+                  <span class="nav-label">← 이전 글</span>
+                  <span class="nav-title">{prev.data.title}</span>
                 </a>
-              </li>
+              ) : (
+                <span />
+              )}
+              {next && (
+                <a rel="next" class="next" href={`/posts/${next.id}`}>
+                  <span class="nav-label">다음 글 →</span>
+                  <span class="nav-title">{next.data.title}</span>
+                </a>
+              )}
+            </nav>
+          );
+        })
+      }
+      {
+        relatedProjects.length > 0 && (
+          <nav class="related-projects" aria-label="관련 프로젝트">
+            {relatedProjects.map((p) => (
+              <a href={`/projects/${p.id}`}>
+                <span>
+                  <span class="rp-label">▤ 완성품</span>
+                  <span class="rp-title">{p.data.title} 보기</span>
+                </span>
+                <span class="rp-arrow">→</span>
+              </a>
             ))}
-          </ul>
-        </section>
-      )
-    }
-
-    <!-- ⑤ 꼬리: 시리즈 내 이전/다음 · 관련 프로젝트 -->
-    {
-      memberships.map((m) => {
-        const prev = m.index > 0 ? m.posts[m.index - 1] : null;
-        const next = m.index < m.posts.length - 1 ? m.posts[m.index + 1] : null;
-        return (
-          <nav class="series-nav" aria-label={`${m.series.data.title} 연재 내비게이션`}>
-            <span class="series-nav-title">{m.series.data.title}</span>
-            {prev && (
-              <a rel="prev" href={`/posts/${prev.id}`}>
-                ← {prev.data.title}
-              </a>
-            )}
-            {next && (
-              <a rel="next" href={`/posts/${next.id}`}>
-                {next.data.title} →
-              </a>
-            )}
           </nav>
-        );
-      })
-    }
-    {
-      relatedProjects.length > 0 && (
-        <nav class="related-projects" aria-label="관련 프로젝트">
-          {relatedProjects.map((p) => (
-            <a href={`/projects/${p.id}`}>완성품 보기 → {p.data.title}</a>
-          ))}
-        </nav>
-      )
-    }
+        )
+      }
 
-    <!-- ⑥ 바이라인 — 겸손하지만 숨기지 않게 -->
-    <footer class="byline">
-      <p>작성 AI · 검수 지크 — <a href="/about">이 사이트의 글이 만들어지는 방식</a></p>
-    </footer>
-  </article>
+      <!-- ⑥ 바이라인 — 겸손하지만 숨기지 않게 -->
+      <footer class="byline">
+        <span class="byline-dot" aria-hidden="true"></span>
+        <span>
+          작성 <b>AI</b> · 검수 <b>지크</b> — <a href="/about">저작 방식 보기</a>
+        </span>
+      </footer>
+    </article>
+
+    <TocRail headings={headings} />
+  </div>
 </Base>
 
+<style>
+  .post-wrap {
+    display: grid;
+    grid-template-columns: 1fr 40px;
+    gap: 24px;
+    padding-bottom: 8px;
+  }
+  article {
+    min-width: 0;
+    max-width: var(--w-content);
+  }
+  @media (max-width: 700px) {
+    .post-wrap {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+
+  /* ① 머리 */
+  .post-header {
+    padding: 16px 0 0;
+  }
+  .back-link {
+    color: var(--c-tx3);
+    font: 600 12px/1 var(--font-sans);
+  }
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 14px 0 10px;
+  }
+  .post-meta time {
+    font: 500 12px/1 var(--font-mono);
+    color: var(--c-tx3);
+  }
+  .post-header h1 {
+    font: 800 clamp(22px, 3.6vw, 28px) / 1.3 var(--font-sans);
+    letter-spacing: -0.02em;
+    color: var(--c-tx);
+    margin: 0 0 12px;
+  }
+  .tag-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tag-list a {
+    font: 600 11px/1 var(--font-mono);
+    color: var(--c-lk);
+  }
+
+  /* ④ 참고 자료 */
+  .sources {
+    margin-top: 30px;
+    padding-top: 16px;
+    border-top: 1px solid var(--c-bd);
+  }
+  .sources h2 {
+    font: 700 12px/1 var(--font-sans);
+    color: var(--c-tx3);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+  }
+  .sources ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .sources li {
+    font: 500 13px/1.5 var(--font-sans);
+    color: var(--c-tx2);
+  }
+  .source-num {
+    color: var(--c-tx3);
+    font-family: var(--font-mono);
+  }
+
+  /* ⑤ 이전/다음 · 관련 프로젝트 */
+  .series-nav {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .series-nav a {
+    display: block;
+    border: 1px solid var(--c-bd);
+    border-radius: 10px;
+    padding: 11px 13px;
+  }
+  .series-nav a.next {
+    text-align: right;
+  }
+  .nav-label {
+    display: block;
+    font: 600 10px/1 var(--font-sans);
+    color: var(--c-tx3);
+    margin-bottom: 6px;
+  }
+  .nav-title {
+    display: block;
+    font: 700 13px/1.35 var(--font-sans);
+    color: var(--c-tx);
+  }
+  .related-projects a {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: var(--c-bg2);
+    border: 1px solid var(--c-bd);
+  }
+  .rp-label {
+    display: block;
+    font: 600 10px/1 var(--font-sans);
+    color: var(--c-ac);
+    margin-bottom: 5px;
+  }
+  .rp-title {
+    display: block;
+    font: 700 14px/1.3 var(--font-sans);
+    color: var(--c-tx);
+  }
+  .rp-arrow {
+    color: var(--c-ac);
+    font-size: 18px;
+  }
+
+  /* ⑥ 바이라인 */
+  .byline {
+    margin: 20px 0 8px;
+    padding: 11px 14px;
+    border-radius: 9px;
+    background: var(--c-bg2);
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font: 500 12px/1.5 var(--font-sans);
+    color: var(--c-tx3);
+  }
+  .byline b {
+    color: var(--c-tx2);
+    font-weight: 700;
+  }
+  .byline-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--c-ac);
+    flex: 0 0 auto;
+  }
+</style>
+
 <script>
-  // 코드 블록 복사 버튼 (허용 인터랙션 #2)
-  document.querySelectorAll('.prose pre').forEach((pre) => {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'code-copy';
-    button.textContent = '복사';
+  // 코드 블록 복사 버튼 (허용 인터랙션 #2) — 마크업은 빌드 타임(shiki 트랜스포머), JS는 클립보드만
+  document.querySelectorAll<HTMLButtonElement>('.code-copy').forEach((button) => {
     button.addEventListener('click', async () => {
-      const code = pre.querySelector('code')?.textContent ?? '';
+      const code = button.closest('.code-block')?.querySelector('pre code')?.textContent ?? '';
       await navigator.clipboard.writeText(code);
-      button.textContent = '복사됨';
-      setTimeout(() => (button.textContent = '복사'), 1500);
+      button.textContent = '복사됨 ✓';
+      button.classList.add('copied');
+      setTimeout(() => {
+        button.textContent = '복사';
+        button.classList.remove('copied');
+      }, 1400);
     });
-    pre.insertAdjacentElement('afterbegin', button);
   });
 </script>
