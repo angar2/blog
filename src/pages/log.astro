@@ -1,12 +1,31 @@
 ---
+// Log 목록 — 서사 트랙, 시간순
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
+import TrackBadge from '../components/TrackBadge.astro';
 import { getPostsByTrack } from '../lib/content';
 
 const posts = await getPostsByTrack('log');
 ---
 
 <Base title="Log · angari.dev" description="서사 트랙 — 데브로그·구축기·회고" current="log">
-  <h1>Log</h1>
+  <div class="list-head">
+    <div class="title-row">
+      <TrackBadge track="log" />
+      <h1 class="page-title">Log</h1>
+    </div>
+    <p class="page-desc">데브로그 · 구축기 · 회고. 시간순 기록입니다.</p>
+  </div>
   <PostList posts={posts} />
 </Base>
+
+<style>
+  .list-head {
+    padding: 16px 0 6px;
+  }
+  .title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+</style>

@@ -1,6 +1,8 @@
 ---
+// Notes 목록 — 지식 트랙, 태그 칩 필터
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
+import TrackBadge from '../components/TrackBadge.astro';
 import { getPostsByTrack, getTagCounts } from '../lib/content';
 
 const posts = await getPostsByTrack('notes');
@@ -8,7 +10,13 @@ const tags = await getTagCounts(posts);
 ---
 
 <Base title="Notes · angari.dev" description="지식 트랙 — 개념 정리·삽질 해법" current="notes">
-  <h1>Notes</h1>
+  <div class="list-head">
+    <div class="title-row">
+      <TrackBadge track="notes" />
+      <h1 class="page-title">Notes</h1>
+    </div>
+    <p class="page-desc">개념 정리 · 삽질 해법. 태그로 걸러 보세요.</p>
+  </div>
 
   <!-- 태그 칩 바 (글 수 많은 순) — 칩 클릭 = 필터 (허용 인터랙션 #3) -->
   {
@@ -25,6 +33,40 @@ const tags = await getTagCounts(posts);
 
   <PostList posts={posts} />
 </Base>
+
+<style>
+  .list-head {
+    padding: 16px 0 6px;
+  }
+  .title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .tag-chip-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    padding: 8px 0 4px;
+  }
+  .tag-chip {
+    cursor: pointer;
+    font: 600 11px/1 var(--font-mono);
+    padding: 6px 9px;
+    border-radius: 999px;
+    border: 1px solid var(--c-bd);
+    color: var(--c-tx2);
+    background: transparent;
+  }
+  .tag-chip .count {
+    opacity: 0.6;
+  }
+  .tag-chip[aria-pressed='true'] {
+    border-color: var(--c-ac);
+    color: var(--c-acT);
+    background: var(--c-ac);
+  }
+</style>
 
 <script>
   // 태그 칩 필터: 선택된 태그를 가진 글만 표시 (단일 선택 토글)
