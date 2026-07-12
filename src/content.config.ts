@@ -34,17 +34,10 @@ const posts = defineCollection({
       created: datetime,
       updated: datetime.optional(),
       tags: z.array(z.string().regex(KEBAB_RE, '태그는 소문자 kebab-case')),
+      // sources는 track 무관 optional — 출처 없이 습득한 지식도 notes로 발행 가능
       sources: z.array(source).optional(),
     })
-    .strict()
-    .superRefine((data, ctx) => {
-      if (data.track === 'notes' && (!data.sources || data.sources.length === 0)) {
-        ctx.addIssue({
-          code: 'custom',
-          message: 'notes 트랙은 sources(1차 출처)가 필수다 — 없으면 발행 불가.',
-        });
-      }
-    }),
+    .strict(),
 });
 
 const series = defineCollection({
