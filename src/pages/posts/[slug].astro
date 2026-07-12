@@ -93,9 +93,11 @@ const jsonLd = {
               {post.data.sources.map((s, i) => (
                 <li>
                   <span class="source-num">[{i + 1}]</span> {s.title}
-                  <a href={s.url} rel="external noopener" aria-label={`${s.title} 원문 열기`}>
-                    ↗
-                  </a>
+                  {s.url && (
+                    <a href={s.url} rel="external noopener" aria-label={`${s.title} 원문 열기`}>
+                      ↗
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>

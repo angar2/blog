@@ -20,7 +20,8 @@ const KEBAB_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const source = z
   .object({
     title: z.string().min(1),
-    url: z.url(),
+    // url은 optional — 책 등 온라인 링크 없는 출처도 title만으로 등재 가능
+    url: z.url().optional(),
   })
   .strict();
 
