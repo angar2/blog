@@ -1,11 +1,16 @@
 ---
-// 홈 — 아바타·정체성 문구(타이핑)·소개 → 최신 글 4 → 최신 시리즈
+// 홈 — 아바타·정체성 문구(타이핑)·소개 → 최신 글 4 → 최신 시리즈 → 최신 프로젝트
+import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 import { getAllPosts, getSeriesOverview } from '../lib/content';
 
 const latest = (await getAllPosts()).slice(0, 4);
 const latestSeries = (await getSeriesOverview()).slice(0, 2);
+const latestProjects = (await getCollection('projects'))
+  .sort((a, b) => b.data.created.localeCompare(a.data.created))
+  .slice(0, 2);
 
 // 임시 문안 — 한 줄 정체성 문구는 B4에서 지크 확정 (build-prd §10)
 const identity = '# always doing something';
@@ -45,6 +50,17 @@ const identity = '# always doing something';
               {series.data.description} · {count}편
             </span>
           </a>
+        ))}
+      </section>
+    )
+  }
+
+  {
+    latestProjects.length > 0 && (
+      <section class="feature-grid" aria-label="최신 프로젝트">
+        <h2 class="section-label span-all">최신 프로젝트</h2>
+        {latestProjects.map((p) => (
+          <ProjectCard project={p} />
         ))}
       </section>
     )
