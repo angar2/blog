@@ -1,0 +1,20 @@
+# project internal docs (planning/design deliverables — not published)
+.project/
+
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+pnpm-debug.log*
+
+# environment
+.env
+.env.*
+
+# macOS
+.DS_Store
