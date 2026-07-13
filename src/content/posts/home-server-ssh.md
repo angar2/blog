@@ -1,0 +1,145 @@
+---
+title: SSH 원격 접속 설정
+description: Ubuntu 서버에 OpenSSH를 설치하고 키 기반 인증으로 비밀번호 없이 안전하게 원격 접속하는 환경을 구성한다.
+track: log
+created: 2024-10-10T09:48
+tags: [home-server, ssh, ubuntu]
+sources:
+  - title: 집에서 홈서버 구축해보자 - 3 (우분투 설치 및 SSH, 공유기 포트 포워딩)
+    url: https://stack94.tistory.com/entry/%EC%A7%91%EC%97%90%EC%84%9C-%ED%99%88%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%B6%95%ED%95%B4%EB%B3%B4%EC%9E%90-3-%EC%9A%B0%EB%B6%84%ED%88%AC-%EC%84%A4%EC%B9%98-%EB%B0%8F-SSH-%EA%B3%B5%EC%9C%A0%EA%B8%B0-%ED%8F%AC%ED%8A%B8-%ED%8F%AC%EC%9B%8C%EB%94%A9
+---
+
+지난 문서까지 개인 노트북에 Ubuntu 운영체제를 설치하는 과정을 다뤘다.
+
+하지만 아직 컴퓨터에 운영체제만 설치되어 있는 것이기 때문에, 서버로서 조작하기 위해 기본적인 시스템 설정이 필요하다.
+이 파트에서는 그중 **SSH 설정**에 대해 다룬다.
+
+## SSH(Secure Shell)
+
+**SSH**는 안전하게 원격 서버에 접속하고 관리할 수 있도록 해주는 네트워크 프로토콜이다.
+
+보통 SSH 키 기반 인증을 통해 <u>원격 접속</u>과 <u>Github와 같은 버전 관리 서비스의 push / pull 작업</u>에 사용되며, **22 포트** 사용으로 익숙한 프로토콜이다.
+
+익숙하지만 직접 설정한 적이 없는 이유는, 대체로 AWS의 EC2 서비스로 서버를 렌탈할 경우 SSH 설정이 기본으로 되어 있기 때문에, 별도로 처리할 일이 없었기 때문이다.
+
+### SSH 키 기반 인증
+
+서버에 SSH 프로토콜 소프트웨어를 실행하면, 기본적으로 외부에서는 서버의 비밀번호만 알고 있다면 원격으로 접속할 수 있다.
+
+하지만 비밀번호를 이용한 접속은 보안적인 측면에서 취약하므로, 키 인증 방식을 통해 신뢰할 수 있는 클라이언트 컴퓨터만 접속하도록 설정하는 것이 좋다.
+
+키 인증 방식은 사용자가 **개인 키(Private Key)** 를 제시하면, 서버에서 등록된 **공개 키(Public Key)** 와 비교하여 인증하는 방식이다.
+
+- 개인 키 ⇒ 클라이언트가 보관하고 인증 시 제시함(**`파일명: id_rsa`**)
+- 공개 키 ⇒ 서버가 보관하고 제시된 개인 키와 비교 인증함(**`파일명: id_rsa.pub`**)
+
+> [!note]
+> AWS EC2 인스턴스를 생성할 때, 암호화된 내용의 파일을 생성해서 로컬 컴퓨터에 보관한 후에 해당 파일을 이용해 서버에 접속하는데, 그 파일이 SSH 개인 키이며, 이 개인 키에 해당하는 공개 키는 서버에 보관되어 있다.
+
+## SSH 설정
+
+패키지 설치부터 키 인증 방식 적용까지, 실제 서버에서 SSH 설정을 진행한다.
+
+> [!note]
+> 해당 문서의 프로그래밍 작업은 Ubuntu 24.04.01 서버에서 진행한다.
+
+### 패키지 설치 및 실행
+
+Ubuntu OS에는 SSH 소프트웨어 패키지가 기본으로 설치되어 있지 않기 때문에 별도의 설치가 필요하다.
+
+- **패키지 설치**
+
+  ```zsh
+  sudo apt install openssh-server
+  ```
+
+- **SSH 서비스 실행 및 자동 실행 설정**
+
+  패키지 설치 후 SSH 서비스를 실행하고, 서버 부팅 시 자동으로 실행되도록 시스템에 등록한다.
+
+  ```zsh
+  sudo systemctl start ssh
+  sudo systemctl enable ssh
+  ```
+
+- **SSH 서비스 상태 확인**
+
+  ```zsh
+  sudo systemctl status ssh
+  ```
+
+  ![SSH 서비스 정상 실행](/assets/images/blog/48/1.png)
+
+### SSH 키 인증 설정
+
+- **SSH 인증 키 생성**
+
+  로컬에 이미 SSH 인증 키가 있다면, 해당 키를 그대로 사용하면 된다. 없을 경우 새로 생성한다.
+
+  ```zsh
+  ssh-keygen -t rsa -b 4096
+  ```
+
+- **공개 키 복사**
+
+  서버에 보관되는 SSH 공개 키는 **`.ssh` 디렉토리**의 **`authorized_keys`라는 이름(SSH 프로토콜 표준)의 파일**로 추가해주어야 한다.
+
+  `authorized_keys` 파일의 존재만으로도 자동으로 키 인증이 진행된다.
+
+  - **방법 1) 파일 복사**
+
+    ```zsh
+    # 클라이언트 컴퓨터
+    ssh-copy-id server_username@server_ip
+
+    # or
+
+    scp ~/.ssh/id_rsa.pub server_username@server_ip:~/.ssh/authorized_keys
+    ```
+
+    파일 복사를 하지 못하는 경우에는 클라이언트 컴퓨터의 공개 키의 내용을 복사해서 서버에 직접 파일로 만들어 추가해주면 된다.
+
+  - **방법 2) 내용 복사 및 파일 생성**
+
+    ```zsh
+    # 클라이언트 컴퓨터
+    cat ~/.ssh/id_rsa.pub
+
+    # 서버 컴퓨터
+    vim ~/.ssh/authorized_keys
+    ```
+
+- **파일 및 디렉토리 권한 설정**
+
+  ```zsh
+  chmod 700 ~/.ssh
+  chmod 600 ~/.ssh/authorized_keys
+  ```
+
+- **SSH 환경 설정**
+
+  키 인증을 설정했다면, 비밀번호 인증 절차는 제외시킨다.
+
+  ```zsh
+  sudo vim /etc/ssh/sshd_config
+
+  # PasswordAuthentication yes ⇒ no
+  ```
+
+- **SSH 서비스 재시작**
+
+  모든 설정이 완료되면, SSH 서비스를 재시작하여 설정을 적용한다.
+
+  ```zsh
+  sudo systemctl restart ssh
+  ```
+
+### SSH 원격 접속
+
+ssh 프로토콜 서버 접속 명령어를 입력하면 키 인증이 진행되고, 개인 키의 비밀번호 입력하면 접속할 수 있다.
+
+```zsh
+ssh server_username@server_ip
+```
+
+![SSH 서버 원격 접속](/assets/images/blog/48/2.png)

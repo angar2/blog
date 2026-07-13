@@ -1,0 +1,115 @@
+---
+title: 자바스크립트 프로토타입
+description: 자바스크립트의 프로토타입 개념과 동작 원리, 그리고 프로토타입 체인 구조를 정리한다.
+track: notes
+created: 2024-07-07T09:27
+tags: [javascript, prototype]
+---
+
+자바스크립트는 프로토타입 기반 언어이다.
+프로토타입은 객체가 다른 객체의 메서드와 속성을 참조할 수 있게 하는 메커니즘으로서, 모든 객체는 숨겨진 프로토타입 링크를 통해 다른 객체와 연결되어 메서드와 속성에 접근할 수 있다.
+
+> [!note]
+> 클래스 기반 언어에서는 '상속'을 사용하지만, 프로토타입 기반 언어에서는 어떤 객체를 원형(프로토타입)으로 삼고 이를 복제(참조)한다.
+
+![프로토타입 구조](/assets/images/blog/27/1.png)
+
+```js
+var instance = new Constructor();
+```
+
+1. 어떤 생성자 함수를 new 연산자와 함께 호출하면,
+2. Constructor에서 정의된 내용을 바탕으로 instance가 생성된다.
+3. 이때 instance에는 프로퍼티(`__proto__`)가 자동으로 부여되는데,
+4. 이 프로퍼티는 Constructor의 프로퍼티(`prototype`)를 참조한다.
+
+> [!note]
+> ES 명세에서는 `__proto__`가 아닌, `Object.getPrototypeOf(instance)`/`Reflect.getPrototypeOf(instance)`를 권고한다.
+
+## prototype 원리
+
+생성자 함수의 프로퍼티인 `prototype` 객체 내부에 인스턴스가 사용할 메서드를 저장해놓으면, 인스턴스의 프로퍼티인 `__proto__`를 통해 해당 메서드에 접근할 수 있다.
+
+### 예시
+
+```js
+var Person = function (name) {
+  this._name = name;
+};
+Person.prototype.getName = function () {
+  return this._name;
+};
+
+var angari = new Person('angari');
+angari.__proto__.getName(); // undefined
+angari.getName(); // 'angari'
+```
+
+생성된 인스턴스(`angari`)의 `__proto__`프로퍼티가 생성자 함수의 `prototype` 객체를 참조하기 때문에 생성자 함수의 메서드(`getName`)를 사용할 수 있게 된다.
+
+다만, `angari.__proto__.getName()`가 `undefined`를 반환하는 이유는, this 바인딩 규칙에 따라 메서드 내부의 `this`가 인스턴스 자체가 아닌 `__proto__`를 가리키기 때문이다. `getName` 메서드가 찾고 있는 `_name` 프로퍼티는 인스턴스 내부에 직접적으로 존재(개별 프로퍼티)한다.
+
+![인스턴스 객체 구조](/assets/images/blog/27/2.png)
+
+이 경우, `__proto__`를 생략해도 생성자 함수의 메서드(`getName`)를 사용할 수 있어 적절한 결과를 출력할 수 있다.
+
+> [!note]
+> 사실 생략이 가능한 이유는 인스턴스 내부에 찾고자 하는 프로퍼티가 없을 경우, '프로토타입 체이닝'을 통해 `__proto__`프로퍼티 내에서 검색해 나가기 때문이다.
+
+⇒ **인스턴스에서 특정 변수나 메서드를 사용 가능하게 하고 싶다면, 생성자 함수의 `prototype`에 객체 내부에 프로퍼티로 지정해두면 된다.**
+
+### 자주 접하는 prototype 사례
+
+- **배열** 변수에 배열 메서드(`slice`, `sort`, `map`, `filter` 등)를 사용할 때
+  → **`Array`** 생성자 함수의 prototype을 참조.
+
+- **문자열** 변수에 문자열 메서드(`indexOf`, `toUpperCase`, `trim` 등)를 사용할 때
+  → **`String`** 생성자 함수의 prototype을 참조.
+
+- **함수** 객체에 함수 메서드(`call`, `apply`, `bind` 등)를 사용할 때
+  → **`Function`** 생성자 함수의 prototype을 참조.
+
+- **날짜** 객체에 날짜 메서드(`getDate`, `setDate`, `toISOString` 등)를 사용할 때
+  → **`Date`** 생성자 함수의 prototype을 참조.
+
+- **정규 표현식** 객체에 정규 표현식 메서드(`test`, `exec` 등)를 사용할 때
+  → **`RegExp`** 생성자 함수의 prototype을 참조.
+
+> [!note]
+> null과 undefined를 제외한 모든 데이터 타입에는 생성자 함수가 있다.
+
+## Prototype Chain
+
+프로토타입 체인은 어떤 데이터의 `__proto__`프로퍼티 내부에 다시 `__proto__`프로퍼티가 연쇄적으로 이어진 것으로서, 이 체인을 따라 검색하는 것을 프로토타입 체이닝이라고 한다.
+
+### 예시
+
+![배열의 내부 도식](/assets/images/blog/27/3.png)
+
+![배열의 프로토타입](/assets/images/blog/27/4.png)
+
+Array의 인스턴스인 `arr`의 내부에서 `__proto__`를 따라가면 생성자인 **Array**가 존재하고, 그 생성자 내부에 `__proto__`에 **Object** 생성자가 존재한다.
+
+기본적으로 모든 객체의 `__proto__`에는 `Object.prototype`이 연결되어 있는데, 이는 **`prototype(__proto__)` 자체가 <u>객체</u>이기 때문이다.**
+
+즉, 프로토타입 체인 구조의 최상단에는 **Object**가 위치해있다.
+
+> [!note]
+> 일반적으로 프로토타입 체인에 포함된 메서드는 생성자 함수에서 인스턴스를 생성해 사용해야 한다. 예외) `Array.isArray()`, `Object.keys()`, `parseInt()`
+
+### 정적 메서드(static)
+
+객체의 인스턴스화 없이 직접 생성자 함수를 통해 호출할 수 있는 **정적 메서드**를 이용하면 생성자 함수에서 인스턴스를 생성하더라도 해당 메서드를 상속하지 않을 수 있다.
+
+![배열의 프로토타입](/assets/images/blog/27/5.png)
+
+- **정적 메서드**: 프로토타입 체인에 포함되지 않는 생성자 함수 자체에 속한 메서드.
+
+- **`prototype`**: 프로토타입 체인에 포함해 메서드를 상속하기 위한 객체.
+
+- **`[[prototype]]`**: 상위(부모) 객체를 가리키며, 프로토타입 체인을 통해 상속된 메서드들이 포함된 참조.(실존하는 객체는 아니므로 `__proto__`를 통해 접근)
+
+> [!note]
+> `Object.create(null)`를 이용해 인스턴스를 생성하면 `[[prototype]]`이 없는 객체가 생성된다.
+
+정재남 (2019). **코어 자바스크립트**. 위키북스.

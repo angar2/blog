@@ -39,8 +39,8 @@ const jsonLd = {
   datePublished: `${post.data.created}:00+09:00`,
   ...(post.data.updated && { dateModified: `${post.data.updated}:00+09:00` }),
   keywords: post.data.tags,
-  author: { '@type': 'SoftwareApplication', name: 'Claude (AI)' },
-  editor: { '@type': 'Person', name: 'angari (Zeke)', url: new URL('/about', Astro.site).href },
+  author: { '@type': 'SoftwareApplication', name: 'Claude(AI)' },
+  editor: { '@type': 'Person', name: 'Zeke(angari)', url: new URL('/about', Astro.site).href },
   inLanguage: 'ko',
 };
 ---
@@ -84,7 +84,7 @@ const jsonLd = {
         <Content />
       </div>
 
-      <!-- ④ 참고 자료 (notes 트랙은 항상 존재) -->
+      <!-- ④ 참고 자료 (sources 있을 때만 — track 무관 optional) -->
       {
         post.data.sources && post.data.sources.length > 0 && (
           <section class="sources">
@@ -93,9 +93,11 @@ const jsonLd = {
               {post.data.sources.map((s, i) => (
                 <li>
                   <span class="source-num">[{i + 1}]</span> {s.title}
-                  <a href={s.url} rel="external noopener" aria-label={`${s.title} 원문 열기`}>
-                    ↗
-                  </a>
+                  {s.url && (
+                    <a href={s.url} rel="external noopener" aria-label={`${s.title} 원문 열기`}>
+                      ↗
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -149,7 +151,7 @@ const jsonLd = {
       <footer class="byline">
         <span class="byline-dot" aria-hidden="true"></span>
         <span>
-          작성 <b>AI</b> · 검수 <b>지크</b> — <a href="/about">저작 방식 보기</a>
+          Drafted by AI. Reviewed &amp; finalized by Zeke. — <a href="/about">저작 방식 보기</a>
         </span>
       </footer>
     </article>
