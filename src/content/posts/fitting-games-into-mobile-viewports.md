@@ -1,5 +1,5 @@
 ---
-title: 모바일 뷰포트에 게임 끼워 맞추기 — dvh와 safe-area 그다음
+title: 모바일 뷰포트에 게임 욱여넣기
 description: Phaser 캔버스 게임과 CSS flex 레이아웃 게임 두 종을 모바일에 맞추다 겪은 실패를 하나의 체크리스트로 묶는다.
 track: notes
 created: 2026-06-20T09:00

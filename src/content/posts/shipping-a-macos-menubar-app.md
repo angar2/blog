@@ -1,5 +1,5 @@
 ---
-title: 'macOS 메뉴바 앱 첫 배포기: dmg 빌드와 GitHub Release, 그리고 뒤엎은 브랜치 전략'
+title: macOS 메뉴바 앱 첫 배포기 — 뒤엎은 출시 전략
 description: macOS 메뉴바 클립보드 매니저 stash를 처음 외부에 공개하며 orphan 브랜치 기반 7단계 배포 전략을 세웠으나, 실행 직전 더 단순한 .gitignore 기반 dev→main merge를 발견해 전략을 전면 뒤엎은 과정을 기록한다.
 track: log
 created: 2026-06-15T09:00
