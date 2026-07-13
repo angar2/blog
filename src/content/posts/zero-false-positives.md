@@ -1,5 +1,5 @@
 ---
-title: 허위 적격 0(Zero False Positives) — 결정론 필터의 비대칭 설계
+title: 허위 적격 0 — 애매하면 통과시키는 필터
 description: 정부지원 공고를 걸러내는 gov-radar의 hardCheck 함수를 통해, 결정론 코드가 어디까지 판단하고 어디서 손을 놓아야 하는지를 정리한다. 통과를 기본값에 두고 거절만 증명하게 만드는 비대칭 설계가 왜 안전한 실패로 이어지는지 짚는다.
 track: notes
 created: 2026-07-11T09:00

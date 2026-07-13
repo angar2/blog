@@ -1,5 +1,5 @@
 ---
-title: 'Claude Design 핸드오프기: 정책은 plan이, 시각은 디자인이 이긴다'
+title: Claude Design 목업을 SwiftUI 네이티브 앱으로
 description: AI 디자인 툴 Claude Design이 만든 인터랙티브 프로토타입을 SwiftUI로 옮기며 시각 충실도가 전면 미달했던 사건과, 그 원인이 NSPopover라는 시스템 컴포넌트였음을 추적한 과정을 정리한다.
 track: log
 created: 2026-05-10T09:00

@@ -1,5 +1,5 @@
 ---
-title: '클립 하나에 33MB: NSImage 무캐시 로드를 NSCache로 잡다'
+title: 클립 하나에 33MB — 썸네일 메모리를 99.4% 줄이기
 description: stash 클립보드 매니저의 이미지 썸네일이 매번 풀해상도로 로드되던 문제를, mach task_info 실측과 NSCache 캐시 레시피로 잡아낸 성능 개선 기록.
 track: log
 created: 2026-06-05T09:00
