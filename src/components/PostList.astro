@@ -116,6 +116,11 @@ function seriesOf(postId: string) {
   .home .post-item-cover {
     display: none;
   }
+  /* 목록 페이지: 날짜는 메타 줄 왼쪽 첫 자리(킥커) — 시리즈 없는 글도 문법 동일 */
+  .column .post-item-meta time {
+    margin-left: 0;
+    order: -1;
+  }
   @media (max-width: 480px) {
     .post-item-cover {
       display: none;
