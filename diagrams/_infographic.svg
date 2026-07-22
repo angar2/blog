@@ -1,0 +1,61 @@
+<!-- 인포그래픽 템플릿 — 블로그 토큰 팔레트 (IMAGE_STYLE.md §5)
+     사용법: 이 파일을 diagrams/{slug}/{이름}.svg로 복사 → 컴포넌트 골격은 유지하고
+             텍스트·카드 개수·목록 항목만 글 내용으로 교체한다.
+     렌더:  rsvg-convert -w 1600 {이름}.svg > public/assets/images/blog/{slug}/{이름}.png
+            (주의: XML 주석 안에서는 이중 하이픈 금지라 단축 옵션 -w를 쓴다. 긴 옵션과 동일)
+
+     컴포넌트 문법 (컬리 슬라이드 문법 벤치마킹, 2026-07-23):
+       ① 아이브로우 라벨: 좌상단 소제목 (red, letter-spacing)
+       ② 타이틀: 큰 제목 + 밑줄 바
+       ③ 카드: rx=16 라운드 박스. 일반 카드는 bg2+헤어라인, 강조 카드는 bg3+red 테두리
+       ④ 번호 원 목록: circle+숫자+텍스트. 일반은 tx3 톤, 강조 카드 안은 red 톤
+       ⑤ 전환 화살표: 카드 사이 red 라인+삼각형
+       ⑥ 인용 바: 하단 전폭 박스, italic, 키워드만 red
+     팔레트 (tokens.css 다크와 동일):
+       bg #17100e · surface #1e1613 · raised #291d19 · 텍스트 #f3eae6 / #b6a59f / #7a6c67
+       accent #ff5247 · accent-soft rgba(255,82,71,0.16) · 링크톤 #ff7a70
+-->
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, Apple SD Gothic Neo, sans-serif">
+  <rect width="1600" height="900" fill="#17100e"/>
+
+  <!-- ① 아이브로우 + ② 타이틀 -->
+  <text x="120" y="108" font-size="24" fill="#ff5247" font-weight="600" letter-spacing="4">아이브로우</text>
+  <text x="120" y="182" font-size="60" fill="#f3eae6" font-weight="800">제목을 여기에</text>
+  <rect x="122" y="212" width="64" height="5" rx="2.5" fill="#ff5247"/>
+
+  <!-- ③ 일반 카드 -->
+  <rect x="120" y="280" width="560" height="420" rx="16" fill="#1e1613" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+  <text x="168" y="352" font-family="JetBrains Mono, Menlo, monospace" font-size="22" fill="#7a6c67" letter-spacing="5">LABEL</text>
+  <text x="168" y="408" font-size="30" fill="#f3eae6" font-weight="700">카드 소제목</text>
+  <!-- ④ 번호 원 목록 (일반 톤) -->
+  <g font-size="25" fill="#b6a59f">
+    <circle cx="188" cy="478" r="19" fill="none" stroke="#7a6c67" stroke-width="1.5"/>
+    <text x="188" y="486" font-size="19" fill="#7a6c67" text-anchor="middle">1</text>
+    <text x="228" y="487">항목 하나</text>
+    <circle cx="188" cy="552" r="19" fill="none" stroke="#7a6c67" stroke-width="1.5"/>
+    <text x="188" y="560" font-size="19" fill="#7a6c67" text-anchor="middle">2</text>
+    <text x="228" y="561">항목 둘</text>
+  </g>
+
+  <!-- ⑤ 전환 화살표 -->
+  <line x1="734" y1="450" x2="806" y2="450" stroke="#ff5247" stroke-width="3"/>
+  <path d="M 806 450 l -14 -9 v 18 z" fill="#ff5247"/>
+
+  <!-- ③ 강조 카드 -->
+  <rect x="860" y="252" width="620" height="476" rx="16" fill="#291d19" stroke="rgba(255,82,71,0.35)" stroke-width="1.5"/>
+  <text x="908" y="324" font-family="JetBrains Mono, Menlo, monospace" font-size="22" fill="#ff5247" letter-spacing="5">LABEL</text>
+  <text x="908" y="380" font-size="30" fill="#f3eae6" font-weight="700">강조 카드 소제목</text>
+  <!-- ④ 번호 원 목록 (강조 톤) -->
+  <g font-size="25" fill="#f3eae6">
+    <circle cx="928" cy="446" r="19" fill="rgba(255,82,71,0.16)" stroke="#ff5247" stroke-width="1.5"/>
+    <text x="928" y="454" font-size="19" fill="#ff7a70" text-anchor="middle">1</text>
+    <text x="968" y="455">항목 하나</text>
+    <circle cx="928" cy="514" r="19" fill="rgba(255,82,71,0.16)" stroke="#ff5247" stroke-width="1.5"/>
+    <text x="928" y="522" font-size="19" fill="#ff7a70" text-anchor="middle">2</text>
+    <text x="968" y="523">항목 둘</text>
+  </g>
+
+  <!-- ⑥ 인용 바 -->
+  <rect x="120" y="772" width="1360" height="76" rx="12" fill="#1e1613" stroke="rgba(255,255,255,0.08)"/>
+  <text x="800" y="820" font-size="24" fill="#b6a59f" text-anchor="middle" font-style="italic">"핵심 문장을 여기에 — <tspan fill="#ff7a70">키워드</tspan>만 강조"</text>
+</svg>

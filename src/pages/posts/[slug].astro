@@ -45,7 +45,12 @@ const jsonLd = {
 };
 ---
 
-<Base title={`${post.data.title} · angari.dev`} description={post.data.description} wide>
+<Base
+  title={`${post.data.title} · angari.dev`}
+  description={post.data.description}
+  ogImage={post.data.cover}
+  wide
+>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
   <div class="post-wrap">

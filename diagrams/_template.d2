@@ -1,0 +1,76 @@
+# 구조도 템플릿 — 블로그 다크 팔레트 (IMAGE_STYLE.md §4)
+# 사용법: 이 파일을 diagrams/{slug}/{이름}.d2로 복사 → vars/classes는 그대로 두고
+#         아래 "예시 콘텐츠" 블록만 실제 내용으로 교체한다.
+# 렌더:  d2 --layout elk {이름}.d2 /tmp/{이름}.svg
+#        rsvg-convert --width=1280 /tmp/{이름}.svg > public/assets/images/blog/{slug}/{이름}.png
+
+direction: right
+
+vars: {
+  d2-config: {
+    pad: 48
+  }
+}
+
+style.fill: "#17100e"
+
+classes: {
+  # 일반 노드
+  box: {
+    style: {
+      fill: "#1e1613"
+      stroke: "#3a2d27"
+      border-radius: 10
+      font-color: "#f3eae6"
+      font-size: 15
+      shadow: false
+      bold: false
+    }
+  }
+  # 그룹 컨테이너 (시스템 경계·영역)
+  zone: {
+    style: {
+      fill: "#17100e"
+      stroke: "#3a2d27"
+      border-radius: 14
+      font-color: "#b6a59f"
+      font-size: 14
+      bold: true
+    }
+  }
+  # 강조 노드 (핵심 주체 1~2개만)
+  accent: {
+    style: {
+      fill: "#291d19"
+      stroke: "#ff5247"
+      border-radius: 10
+      font-color: "#f3eae6"
+      font-size: 15
+      bold: true
+    }
+  }
+  # 연결선 (모든 엣지에 적용)
+  edge: {
+    style: {
+      stroke: "#7a6c67"
+      font-color: "#b6a59f"
+      font-size: 13
+      stroke-width: 1
+    }
+  }
+}
+
+# ── 예시 콘텐츠 (여기부터 교체) ─────────────────────────────
+
+source: 입력 { class: box }
+core: 핵심 처리 { class: accent }
+sink: 출력 { class: box }
+
+group: 시스템 경계 {
+  class: zone
+  worker: 작업자 { class: box }
+}
+
+source -> core: 데이터 { class: edge }
+core -> group.worker: 위임 { class: edge }
+group.worker -> sink: 결과 { class: edge }
