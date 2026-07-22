@@ -37,6 +37,13 @@ const posts = defineCollection({
       tags: z.array(z.string().regex(KEBAB_RE, '태그는 소문자 kebab-case')),
       // sources는 track 무관 optional — 출처 없이 습득한 지식도 notes로 발행 가능
       sources: z.array(source).optional(),
+      // cover: 썸네일 (og:image 오버라이드). 규격·제작은 .project/rules/IMAGE_STYLE.md
+      cover: z
+        .string()
+        .startsWith('/assets/images/blog/', {
+          message: 'cover는 /assets/images/blog/{slug}/ 경로여야 한다',
+        })
+        .optional(),
     })
     .strict(),
 });

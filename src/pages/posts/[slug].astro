@@ -45,7 +45,12 @@ const jsonLd = {
 };
 ---
 
-<Base title={`${post.data.title} · angari.dev`} description={post.data.description} wide>
+<Base
+  title={`${post.data.title} · angari.dev`}
+  description={post.data.description}
+  ogImage={post.data.cover}
+  wide
+>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
   <div class="post-wrap">
@@ -74,6 +79,7 @@ const jsonLd = {
             ))
           }
         </ul>
+        {post.data.cover && <img class="post-cover" src={post.data.cover} alt="" />}
       </header>
 
       <!-- ② 시리즈 박스 (다중 소속이면 복수) -->
@@ -181,6 +187,15 @@ const jsonLd = {
   /* ① 머리 */
   .post-header {
     padding: 16px 0 0;
+  }
+  .post-cover {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid var(--c-bd);
+    margin-top: 18px;
   }
   .back-link {
     color: var(--c-tx3);
