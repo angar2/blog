@@ -92,6 +92,7 @@ function seriesOf(postId: string) {
   }
   .post-item-title {
     display: block;
+    min-width: 0;
     font: 700 15px/1.4 var(--font-sans);
     color: var(--c-tx);
     letter-spacing: -0.01em;
@@ -110,11 +111,6 @@ function seriesOf(postId: string) {
     object-fit: cover;
     border-radius: 8px;
     border: 1px solid var(--c-bd);
-    order: -1;
-  }
-  /* 목록 페이지: 날짜는 메타 줄 왼쪽 첫 자리(킥커) — 시리즈 없는 글도 문법 동일 */
-  .column .post-item-meta time {
-    margin-left: 0;
     order: -1;
   }
   @media (max-width: 480px) {
