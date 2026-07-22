@@ -62,7 +62,6 @@ function seriesOf(postId: string) {
     padding: 14px 0;
   }
   .home .post-item a {
-    display: block;
     padding: 13px 0;
   }
   .post-item > a > time {
@@ -73,6 +72,7 @@ function seriesOf(postId: string) {
   }
   .post-item-main {
     min-width: 0;
+    flex: 1 1 auto;
     display: block;
   }
   .post-item-meta {
@@ -111,10 +111,6 @@ function seriesOf(postId: string) {
     border-radius: 8px;
     border: 1px solid var(--c-bd);
     order: -1;
-  }
-  /* 홈 다이제스트는 텍스트 전용 — 커버는 목록 페이지에서만 */
-  .home .post-item-cover {
-    display: none;
   }
   /* 목록 페이지: 날짜는 메타 줄 왼쪽 첫 자리(킥커) — 시리즈 없는 글도 문법 동일 */
   .column .post-item-meta time {
