@@ -26,22 +26,20 @@ function seriesOf(postId: string) {
     posts.map((post) => (
       <li class="post-item" data-tags={post.data.tags.join(' ')}>
         <a href={`/posts/${post.id}`}>
-          {variant === 'column' && (
-            <time datetime={post.data.created}>{displayDate(post.data.created)}</time>
-          )}
           <span class="post-item-main">
             <span class="post-item-meta">
               {showTrackBadge && <TrackBadge track={post.data.track} />}
               {seriesOf(post.id).map((s) => (
                 <span class="series-label">◈ {s.data.title}</span>
               ))}
-              {variant === 'home' && (
-                <time datetime={post.data.created}>{displayDate(post.data.created)}</time>
-              )}
+              <time datetime={post.data.created}>{displayDate(post.data.created)}</time>
             </span>
             <span class="post-item-title">{post.data.title}</span>
             <span class="post-item-desc">{post.data.description}</span>
           </span>
+          {post.data.cover && (
+            <img class="post-item-cover" src={post.data.cover} alt="" loading="lazy" />
+          )}
         </a>
       </li>
     ))
@@ -64,7 +62,6 @@ function seriesOf(postId: string) {
     padding: 14px 0;
   }
   .home .post-item a {
-    display: block;
     padding: 13px 0;
   }
   .post-item > a > time {
@@ -75,6 +72,7 @@ function seriesOf(postId: string) {
   }
   .post-item-main {
     min-width: 0;
+    flex: 1 1 auto;
     display: block;
   }
   .post-item-meta {
@@ -94,6 +92,7 @@ function seriesOf(postId: string) {
   }
   .post-item-title {
     display: block;
+    min-width: 0;
     font: 700 15px/1.4 var(--font-sans);
     color: var(--c-tx);
     letter-spacing: -0.01em;
@@ -103,6 +102,21 @@ function seriesOf(postId: string) {
     display: block;
     font: 500 13px/1.5 var(--font-sans);
     color: var(--c-tx2);
+  }
+  .post-item-cover {
+    flex: 0 0 auto;
+    align-self: center;
+    width: 116px;
+    height: 78px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--c-bd);
+    order: -1;
+  }
+  @media (max-width: 480px) {
+    .post-item-cover {
+      display: none;
+    }
   }
 
   @media (max-width: 480px) {
