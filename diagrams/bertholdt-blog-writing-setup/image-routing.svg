@@ -1,0 +1,43 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, Apple SD Gothic Neo, sans-serif">
+  <rect width="1600" height="900" fill="#17100e"/>
+
+  <text x="120" y="108" font-size="24" fill="#ff5247" font-weight="600" letter-spacing="4">IMAGE ROUTING</text>
+  <text x="120" y="182" font-size="58" fill="#f3eae6" font-weight="800">정확한 정보와 은유를 갈라 태운다</text>
+  <rect x="122" y="212" width="64" height="5" rx="2.5" fill="#ff5247"/>
+
+  <rect x="120" y="274" width="620" height="430" rx="16" fill="#1e1613" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+  <text x="168" y="346" font-family="JetBrains Mono, Menlo, monospace" font-size="22" fill="#7a6c67" letter-spacing="5">GENERATIVE</text>
+  <text x="168" y="402" font-size="32" fill="#f3eae6" font-weight="700">생성형 이미지가 맡는 것</text>
+  <g font-size="25" fill="#b6a59f">
+    <circle cx="188" cy="478" r="19" fill="none" stroke="#7a6c67" stroke-width="1.5"/>
+    <text x="188" y="486" font-size="19" fill="#7a6c67" text-anchor="middle">1</text>
+    <text x="228" y="487">썸네일: 글의 은유 한 장면</text>
+    <circle cx="188" cy="552" r="19" fill="none" stroke="#7a6c67" stroke-width="1.5"/>
+    <text x="188" y="560" font-size="19" fill="#7a6c67" text-anchor="middle">2</text>
+    <text x="228" y="561">은유 삽화: 정말 필요할 때만</text>
+    <circle cx="188" cy="626" r="19" fill="none" stroke="#7a6c67" stroke-width="1.5"/>
+    <text x="188" y="634" font-size="19" fill="#7a6c67" text-anchor="middle">3</text>
+    <text x="228" y="635">공통 조건: 텍스트 없음</text>
+  </g>
+
+  <line x1="792" y1="490" x2="838" y2="490" stroke="#ff5247" stroke-width="3"/>
+  <path d="M 838 490 l -14 -9 v 18 z" fill="#ff5247"/>
+
+  <rect x="860" y="248" width="620" height="482" rx="16" fill="#291d19" stroke="rgba(255,82,71,0.35)" stroke-width="1.5"/>
+  <text x="908" y="320" font-family="JetBrains Mono, Menlo, monospace" font-size="22" fill="#ff5247" letter-spacing="5">CODE RENDER</text>
+  <text x="908" y="376" font-size="32" fill="#f3eae6" font-weight="700">코드가 맡는 것</text>
+  <g font-size="25" fill="#f3eae6">
+    <circle cx="928" cy="452" r="19" fill="rgba(255,82,71,0.16)" stroke="#ff5247" stroke-width="1.5"/>
+    <text x="928" y="460" font-size="19" fill="#ff7a70" text-anchor="middle">1</text>
+    <text x="968" y="461">구조도: 흐름·관계·아키텍처</text>
+    <circle cx="928" cy="526" r="19" fill="rgba(255,82,71,0.16)" stroke="#ff5247" stroke-width="1.5"/>
+    <text x="928" y="534" font-size="19" fill="#ff7a70" text-anchor="middle">2</text>
+    <text x="968" y="535">인포그래픽: 분류·비교·단계</text>
+    <circle cx="928" cy="600" r="19" fill="rgba(255,82,71,0.16)" stroke="#ff5247" stroke-width="1.5"/>
+    <text x="928" y="608" font-size="19" fill="#ff7a70" text-anchor="middle">3</text>
+    <text x="968" y="609">공통 조건: 본문과 1:1 일치</text>
+  </g>
+
+  <rect x="120" y="776" width="1360" height="76" rx="12" fill="#1e1613" stroke="rgba(255,255,255,0.08)"/>
+  <text x="800" y="824" font-size="25" fill="#b6a59f" text-anchor="middle" font-style="italic">"판단 기준은 하나다 — <tspan fill="#ff7a70">정확한 정보가 실리는가</tspan>"</text>
+</svg>
