@@ -1,0 +1,82 @@
+direction: right
+
+vars: {
+  d2-config: {
+    pad: 48
+  }
+}
+
+style.fill: "#17100e"
+
+classes: {
+  box: {
+    style: {
+      fill: "#1e1613"
+      stroke: "#3a2d27"
+      border-radius: 10
+      font-color: "#f3eae6"
+      font-size: 15
+      shadow: false
+      bold: false
+    }
+  }
+  zone: {
+    style: {
+      fill: "#17100e"
+      stroke: "#3a2d27"
+      border-radius: 14
+      font-color: "#b6a59f"
+      font-size: 14
+      bold: true
+    }
+  }
+  accent: {
+    style: {
+      fill: "#291d19"
+      stroke: "#ff5247"
+      border-radius: 10
+      font-color: "#f3eae6"
+      font-size: 15
+      bold: true
+    }
+  }
+  edge: {
+    style: {
+      stroke: "#7a6c67"
+      font-color: "#b6a59f"
+      font-size: 13
+      stroke-width: 1
+    }
+  }
+}
+
+material: "재료\ndossier·raw·repo" { class: box }
+classification: "이미지 4분류\n역할별 도구 선택" { class: accent }
+style_node: "스타일 박제\n클레이 썸네일 규격" { class: box }
+rules: "규칙 문서\nIMAGE_STYLE·write-post" { class: box }
+post: "새 글\n정적 PNG와 본문" { class: accent }
+live: "라이브\n목록·히어로·OG" { class: box }
+
+render: "결정론 렌더" {
+  class: zone
+  d2: "구조도\nD2 → SVG → PNG" { class: box }
+  svg: "인포그래픽\nSVG → PNG" { class: box }
+}
+
+generative: "생성형 렌더" {
+  class: zone
+  cover: "썸네일\n텍스트 없는 은유" { class: box }
+  metaphor: "은유 삽화\n예외적으로만" { class: box }
+}
+
+material -> classification: "근거" { class: edge }
+classification -> render.d2: "정보가 실림" { class: edge }
+classification -> render.svg: "텍스트가 실림" { class: edge }
+classification -> generative.cover: "은유만" { class: edge }
+classification -> generative.metaphor: "보조" { class: edge }
+generative.cover -> style_node: "5라운드 수렴" { class: edge }
+render.d2 -> rules: "템플릿" { class: edge }
+render.svg -> rules: "템플릿" { class: edge }
+style_node -> rules: "불변 프롬프트" { class: edge }
+rules -> post: "집필 단계 삽입" { class: edge }
+post -> live: "정적 배포" { class: edge }
