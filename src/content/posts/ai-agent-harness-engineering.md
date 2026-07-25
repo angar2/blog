@@ -3,7 +3,9 @@ title: "모델보다 하네스: AI 에이전트 성능은 어디서 갈리는가
 description: "AI 에이전트의 품질을 모델 단독 성능이 아니라 도구·권한·컨텍스트·검증을 묶는 실행 환경의 문제로 정리한다."
 track: notes
 created: 2026-07-25T19:26
+updated: 2026-07-25T19:58
 tags: [ai-agents, automation, workflow, orchestration]
+cover: /assets/images/blog/ai-agent-harness-engineering/cover.png
 sources:
   - title: "AI Agents News Brief: July 5, 2026 - Key Developments and Trends"
     url: https://aiagentsdirectory.com/news/ai-agents-directory-daily-brief-july-5-2026
