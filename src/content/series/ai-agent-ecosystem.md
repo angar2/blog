@@ -21,6 +21,7 @@ posts:
   - agent-lies-are-a-plumbing-problem
   - the-silence-that-ate-the-report
   - the-logs-nobody-owned
+  - the-old-path-i-never-removed
   - the-sixty-one-minute-gap
   - the-orphan-folder-that-froze-my-agent
 ---
