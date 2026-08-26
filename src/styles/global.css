@@ -221,8 +221,20 @@ a {
   margin: 24px 0;
 }
 .prose img {
+  display: block;
   max-width: 100%;
+  margin: 0 auto;
   border-radius: 10px;
+}
+/* 이미지만 감싼 링크도 이미지와 함께 가운데로 (`[![alt](img)](url)`) */
+.prose a:has(> img:only-child) {
+  display: block;
+  text-align: center;
+}
+.prose img.image-compact {
+  display: block;
+  width: 85%;
+  margin: 20px auto 6px;
 }
 
 /* ═══════════ 코드 블록 — Shiki + 상단 바 ═══════════ */

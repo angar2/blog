@@ -1,0 +1,48 @@
+# 테스트 통과를 믿기 위해 함께 점검할 범위
+direction: right
+
+vars: {
+  d2-config: { pad: 48 }
+}
+
+style.fill: "#17100e"
+
+classes: {
+  box: {
+    style: {
+      fill: "#1e1613"
+      stroke: "#3a2d27"
+      border-radius: 10
+      font-color: "#f3eae6"
+      font-size: 15
+    }
+  }
+  accent: {
+    style: {
+      fill: "#291d19"
+      stroke: "#ff5247"
+      border-radius: 10
+      font-color: "#f3eae6"
+      font-size: 15
+      bold: true
+    }
+  }
+  edge: {
+    style: {
+      stroke: "#7a6c67"
+      font-color: "#b6a59f"
+      font-size: 13
+    }
+  }
+}
+
+plan: 테스트 계획\n실행 방법과 관측 결과 { class: accent }
+input: 테스트 입력\n실제 사용 가능한 경우 포함 { class: accent }
+behavior: 핵심 동작\n화면 상태가 아닌 실제 실행 확인 { class: accent }
+run: 테스트 실행\n수정 중 국소 검사 { class: box }
+result: 검증 결과\n마무리 때 전체 검사 { class: box }
+
+plan -> input { class: edge }
+input -> behavior { class: edge }
+behavior -> run { class: edge }
+run -> result { class: edge }

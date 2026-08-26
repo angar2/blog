@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1672" height="941" viewBox="0 0 1672 941">
+  <defs>
+    <linearGradient id="folder-face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f6eee4"/>
+      <stop offset="1" stop-color="#e7dbcf"/>
+    </linearGradient>
+    <filter id="panel-shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#0e0907" flood-opacity="0.32"/>
+    </filter>
+  </defs>
+
+  <!-- AI-generated scene remains the background; the Stash icon is composited from its original asset. -->
+  <image href="file:///Users/angari/.codex/generated_images/019fec8c-ea9c-7660-a5fb-5beb211f1da4/exec-2dbaa82d-0a5f-4639-8b64-9c93f462cfa8.png" x="0" y="0" width="1672" height="941"/>
+
+  <!-- DMG 안의 Stash 앱: 원본 아이콘을 그대로 사용. -->
+  <image href="file:///private/var/folders/pm/7sqpb_wn1d3fv98pfp1k47300000gn/T/codex-clipboard-2dcd6d03-1a9e-43f9-850c-0e44383cdb17.png" x="145" y="315" width="370" height="370"/>
+
+  <!-- Applications 폴더 뒤의 Stash 앱: 원본 아이콘을 그대로 사용. -->
+  <image href="file:///private/var/folders/pm/7sqpb_wn1d3fv98pfp1k47300000gn/T/codex-clipboard-2dcd6d03-1a9e-43f9-850c-0e44383cdb17.png" x="1275" y="295" width="290" height="290"/>
+
+  <!-- 폴더 앞면을 다시 올려, 아이콘이 폴더 안에 꽂힌 모습으로 만든다. -->
+  <path d="M1240 454 Q1240 432 1266 432 H1590 Q1620 432 1620 462 V694 Q1620 720 1590 720 H1266 Q1240 720 1240 694 Z" fill="url(#folder-face)" filter="url(#panel-shadow)"/>
+
+  <!-- Applications 폴더 표식 -->
+  <g fill="none" stroke="#d8cdbf" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M1365 642 L1440 500 L1515 642"/>
+    <path d="M1392 590 H1488"/>
+  </g>
+</svg>
