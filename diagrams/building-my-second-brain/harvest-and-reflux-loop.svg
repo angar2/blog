@@ -1,0 +1,27 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#7a6c67"/></marker>
+    <style>
+      .box { fill:#1e1613; stroke:#3a2d27; stroke-width:2; rx:20; }
+      .accent { fill:#291d19; stroke:#ff5247; stroke-width:3; rx:20; }
+      .title { fill:#f3eae6; font:700 30px 'Pretendard','Apple SD Gothic Neo',sans-serif; text-anchor:middle; }
+      .detail { fill:#b6a59f; font:400 22px 'Pretendard','Apple SD Gothic Neo',sans-serif; text-anchor:middle; }
+      .edge { fill:none; stroke:#7a6c67; stroke-width:4; marker-end:url(#arrow); }
+      .label { fill:#ff7a70; font:700 22px 'Pretendard','Apple SD Gothic Neo',sans-serif; text-anchor:middle; }
+    </style>
+  </defs>
+  <rect width="1600" height="900" fill="#17100e"/>
+  <rect class="box" x="70" y="250" width="220" height="180" rx="20"/>
+  <text class="title" x="180" y="326">새 작업 세션</text>
+  <rect class="box" x="355" y="250" width="220" height="180" rx="20"/>
+  <text class="title" x="465" y="316">대화와 작업</text><text class="detail" x="465" y="354">진행</text>
+  <rect class="accent" x="640" y="220" width="245" height="240" rx="20"/>
+  <text class="title" x="762" y="304">수확</text><text class="detail" x="762" y="346">세션 전문 위치 기록</text>
+  <rect class="accent" x="950" y="220" width="245" height="240" rx="20"/>
+  <text class="title" x="1072" y="304">컴파일</text><text class="detail" x="1072" y="346">원본을 읽어 위키 정리</text>
+  <rect class="box" x="1260" y="250" width="255" height="180" rx="20"/>
+  <text class="title" x="1387" y="316">LLM Wiki</text><text class="detail" x="1387" y="354">쌓인 작업 맥락</text>
+  <path class="edge" d="M290 340 H355"/><path class="edge" d="M575 340 H640"/><path class="edge" d="M885 340 H950"/><path class="edge" d="M1195 340 H1260"/>
+  <path class="edge" d="M1385 430 V610 H180 V430"/>
+  <text class="label" x="782" y="655">환류 · 프로필과 위키 목록을 다음 세션에 전달</text>
+</svg>

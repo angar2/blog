@@ -1,0 +1,65 @@
+<!-- Stash의 실제 수정 전·후 이미지 읽기 경로를 가로 두 행으로 비교하는 구조도 -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Stash의 수정 전후 이미지 읽기 흐름</title>
+  <desc id="desc">수정 전에는 이미지 목록 행이 원본을 읽고 화면 표시 때 원본 해상도로 디코드했다. 수정 후에는 저장된 썸네일이 있으면 되돌려 쓰고, 없으면 화면 크기로 만들어 메모리에 보관한다.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#7a6c67" />
+    </marker>
+  </defs>
+
+  <rect width="1600" height="900" fill="#17100e" />
+  <g transform="translate(0 70)">
+  <line x1="48" y1="360" x2="1552" y2="360" stroke="#3a2d27" stroke-width="2" />
+
+  <text x="64" y="142" fill="#b6a59f" font-family="Pretendard, Apple SD Gothic Neo, sans-serif" font-size="24" font-weight="700">수정 전</text>
+  <text x="64" y="498" fill="#b6a59f" font-family="Pretendard, Apple SD Gothic Neo, sans-serif" font-size="24" font-weight="700">수정 후</text>
+
+  <g fill="#1e1613" stroke="#3a2d27" stroke-width="3">
+    <rect x="190" y="80" width="220" height="116" rx="16" />
+    <rect x="480" y="80" width="240" height="116" rx="16" />
+    <rect x="790" y="80" width="250" height="116" rx="16" fill="#291d19" stroke="#ff5247" />
+    <rect x="1110" y="80" width="300" height="116" rx="16" />
+
+    <rect x="190" y="470" width="220" height="116" rx="16" />
+    <rect x="480" y="470" width="240" height="116" rx="16" fill="#291d19" stroke="#ff5247" />
+    <rect x="800" y="398" width="260" height="100" rx="16" />
+    <rect x="800" y="548" width="260" height="100" rx="16" />
+    <rect x="1160" y="470" width="290" height="116" rx="16" />
+  </g>
+
+  <g stroke="#7a6c67" stroke-width="3" fill="none" marker-end="url(#arrow)">
+    <path d="M410 138 H468" />
+    <path d="M720 138 H778" />
+    <path d="M1040 138 H1098" />
+
+    <path d="M410 528 H468" />
+    <path d="M720 528 H760 V448 H788" />
+    <path d="M720 528 H760 V598 H788" />
+    <path d="M1060 448 H1128 V528 H1148" />
+    <path d="M1060 598 H1128 V528 H1148" />
+  </g>
+
+  <g fill="#b6a59f" font-family="Pretendard, Apple SD Gothic Neo, sans-serif" font-size="18" text-anchor="middle">
+    <text x="760" y="430">저장된 썸네일 있음</text>
+    <text x="760" y="628">저장된 썸네일 없음</text>
+  </g>
+
+  <g fill="#f3eae6" font-family="Pretendard, Apple SD Gothic Neo, sans-serif" font-size="23" text-anchor="middle">
+    <text x="300" y="146">원본 이미지 파일</text>
+    <text x="600" y="146">이미지 목록 행</text>
+    <text x="915" y="130">원본 이미지 읽기</text>
+    <text x="1260" y="130">화면 표시 때</text>
+    <text x="1260" y="162">풀 해상도 디코드</text>
+
+    <text x="300" y="536">원본 이미지 파일</text>
+    <text x="600" y="518">작은 미리보기</text>
+    <text x="600" y="550">저장소 확인</text>
+    <text x="930" y="458">저장된 썸네일 반환</text>
+    <text x="930" y="582">화면 크기로 축소</text>
+    <text x="930" y="614">메모리에 보관 후 반환</text>
+    <text x="1305" y="508">메인 목록 · 고정 클립</text>
+    <text x="1305" y="540">사이드바 · 다시 연 팝오버</text>
+  </g>
+</g>
+</svg>

@@ -1,0 +1,49 @@
+# 작업 기록을 지식으로 쌓고 다음 세션에 다시 건네는 흐름
+direction: right
+
+vars: {
+  d2-config: { pad: 48 }
+}
+
+style.fill: "#17100e"
+
+classes: {
+  box: {
+    style: {
+      fill: "#1e1613"
+      stroke: "#3a2d27"
+      border-radius: 10
+      font-color: "#f3eae6"
+      font-size: 15
+    }
+  }
+  accent: {
+    style: {
+      fill: "#291d19"
+      stroke: "#ff5247"
+      border-radius: 10
+      font-color: "#f3eae6"
+      font-size: 15
+      bold: true
+    }
+  }
+  edge: {
+    style: {
+      stroke: "#7a6c67"
+      font-color: "#b6a59f"
+      font-size: 13
+    }
+  }
+}
+
+session: 새 작업 세션 { class: box }
+work: 대화와 작업 진행 { class: box }
+harvest: 수확\n세션 전문 위치 기록 { class: accent }
+compile: 컴파일\n원본을 읽어 위키 정리 { class: accent }
+wiki: LLM Wiki\n쌓인 작업 맥락 { class: box }
+
+session -> work { class: edge }
+work -> harvest { class: edge }
+harvest -> compile { class: edge }
+compile -> wiki { class: edge }
+wiki -> session: 환류\n프로필과 위키 목록 전달 { class: edge }

@@ -1,0 +1,27 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#7a6c67"/></marker>
+    <style>
+      .box { fill:#1e1613; stroke:#3a2d27; stroke-width:2; rx:20; }
+      .accent { fill:#291d19; stroke:#ff5247; stroke-width:3; rx:20; }
+      .title { fill:#f3eae6; font:700 30px 'Pretendard','Apple SD Gothic Neo',sans-serif; text-anchor:middle; }
+      .detail { fill:#b6a59f; font:400 21px 'Pretendard','Apple SD Gothic Neo',sans-serif; text-anchor:middle; }
+      .edge { fill:none; stroke:#7a6c67; stroke-width:4; marker-end:url(#arrow); }
+      .label { fill:#b6a59f; font:600 19px 'Pretendard','Apple SD Gothic Neo',sans-serif; text-anchor:middle; }
+    </style>
+  </defs>
+  <rect width="1600" height="900" fill="#17100e"/>
+  <rect class="box" x="50" y="310" width="220" height="170" rx="20"/>
+  <text class="title" x="160" y="382">새 정부지원 공고</text>
+  <rect class="accent" x="345" y="270" width="265" height="250" rx="20"/>
+  <text class="title" x="477" y="350">gov-radar 코드</text><text class="detail" x="477" y="394">명백히 맞지 않는</text><text class="detail" x="477" y="426">조건 먼저 제외</text>
+  <rect class="accent" x="685" y="270" width="245" height="250" rx="20"/>
+  <text class="title" x="807" y="350">헤르메스</text><text class="detail" x="807" y="394">공고문 읽기와</text><text class="detail" x="807" y="426">알림 작성</text>
+  <rect class="box" x="1005" y="310" width="215" height="170" rx="20"/>
+  <text class="title" x="1112" y="372">지크</text><text class="detail" x="1112" y="408">확인과 다음 행동 결정</text>
+  <rect class="accent" x="1295" y="270" width="255" height="250" rx="20"/>
+  <text class="title" x="1422" y="350">second</text><text class="detail" x="1422" y="394">판단 이유와</text><text class="detail" x="1422" y="426">제도 정보 축적</text>
+  <path class="edge" d="M270 395 H345"/><path class="edge" d="M610 395 H685"/><path class="edge" d="M930 395 H1005"/><path class="edge" d="M1220 395 H1295"/>
+  <path class="edge" d="M807 520 V650 H1422 V520"/>
+  <text class="label" x="1114" y="700">공고 이해와 기준은 지식 뇌에 함께 남긴다</text>
+</svg>

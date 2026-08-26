@@ -1,0 +1,52 @@
+direction: right
+
+vars: {
+  d2-config: {
+    pad: 48
+  }
+}
+
+style.fill: "#17100e"
+
+classes: {
+  box: {
+    style: {
+      fill: "#1e1613"
+      stroke: "#3a2d27"
+      border-radius: 10
+      font-color: "#f3eae6"
+      font-size: 15
+    }
+  }
+  accent: {
+    style: {
+      fill: "#291d19"
+      stroke: "#ff5247"
+      border-radius: 10
+      font-color: "#f3eae6"
+      font-size: 15
+      bold: true
+    }
+  }
+  edge: {
+    style: {
+      stroke: "#7a6c67"
+      font-color: "#b6a59f"
+      font-size: 13
+      stroke-width: 1
+    }
+  }
+}
+
+draft: 글 본문 작성 { class: box }
+cover: 썸네일 1장 생성 { class: accent }
+structure: D2 구조도 { class: box }
+infographic: SVG 인포그래픽 { class: box }
+check: 결과 확인 { class: accent }
+
+draft -> cover: 모든 글 { class: edge }
+cover -> structure: 흐름·관계 설명이 있으면 { class: edge }
+cover -> infographic: 분류·비교·단계가 있으면 { class: edge }
+cover -> check { class: edge }
+structure -> check { class: edge }
+infographic -> check { class: edge }

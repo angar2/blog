@@ -1,30 +1,21 @@
 ---
 title: AI 에이전트 생태계 구축기
-description: AI로 나를 위한 도구 생태계를 지으려다 두 번 무너지고 다시 세운 기록. 완료를 실측으로만 말한다는 원칙에서 출발해, 재발한 실패의 부검과 지식 뇌 재설계, 그리고 판단은 떼고 결정론만 남긴 자동화까지 순서대로 담았다.
+description: 나를 아는 AI 비서를 만들기 위해 LLM Wiki를 세우고, 자동화와 작업 환경을 하나씩 연결하며 운영한 기록.
 posts:
-  - done-only-when-measured
   - the-same-trap-thrice
-  - passing-tests-is-not-done
-  - the-hollow-flagship
   - building-my-second-brain
-  - assets-before-organization
-  - ai-judgment-does-not-compound
-  - immutable-raw-and-digest-queue
   - three-brains-one-mind
-  - zero-false-positives
+  - connecting-hands-to-brain
+  - reopening-my-blog-with-ai
+  - why-ai-agents-need-a-mailbox
   - telegram-to-slack-agent-office-move
-  - slack-block-kit-measured-physics
-  - the-renderer-that-stole-the-title
-  - who-writes-the-ledger
-  - bertholdt-blog-writing-setup
-  - hermes-operation-council-build
-  - agent-lies-are-a-plumbing-problem
-  - the-silence-that-ate-the-report
-  - the-logs-nobody-owned
-  - the-old-path-i-never-removed
-  - the-sixty-one-minute-gap
-  - the-orphan-folder-that-froze-my-agent
-  - the-fixture-that-hid-the-bugs
+  - adding-images-to-ai-written-blog-posts
+  - operating-hermes-in-slack
+  - why-green-checks-lie-in-ai-coding
 ---
 
-AI로 개인 도구 생태계를 짓겠다는 시도가 두 번 좌초하고 세 번째로 다시 선 여정을 순서대로 정리한 기록이다. "완료는 실측 가능한 결과를 가리킬 때만 말한다"는 한 문장을 척추로 삼아, 같은 함정에 다시 걸린 실패의 정직한 부검과 측정 통과가 완료를 보장하지 못한 이유에서 시작한다. 이어 조직이 아니라 자산부터 다시 접근한 지식 뇌의 탄생과 그 설계 원칙, AI 판단력은 학습으로 자라지 않는다는 반박, 불변 원본과 소화 큐의 분리, 그리고 하나의 비서를 결정론 코드·소프트판정 에이전트·영속 지식 셋으로 쪼갠 아키텍처와 허위 적격 0을 강제하는 하드필터까지 — 실패에서 귀납한 이전 가능한 원칙들을 하나씩 짚는다.
+처음에는 멋진 비서를 만들고 싶었다. 하지만 막상 만들어 보니 무엇을 맡길지조차 분명하지 않았고, 두 번의 시도는 오래 쓰지 못한 채 멈췄다.
+
+이후에는 내가 매일 AI와 나눈 대화와 작업 기록부터 쌓기로 했다. LLM Wiki를 지식 기반으로 삼고, 그 위에 알림 기능과 우편함, 헤르메스, 슬랙, 블로그 작성 자동화를 하나씩 연결했다.
+
+자동화는 연결했다고 끝나지 않았다. 실제로 운영하며 생기는 작은 문제를 고치고, 테스트가 놓치는 범위를 다시 확인하는 일까지 담았다.

@@ -1,0 +1,51 @@
+# 서로 다른 기관이 우편함으로만 일을 전달하는 흐름
+direction: right
+
+vars: {
+  d2-config: {
+    pad: 48
+  }
+}
+
+style.fill: "#17100e"
+
+classes: {
+  box: {
+    style: {
+      fill: "#1e1613"
+      stroke: "#3a2d27"
+      border-radius: 10
+      font-color: "#f3eae6"
+      font-size: 15
+    }
+  }
+  accent: {
+    style: {
+      fill: "#291d19"
+      stroke: "#ff5247"
+      border-radius: 10
+      font-color: "#f3eae6"
+      font-size: 15
+      bold: true
+    }
+  }
+  edge: {
+    style: {
+      stroke: "#7a6c67"
+      font-color: "#b6a59f"
+      font-size: 13
+    }
+  }
+}
+
+second: second\n지식 보관소 { class: box }
+postbox: 우편함\n미결 요청의 중계소 { class: accent }
+hermes: 헤르메스\n텔레그램 알림 { class: box }
+zeke: 지크\n승인 · 반려 · 확인 { class: accent }
+blog: blog\n승인된 발제 집필 { class: box }
+
+second -> postbox: 컴파일 보고 · 블로그 발제 { class: edge }
+postbox -> hermes: 아직 처리하지 않은 우편 { class: edge }
+hermes -> zeke: 텔레그램 전달 { class: edge }
+zeke -> postbox: 결재 { class: edge }
+postbox -> blog: 승인된 발제 회송 { class: edge }
