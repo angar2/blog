@@ -1,0 +1,21 @@
+<svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, Apple SD Gothic Neo, sans-serif">
+  <rect width="800" height="800" fill="#17100e"/>
+  <text x="72" y="104" font-size="25" fill="#ff5247" font-weight="700" letter-spacing="3">비교</text>
+  <text x="72" y="170" font-size="48" fill="#f3eae6" font-weight="800">이미지 선택</text>
+  <rect x="72" y="194" width="58" height="5" rx="2.5" fill="#ff5247"/>
+
+  <rect x="72" y="262" width="656" height="160" rx="18" fill="#1e1613" stroke="#3a2d27" stroke-width="2"/>
+  <circle cx="132" cy="342" r="26" fill="#291d19" stroke="#ff7a70" stroke-width="2"/>
+  <text x="132" y="352" font-size="28" fill="#ff7a70" font-weight="700" text-anchor="middle">1</text>
+  <text x="186" y="332" font-size="28" fill="#f3eae6" font-weight="700">글에 정보가 들어가는가?</text>
+  <text x="186" y="374" font-size="24" fill="#b6a59f">흐름·비교·단계를 보여 주는가</text>
+
+  <rect x="72" y="466" width="656" height="160" rx="18" fill="#291d19" stroke="#ff5247" stroke-width="2"/>
+  <circle cx="132" cy="546" r="26" fill="rgba(255,82,71,0.16)" stroke="#ff5247" stroke-width="2"/>
+  <text x="132" y="556" font-size="28" fill="#ff7a70" font-weight="700" text-anchor="middle">2</text>
+  <text x="186" y="536" font-size="28" fill="#f3eae6" font-weight="700">그렇다면 코드로 만든다</text>
+  <text x="186" y="578" font-size="24" fill="#f3eae6">아니라면 생성형 이미지도 쓸 수 있다</text>
+
+  <rect x="72" y="682" width="656" height="58" rx="12" fill="#1e1613"/>
+  <text x="400" y="720" font-size="22" fill="#b6a59f" text-anchor="middle">정보는 정확하게, 분위기는 자유롭게</text>
+</svg>

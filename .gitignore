@@ -21,3 +21,4 @@ pnpm-debug.log*
 
 # 로컬 세션 설정 (프리뷰 launch.json 등)
 .claude/
+.codex/

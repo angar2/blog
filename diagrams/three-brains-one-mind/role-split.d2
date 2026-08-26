@@ -1,0 +1,49 @@
+# 정부지원 공고 알림에서 역할을 나눈 흐름
+direction: right
+
+vars: {
+  d2-config: { pad: 48 }
+}
+
+style.fill: "#17100e"
+
+classes: {
+  box: {
+    style: {
+      fill: "#1e1613"
+      stroke: "#3a2d27"
+      border-radius: 10
+      font-color: "#f3eae6"
+      font-size: 15
+    }
+  }
+  accent: {
+    style: {
+      fill: "#291d19"
+      stroke: "#ff5247"
+      border-radius: 10
+      font-color: "#f3eae6"
+      font-size: 15
+      bold: true
+    }
+  }
+  edge: {
+    style: {
+      stroke: "#7a6c67"
+      font-color: "#b6a59f"
+      font-size: 13
+    }
+  }
+}
+
+notice: 새 정부지원 공고 { class: box }
+code: gov-radar 코드\n명백히 맞지 않는 조건 제외 { class: accent }
+hermes: 헤르메스\n공고문 읽기와 알림 작성 { class: accent }
+zeke: 지크\n확인과 다음 행동 결정 { class: box }
+second: second\n판단 이유와 제도 정보 축적 { class: accent }
+
+notice -> code { class: edge }
+code -> hermes: 남은 공고 { class: edge }
+hermes -> zeke: 확인할 알림 { class: edge }
+zeke -> second: 판단 맥락 { class: edge }
+hermes -> second: 공고 이해와 기준 { class: edge }

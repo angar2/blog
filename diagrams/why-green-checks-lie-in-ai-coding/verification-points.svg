@@ -1,0 +1,24 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#7a6c67"/></marker>
+    <style>
+      .box { fill:#1e1613; stroke:#3a2d27; stroke-width:2; rx:20; }
+      .accent { fill:#291d19; stroke:#ff5247; stroke-width:3; rx:20; }
+      .title { fill:#f3eae6; font:700 29px 'Pretendard','Apple SD Gothic Neo',sans-serif; text-anchor:middle; }
+      .detail { fill:#b6a59f; font:400 20px 'Pretendard','Apple SD Gothic Neo',sans-serif; text-anchor:middle; }
+      .edge { fill:none; stroke:#7a6c67; stroke-width:4; marker-end:url(#arrow); }
+    </style>
+  </defs>
+  <rect width="1600" height="900" fill="#17100e"/>
+  <rect class="accent" x="55" y="285" width="265" height="220" rx="20"/>
+  <text class="title" x="187" y="360">테스트 계획</text><text class="detail" x="187" y="404">실행 방법과 관측 결과</text>
+  <rect class="accent" x="370" y="285" width="265" height="220" rx="20"/>
+  <text class="title" x="502" y="360">테스트 입력</text><text class="detail" x="502" y="404">실제 가능한 경우 포함</text>
+  <rect class="accent" x="685" y="285" width="265" height="220" rx="20"/>
+  <text class="title" x="817" y="360">핵심 동작</text><text class="detail" x="817" y="404">화면이 아닌 실제 실행 확인</text>
+  <rect class="box" x="1000" y="285" width="265" height="220" rx="20"/>
+  <text class="title" x="1132" y="360">테스트 실행</text><text class="detail" x="1132" y="404">수정 중에는 국소 검사</text>
+  <rect class="box" x="1315" y="285" width="230" height="220" rx="20"/>
+  <text class="title" x="1430" y="360">검증 결과</text><text class="detail" x="1430" y="404">마무리 때 전체 검사</text>
+  <path class="edge" d="M320 395 H370"/><path class="edge" d="M635 395 H685"/><path class="edge" d="M950 395 H1000"/><path class="edge" d="M1265 395 H1315"/>
+</svg>

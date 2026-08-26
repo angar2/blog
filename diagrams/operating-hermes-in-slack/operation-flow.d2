@@ -1,0 +1,52 @@
+direction: right
+
+vars: {
+  d2-config: {
+    pad: 48
+  }
+}
+
+style.fill: "#17100e"
+
+classes: {
+  box: {
+    style: {
+      fill: "#1e1613"
+      stroke: "#3a2d27"
+      border-radius: 10
+      font-color: "#f3eae6"
+      font-size: 15
+      shadow: false
+      bold: false
+    }
+  }
+  accent: {
+    style: {
+      fill: "#291d19"
+      stroke: "#ff5247"
+      border-radius: 10
+      font-color: "#f3eae6"
+      font-size: 15
+      bold: true
+    }
+  }
+  edge: {
+    style: {
+      stroke: "#7a6c67"
+      font-color: "#b6a59f"
+      font-size: 13
+      stroke-width: 1
+    }
+  }
+}
+
+hermes: 헤르메스\n탐색 · 정리 · 초안 { class: accent }
+slack: 슬랙\n후보 · 결과 · 실패 보고 { class: box }
+zeke: 나\n선택 · 승인 · 방향 판단 { class: accent }
+program: 프로그램 흐름\n실행 · 전달 · 상태 기록 { class: box }
+
+hermes -> slack: 후보와 결과 { class: edge }
+zeke -> slack: 선택과 승인 { class: edge }
+slack -> program: 실행 요청 { class: edge }
+program -> hermes: 다음 작업 전달 { class: edge }
+program -> slack: 결과 또는 실패 기록 { class: edge }
