@@ -10,8 +10,8 @@
 | 글 규격 (frontmatter·slug·린트) | `.project/rules/WRITING_RULE.md` |
 | 문체 (지크의 글 목소리) | `.project/rules/WRITING_STYLE.md` |
 | 문체 — 교정에서 배운 것 | `.project/rules/STYLE_FEEDBACK.md` — 발행 후 지적에서 뽑은 지침. WRITING_STYLE과 충돌하면 이쪽이 이긴다 |
-| 발행글 수정 (지크 지적 반영) | `revise-post` 스킬 — Claude Code: `.claude/skills/revise-post/` · Codex: `.codex/skills/revise-post/` — 지적된 곳만 고치고 검수 대장에 기록 |
-| 문체 학습 (대장 → 규칙) | `distill-style` 스킬 — Claude Code: `.claude/skills/distill-style/` · Codex: `.codex/skills/distill-style/` — 반복된 지적만 STYLE_FEEDBACK으로 증류 |
+| 발행글 수정·발행 확정 (지크 지적 반영) | `revise-post` 스킬 — Claude Code: `.claude/skills/revise-post/` · Codex: `.codex/skills/revise-post/` — 지적된 곳만 고쳐 검수 대장에 기록하고, "이 글 됐다"에 발행 정산해 대장을 `ready`로 닫는다 |
+| 문체 학습 (대장 → 규칙) | `distill-style` 스킬 — Claude Code: `.claude/skills/distill-style/` · Codex: `.codex/skills/distill-style/` — `ready` 대장이 3장 이상 쌓였을 때만 돌아 반복된 지적만 STYLE_FEEDBACK으로 증류한다. 글·발행은 건드리지 않는다 |
 | git·발행 (브랜치·병합) | `.project/rules/GIT_RULE.md` — 발행 = dev→main, 지크 승인 |
 | 발제 수신 (우편함→글) | `.project/rules/INBOUND_RULE.md` |
 
@@ -33,4 +33,5 @@
 |---|---|
 | 2026-07-13 | 신설 (PB3 우편함 온보딩) — 규칙 문서 지도 + postbox 수거 의무(표준 문안, 장부 `.project/postbox/`) |
 | 2026-07-17 | postbox v2 라우팅 정합(지크 승인) — 수거 의무를 v2 표준 문안으로 교체(맨 위 쪽지 기준, 용무 분기, 결재는 route.mjs만) |
+| 2026-08-27 | 교정 배관 역할 재분배(지크 승인) — `revise-post`가 발행 정산까지 맡아 `ready` 대장을 만들고, `distill-style`은 그 대기열을 소비해 증류만 한다. `ready`의 뜻을 "발행 확인까지 끝나 닫힌 대장"으로 통일. 임시 스킬 `rewrite-post` 삭제 |
 | 2026-08-10 | 발행 후 교정 학습 배관 배선(지크 승인) — 규칙 문서 지도에 `STYLE_FEEDBACK.md`(교정에서 배운 문체 지침)와 스킬 2종(`revise-post`·`distill-style`) 3행 추가. 지크가 발행글을 지적하면 고치고 검수 대장에 남기고, 반복된 것만 규칙으로 증류하는 경로 |
