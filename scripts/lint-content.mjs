@@ -14,6 +14,14 @@
  *  8. 미완성 표 (빈 셀 뭉치)
  *  9. 시리즈 posts 배열 slug 실재 (+ 중복)
  * 10. 프로젝트 series 참조 실재
+ *
+ * 문체 린트 (STYLE_FEEDBACK.md 규칙 중 기계로 확정 판별되는 것만 — 2026년 이후 글 한정):
+ * 11. 메타 문장으로 시작하는 문단 (WRITING_STYLE §2 · STYLE_FEEDBACK 근거 3건)
+ * 12. 본문 마크다운 이미지 문법 (STYLE_FEEDBACK 신설 규칙 — 크기 조절은 <img> 속성으로)
+ *
+ * 문체 린트를 2026년 이후 글로 한정하는 이유: 그 이전 글은 구 블로그 마이그레이션분이라
+ * 지크의 확정 문체 기준을 적용받은 적이 없다. 소급 적용하면 전원 위반이 되어 빌드가 막힌다.
+ * 판단이 필요한 규칙은 여기 넣지 않는다 — 오탐 1건이 빌드를 세우면 배관이 소음으로 죽는다.
  */
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
@@ -151,6 +159,29 @@ for (const f of postFiles) {
     if (cells.length >= 2 && empty >= 2)
       err(name, `미완성 표 — 빈 셀 ${empty}개인 행 검출 ("${line.trim().slice(0, 40)}…")`);
   }
+}
+
+// ── 문체 린트 (11~12) — 2026년 이후 글만 ──
+const STYLE_FROM_YEAR = 2026;
+const META_RE = /^\s*(?:>\s*)?이\s?글(?:에서|은)\s[^\n]{0,40}?(?:싶은\s?것은|것은|글이다)/m;
+const MD_IMG_RE = /!\[[^\]]*\]\([^)]+\)/;
+
+for (const f of postFiles) {
+  const name = `posts/${basename(f)}`;
+  const { data, body } = parse(f);
+  const year = Number(String(data.created ?? '').slice(0, 4));
+  if (!Number.isFinite(year) || year < STYLE_FROM_YEAR) continue;
+  const clean = stripCodeFences(body);
+
+  // 11. 메타 문장 — 글 자체를 설명하며 시작하는 문단
+  const meta = clean.match(META_RE);
+  if (meta)
+    err(name, `메타 문장 — 글 자체를 설명하지 말고 바로 내용으로 시작한다 ("${meta[0].trim().slice(0, 40)}…")`);
+
+  // 12. 본문 마크다운 이미지 문법 — <img> 태그로만 삽입한다
+  const img = clean.match(MD_IMG_RE);
+  if (img)
+    err(name, `마크다운 이미지 문법 — 본문 이미지는 <img> 태그로 넣는다 (크기 조절이 CSS 없이 된다) ("${img[0].slice(0, 50)}…")`);
 }
 
 // ── 9. 시리즈 posts 배열 검증 ──

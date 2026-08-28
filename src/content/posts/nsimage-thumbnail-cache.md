@@ -25,7 +25,7 @@ cover: /assets/images/blog/nsimage-thumbnail-cache/cover.png
 
 4K PNG 한 장은 메모리에서 약 33MB를 차지할 수 있다. 이미지가 여러 장 쌓이면 작은 목록을 한 번 여는 일만으로도 메모리가 크게 늘어날 수 있었다.
 
-![수정 전과 후의 Stash 이미지 읽기 흐름](/assets/images/blog/nsimage-thumbnail-cache/image-loading-flow.png)
+<img src="/assets/images/blog/nsimage-thumbnail-cache/image-loading-flow.png" alt="수정 전과 후의 Stash 이미지 읽기 흐름" style="width:100%;" />
 
 *수정 전에는 이미지 목록 행이 원본을 읽고 화면 표시 때 원본 해상도로 디코드했다. 수정 후에는 같은 파일의 작은 미리보기를 보관해 메인 목록·고정 클립 사이드바·다시 연 팝오버에서 다시 쓴다.*
 
