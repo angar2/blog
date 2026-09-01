@@ -7,6 +7,7 @@
 
 | 작업 | 문서 |
 |---|---|
+| **전체 파이프 지도 (제보→발행, 누가 뭘 하나)** | `.project/rules/PIPELINE_MAP.md` — **여기부터 읽어라.** 도식 한 장 + 자주 헷갈리는 지점 + 어느 문서를 봐야 하는지의 색인 |
 | 글 규격 (frontmatter·slug·린트) | `.project/rules/WRITING_RULE.md` |
 | 문체 (지크의 글 목소리) | `.project/rules/WRITING_STYLE.md` |
 | 문체 — 교정에서 배운 것 | `.project/rules/STYLE_FEEDBACK.md` — 발행 후 지적에서 뽑은 지침. WRITING_STYLE과 충돌하면 이쪽이 이긴다 |
@@ -41,3 +42,4 @@
 | 2026-08-27 | 교정 배관 역할 재분배(지크 승인) — `revise-post`가 발행 정산까지 맡아 `ready` 대장을 만들고, `distill-style`은 그 대기열을 소비해 증류만 한다. `ready`의 뜻을 "발행 확인까지 끝나 닫힌 대장"으로 통일. 임시 스킬 `rewrite-post` 삭제 |
 | 2026-08-31 | **재료 누적 파이프 개편(지크 기획 확정, Phase 2)** — 규칙 지도에 MATERIAL_RULE(창고·락 단일 원천)·CURATION_RULE(글감 판정 기준)·organize-materials 스킬 3행 추가, INBOUND_RULE 행을 "제보·발제 수신"으로 개칭. postbox 수거 의무 분기를 신모델로 교체: 제보(결재 없는 직행 = 입고, 집필 없음)·발제(`blog-curate` 승인/반려)·구식 발제(전환기 한시). 기획서 = `.project/planning/material-pipeline/plan.md` |
 | 2026-08-10 | 발행 후 교정 학습 배관 배선(지크 승인) — 규칙 문서 지도에 `STYLE_FEEDBACK.md`(교정에서 배운 문체 지침)와 스킬 2종(`revise-post`·`distill-style`) 3행 추가. 지크가 발행글을 지적하면 고치고 검수 대장에 남기고, 반복된 것만 규칙으로 증류하는 경로 |
+| 2026-09-01 | **파이프 지도 신설** — 규칙 문서 지도 맨 위에 `PIPELINE_MAP.md` 행 추가. 제보부터 발행까지의 전 구간 도식(주체를 스크립트·LLM·사람으로 구분)과 자주 헷갈리는 지점 5건을 한 장에 모았다. 규칙 문서들이 각자의 구간만 소유해 **전체 그림을 가진 문서가 없던** 공백을 메운다 |
